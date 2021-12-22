@@ -30,6 +30,27 @@
         <img src="../assets/peopleHome.jpg" class="peopleImg" />
       </div>
     </section>
+
+    <section class="cards-panel">
+      <div class="dev-card">
+        <header>DESARROLLADORES</header>
+        <section class="card-content">
+          <p>
+            <i class="fas fa-check-circle"></i>Oferta de empleo en el sector
+          </p>
+          <p><i class="fas fa-check-circle"></i>Comunidad de desarrolladores</p>
+          <p><i class="fas fa-check-circle"></i>Entrevistas técnicas online</p>
+          <p>
+            <i class="fas fa-check-circle"></i>Ponte a prueba con enunciados
+            reales
+          </p>
+          <button>¡COMIENZA!</button>
+        </section>
+      </div>
+      <div class="company-card">
+        <header>EMPRESAS</header>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -46,16 +67,18 @@ export default {
 </script>
 
 <style scoped>
+.home {
+  overflow: hidden;
+}
 .first-panel {
   height: 500px;
-  background: rgb(0, 46, 208);
+  background: rgb(0, 38, 171);
   background: linear-gradient(
     117deg,
-    rgba(0, 46, 208, 1) 15%,
-    rgba(31, 87, 235, 1) 37%,
-    rgba(9, 102, 240, 1) 51%,
-    rgba(20, 109, 255, 1) 62%,
-    rgba(65, 168, 255, 1) 89%
+    rgba(0, 38, 171, 1) 14%,
+    rgba(17, 82, 213, 1) 57%,
+    rgba(75, 146, 255, 1) 91%,
+    rgba(134, 181, 255, 1) 100%
   );
   position: relative;
 }
@@ -96,20 +119,27 @@ export default {
   font-size: 1.2em;
   color: #fff;
 }
+.first-panel nav .access p {
+  position: relative;
+}
 
-/* .first-panel nav .access p::after {
+.first-panel nav .access p:hover {
+  cursor: pointer;
+}
+.first-panel nav .access p::after {
   content: "";
   background-color: #93ffd0;
-  width: 55px;
+  width: 100%;
   height: 2px;
   position: absolute;
   display: block;
+  border-radius: 5px;
   transform: scale(0);
   transition: all 0.2s ease-out;
 }
 .first-panel nav .access p:hover::after {
   transform: scale(1);
-} */
+}
 
 .first-panel .wave {
   overflow: hidden;
@@ -132,7 +162,7 @@ export default {
   padding: 10px;
 }
 
-.first-panel .jobs-btn:hover{
+.first-panel .jobs-btn:hover {
   cursor: pointer;
 }
 .first-panel .img-container {
@@ -154,5 +184,55 @@ export default {
 .first-panel .img-container .peopleImg {
   width: 320px;
   height: 300px;
+}
+/*************CARDS SECTION***************/
+.cards-panel {
+  height: 500px;
+  /* background-color: rgb(114, 25, 25); */
+  width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.cards-panel .dev-card,
+.company-card {
+  height: 350px;
+  width: 380px;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgb(110, 110, 110);
+  font-family: "Nunito", sans-serif;
+}
+.cards-panel .dev-card header,
+.company-card header {
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px 8px 0 0;
+  letter-spacing: 0.3px;
+  font-size: 1.1em;
+}
+.cards-panel .dev-card header {
+  background-color: #f6b819;
+}
+.cards-panel .company-card header {
+  background-color: #00cdc1;
+}
+
+.cards-panel .card-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.cards-panel .card-content p{
+  font-size: 1.1em;
+  margin-top: 17px;
+}
+.cards-panel .card-content p i{
+ margin: 0px 15px 0px 15px;
+ font-size: 1.5em;
+ color: rgb(0, 196, 33);
 }
 </style>
