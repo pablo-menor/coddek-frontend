@@ -22,8 +22,12 @@
           ></path>
         </svg>
       </div>
+      <div class="jobs-btn">
+        OFERTAS DE <br />
+        EMPLEO
+      </div>
       <div class="img-container">
-        <img src="../assets/peopleHome.jpg" class="peopleImg">
+        <img src="../assets/peopleHome.jpg" class="peopleImg" />
       </div>
     </section>
   </div>
@@ -80,7 +84,7 @@ export default {
   position: absolute;
   width: 15px;
   height: 15px;
-  background-color: #00FFC2;
+  background-color: #00ffc2;
   border-radius: 50%;
   top: 15px;
   left: 103%;
@@ -93,19 +97,48 @@ export default {
   color: #fff;
 }
 
-.first-panel .wave {
+/* .first-panel nav .access p::after {
+  content: "";
+  background-color: #93ffd0;
+  width: 55px;
+  height: 2px;
+  position: absolute;
+  display: block;
+  transform: scale(0);
+  transition: all 0.2s ease-out;
+}
+.first-panel nav .access p:hover::after {
+  transform: scale(1);
+} */
 
+.first-panel .wave {
   overflow: hidden;
   position: absolute;
   bottom: -5px;
   width: 100vw;
   height: 280px;
 }
-.first-panel .img-container {
 
+.first-panel .jobs-btn {
+  background-color: #ff5b96;
+  width: 180px;
+  text-align: center;
+  position: absolute;
+  top: 300px;
+  left: 200px;
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  border-radius: 50px;
+  padding: 10px;
+}
+
+.first-panel .jobs-btn:hover{
+  cursor: pointer;
+}
+.first-panel .img-container {
   width: 300px;
   height: 300px;
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
   position: absolute;
   top: 180px;
   right: 130px;
@@ -116,12 +149,9 @@ export default {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  
-
 }
-.first-panel .img-container .peopleImg{
+.first-panel .img-container .peopleImg {
   width: 320px;
   height: 300px;
-
 }
 </style>
