@@ -149,6 +149,7 @@ export default {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  border: 1px solid rgb(218, 218, 218);
 }
 .first-panel .img-container .peopleImg {
   width: 320px;
