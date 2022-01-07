@@ -49,6 +49,19 @@
       </div>
       <div class="company-card">
         <header>EMPRESAS</header>
+        <section class="card-content">
+          <p><i class="fas fa-check-circle"></i>Encuentra el mejor talento</p>
+          <p>
+            <i class="fas fa-check-circle"></i>Agiliza los procesos de selección
+          </p>
+          <p>
+            <i class="fas fa-check-circle"></i>Comunicación directa y sencilla
+          </p>
+          <p>
+            <i class="fas fa-check-circle"></i>Aumenta la visibilidad de tu empresa
+          </p>
+          <button>¡ÚNETE!</button>
+        </section>
       </div>
     </section>
   </div>
@@ -201,7 +214,7 @@ export default {
   height: 350px;
   width: 380px;
   border-radius: 8px;
-  box-shadow: 0 0 6px rgb(110, 110, 110);
+  box-shadow: 0 0 10px rgb(92, 92, 92);
   font-family: "Nunito", sans-serif;
 }
 .cards-panel .dev-card header,
@@ -221,18 +234,30 @@ export default {
   background-color: #00cdc1;
 }
 
-.cards-panel .card-content{
+.cards-panel .card-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.cards-panel .card-content p{
+.cards-panel .card-content p {
   font-size: 1.1em;
   margin-top: 17px;
 }
-.cards-panel .card-content p i{
- margin: 0px 15px 0px 15px;
- font-size: 1.5em;
- color: rgb(0, 196, 33);
+.cards-panel .card-content p i {
+  margin: 0px 15px 0px 15px;
+  font-size: 1.5em;
+  color: rgb(0, 196, 33);
+}
+.cards-panel .card-content button {
+  width: 170px;
+  margin: auto;
+  margin-top: 35px;
+  padding: 12px 10px 12px 10px;
+  border-radius: 20px;
+  border: none;
+  background-color: #0070c1;
+  color: #fff;
+  font-size: 0.9em;
+  cursor: pointer;
 }
 </style>
