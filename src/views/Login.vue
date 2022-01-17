@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>Inicia sesión en CODDEK</h1>
+    <h1>Inicia sesión en <router-link to="/" class="logo">CODDEK</router-link></h1>
     <div class="content">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -21,16 +21,20 @@
           transform="translate(-165.00003 -189.93073)"
           fill="#fff"
         />-->
+        <!-- <g id="line-svg"> -->
         <path
           d="M445.06712,701.63014c15.2985-12.92712,24.591-33.34815,22.15408-53.22817s-17.53079-38.15588-37.10966-42.37749-41.89745,7.46449-47.8442,26.59014c-3.27278-36.87349-7.04406-75.29195-26.64837-106.69317-17.75122-28.433-48.49666-48.778-81.81777-52.41768s-68.40395,10.107-89.18511,36.407-25.86934,64.53459-11.31476,94.72909c10.72185,22.24324,30.47528,38.79693,51.17195,52.26422,66.02954,42.9653,147.93912,60.88443,225.8773,49.41454"
           transform="translate(-165.00003 -189.93073)"
-          fill="#f2f2f2"
+          fill="rgba(1, 223, 31, 0.322)"
         />
+        <!-- </g> -->
+
         <path
           d="M217.56676,484.37281a540.35491,540.35491,0,0,1,75.30383,74.77651A548.0761,548.0761,0,0,1,352.25665,647.04a545.835,545.835,0,0,1,25.43041,53.8463c1.52726,3.74257-4.55,5.37169-6.06031,1.67075a536.35952,536.35952,0,0,0-49.009-92.727A539.73411,539.73411,0,0,0,256.889,528.63168a538.44066,538.44066,0,0,0-43.76626-39.81484c-3.13759-2.55492,1.33232-6.97788,4.444-4.444Z"
           transform="translate(-165.00003 -189.93073)"
           fill="#fff"
         />
+
         <path
           d="M789.5,708.93073h-365v-374.5c0-79.67773,64.82227-144.5,144.49976-144.5h76.00049c79.67749,0,144.49975,64.82227,144.49975,144.5Z"
           transform="translate(-165.00003 -189.93073)"
@@ -94,17 +98,15 @@
           transform="translate(-165.00003 -189.93073)"
           fill="#2f2e41"
         />
-        
+
         <g id="line-svg">
-            <path 
-                d="M1004.98163,709.57417h-738.294a1.19069,1.19069,0,0,1,0-2.38137h738.294a1.19069,1.19069,0,0,1,0,2.38137Z"
-                transform="translate(-165.00003 -189.93073)"
-                fill="#3f3d56"
-            />
-        
+          <path
+            d="M1004.98163,709.57417h-738.294a1.19069,1.19069,0,0,1,0-2.38137h738.294a1.19069,1.19069,0,0,1,0,2.38137Z"
+            transform="translate(-165.00003 -189.93073)"
+            fill="#3f3d56"
+          />
         </g>
-          
-          
+
         <path
           d="M634,600.43073H504a6.46539,6.46539,0,0,1-6.5-6.41531V303.846a6.46539,6.46539,0,0,1,6.5-6.41531H634a6.46539,6.46539,0,0,1,6.5,6.41531V594.01542A6.46539,6.46539,0,0,1,634,600.43073Z"
           transform="translate(-165.00003 -189.93073)"
@@ -117,7 +119,15 @@
       </svg>
 
       <div class="form-container">
-          m
+        <form action="">
+          <input class="email" type="text" placeholder="Correo electrónico">
+          <input class="password" type="text" placeholder="Contraseña">
+        </form>
+        <input class="submit-btn" type="submit" value="Acceder">
+        <div class="signup">
+          <p>¿No tienes una cuenta?</p>
+          <router-link to="/registro" class="go-to-signup">Regístrate</router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -130,39 +140,104 @@ export default {
 </script>
 
 <style scoped>
-    .container {
-    font-family: "Nunito", sans-serif;
-    overflow-x: hidden;
-    }
-    .container h1 {
-    margin: auto;
-    text-align: center;
-    height: 20vh;
-    line-height: 20vh;
-    }
-    .container .content{
-        background: cornflowerblue;
-        width: 100vw;
-        display: flex;
-        height: 80vh;
-        padding: 60px;
-        gap: 10px
-    }
-    .container .content .login-svg{
-        width: 50%;
-    }
-    #line-svg{
-        color: red;
-        transform: translate(-15%);
-    }
-    
-    .container .content .form-container{
-        background: darkcyan;
-        width: 50%;
-        height: 100%;
-        border: 1px solid black;
-        border-radius: 10px;
-    }
-    
+.container {
+  font-family: "Nunito", sans-serif;
+  overflow-x: hidden;
+}
+.container h1 {
+  margin: auto;
+  text-align: center;
+  height: 20vh;
+  line-height: 20vh;
+}
 
+.container .logo{
+  position: relative;
+  text-decoration: none;
+  color: #000;
+}
+.container .logo:hover{
+  cursor: pointer;
+}
+
+.container .logo::after{
+    content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: #00ffc2;
+  border-radius: 50%;
+  top: 27px;
+  left: 103%;
+}
+.container .content {
+  width: 100vw;
+  display: flex;
+  height: 80vh;
+  padding: 60px;
+  align-items: center;
+}
+.container .content .login-svg {
+  width: 50%;
+}
+#line-svg {
+  color: red;
+  transform: translate(-15%);
+}
+
+.container .content .form-container {
+  width: 35%;
+  max-width: 550px;
+  height: 370px;
+  box-shadow: 0 0 10px rgb(136, 136, 136);
+  border-radius: 8px;
+  margin-left: 50px;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  flex-direction: column;
+ 
+}
+
+.container .content .form-container form{
+  /* background-color: black; */
+  width: 85%;
+  height: 190px;
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.container .content .form-container form input{
+  width: 200px;
+  padding: 15px;
+  text-align: center;
+  margin-top: 30px;
+  outline: none;
+  border-radius: 30px;
+  border: 1px solid rgb(68, 68, 68)
+}
+.container .content .form-container .submit-btn{
+  width: 130px;
+   padding: 15px;
+  text-align: center;
+  background-color: #00B7AC;
+  color: rgb(255, 255, 255);
+   outline: none;
+  border-radius: 30px;
+  border: 1px solid rgb(68, 68, 68);
+}
+.container .content .form-container .submit-btn:hover{
+  cursor: pointer;
+}
+.container .content .form-container .signup{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+.container .content .form-container .go-to-signup{
+  color: #00B7AC;
+  text-decoration: none;
+}
 </style>

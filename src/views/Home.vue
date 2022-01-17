@@ -6,8 +6,8 @@
       <nav>
         <h1 class="logo">CODDEK</h1>
         <div class="access">
-          <p>LOGIN</p>
-          <p>REGISTRO</p>
+          <router-link to="/login" class="links">LOGIN</router-link>
+          <router-link to="/registro" class="links">REGISTRO</router-link>
         </div>
       </nav>
       <div class="wave">
@@ -132,14 +132,16 @@ export default {
   font-size: 1.2em;
   color: #fff;
 }
-.first-panel nav .access p {
+.first-panel nav .access .links {
   position: relative;
+  color: #ffff;
+  text-decoration: none;
 }
 
-.first-panel nav .access p:hover {
+.first-panel nav .access .links:hover {
   cursor: pointer;
 }
-.first-panel nav .access p::after {
+.first-panel nav .access .links::after {
   content: "";
   background-color: #93ffd0;
   width: 100%;
@@ -150,7 +152,7 @@ export default {
   transform: scale(0);
   transition: all 0.2s ease-out;
 }
-.first-panel nav .access p:hover::after {
+.first-panel nav .access .links:hover::after {
   transform: scale(1);
 }
 
