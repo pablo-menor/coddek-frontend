@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
-    <!-- <HelloWorld msg="Welcome to CODDEK"/> -->
+    <!-- <HelloWorld msg="Welcome to asasasasasas"/> -->
     <section class="first-panel">
       <nav>
         <h1 class="logo">CODDEK</h1>
