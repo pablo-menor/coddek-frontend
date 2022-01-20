@@ -1,0 +1,71 @@
+<template>
+    <div class="container">
+        <form action="">
+            <input class="username" type="text" placeholder="Usuario">
+            <input class="email" type="text" placeholder="Correo electrónico">
+            <input class="password" type="text" placeholder="Contraseña">
+            <input class="password" type="text" placeholder="Repetir contraseña">
+        </form>
+        <input class="submit-btn" type="submit" value="Acceder">
+        <div class="signup">
+            <p>¿Ya estás registrado?</p>
+            <router-link to="/login" class="go-to-login">Inicia Sesión</router-link>
+        </div>
+    </div>
+</template>
+
+<style scoped>
+    .container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .container form{
+        width: 85%;
+        height: 350px;
+        margin-top: 45px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .container form input{
+        width: 200px;
+        padding: 15px;
+        text-align: center;
+        margin-top: 30px;
+        outline: none;
+        border-radius: 30px;
+        border: 1px solid rgb(68, 68, 68)
+    }
+    .container .submit-btn{
+        width: 130px;
+        padding: 15px;
+        text-align: center;
+        background-color: #00B7AC;
+        color: rgb(255, 255, 255);
+        outline: none;
+        border-radius: 30px;
+        border: 1px solid rgb(68, 68, 68);
+    }
+    .container .submit-btn:hover{
+        cursor: pointer;
+    }
+    .container .signup{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 40px;
+    }
+    .container .go-to-login{
+        color: #00B7AC;
+        text-decoration: none;
+    }
+</style>
+
+<script>
+export default {
+    name:"DevSignUp"
+    
+}
+</script>

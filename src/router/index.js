@@ -25,7 +25,7 @@ const routes = [
   {
     path: "/registro/:type",
     name: "SignUp",
-    component: SignUp
+    component: SignUp, 
   },
 ]
 

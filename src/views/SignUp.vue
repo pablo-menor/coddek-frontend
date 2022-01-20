@@ -135,15 +135,28 @@
             </svg>
 
             <div class="form-container">
-                f
+                <DevSignUp v-show="$route.params.type == 'dev'"/>
+                <CompanySignUp v-show="$route.params.type == 'empresa'"/>
+
             </div>    
         </div>
     </div>     
 </template>
 
 <script>
+import DevSignUp from "@/components/signup/DevSignUp.vue";
+import CompanySignUp from "@/components/signup/CompanySignUp.vue";
 export default {
     name:"SignUp",
+    components:{
+        DevSignUp,
+        CompanySignUp,
+    },
+    data() {
+        return{
+            show: false
+        }
+    }
 }
 </script>
 
@@ -159,7 +172,6 @@ export default {
         line-height: 20vh;
     }
     .container .content{
-        background: cornflowerblue;
         width: 100vw;
         display: flex;
         height: 80vh;
@@ -173,10 +185,9 @@ export default {
     }
 
     .container .content .form-container{
-        background: darkcyan;
         width: 50%;
         height: 100%;
-        border: 1px solid black;
+        box-shadow: 0 0 10px rgb(136, 136, 136);
         border-radius: 10px;
     }
 
