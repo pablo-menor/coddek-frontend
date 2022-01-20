@@ -20,10 +20,10 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
   },
   {
-    path: "/registro",
+    path: "/registro/:type",
     name: "SignUp",
     component: SignUp
   },
