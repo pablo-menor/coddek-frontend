@@ -9,22 +9,26 @@
         <input class="submit-btn" type="submit" value="Acceder">
         <div class="signup">
             <p>¿Ya estás registrado?</p>
-            <router-link to="/login" class="go-to-login">Inicia Sesión</router-link>
+            <router-link to="/login" class="go-to-login">Inicia sesión</router-link>
         </div>
     </div>
 </template>
 
 <style scoped>
+
     .container {
         height: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
+overflow-x: hidden;
+    
     }
     .container form{
-        width: 85%;
+        overflow-x: hidden;
+        width: 100vw;
         height: 350px;
-        margin-top: 45px;
+        margin-top: 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -61,6 +65,38 @@
         color: #00B7AC;
         text-decoration: none;
     }
+
+
+
+/***********RESPONSIVE***** */
+
+    /*HEIGHT */
+@media screen and (max-height: 600px) {
+        .container form{
+        margin-top: 5px;
+ 
+    }
+    .container form input{
+        width: 180px;
+        padding: 10px;
+        text-align: center;
+        margin-top: 20px;
+        outline: none;
+        border-radius: 30px;
+        border: 1px solid rgb(68, 68, 68)
+    }
+        .container .submit-btn{
+         padding: 0px;
+        width: 130px;
+        height: 60px;
+
+    }
+        .container .signup{
+        margin-top: 40px;
+        height: 60px;
+    }
+
+}
 </style>
 
 <script>

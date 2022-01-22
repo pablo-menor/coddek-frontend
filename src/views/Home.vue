@@ -1,7 +1,5 @@
 <template>
   <div class="home">
-    <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
-    <!-- <HelloWorld msg="Welcome to asasasasasas"/> -->
     <section class="first-panel">
       <nav>
         <h1 class="logo">CODDEK</h1>
@@ -410,6 +408,7 @@ export default {
 <style scoped>
 .home {
   overflow: hidden;
+   scroll-behavior: smooth;
 }
 .first-panel {
   height: 500px;
