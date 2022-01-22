@@ -407,7 +407,7 @@ export default {
 
 <style scoped>
 .home {
-  overflow: hidden;
+
    scroll-behavior: smooth;
 }
 .first-panel {
@@ -421,6 +421,7 @@ export default {
     rgba(134, 181, 255, 1) 100%
   );
   position: relative;
+  overflow: hidden ;
 }
 
 .first-panel nav {
@@ -441,6 +442,7 @@ export default {
   letter-spacing: 1.5px;
   font-weight: 200;
   position: relative;
+  width: 125px;
 }
 .first-panel nav .logo::after {
   content: "";
@@ -449,8 +451,8 @@ export default {
   height: 15px;
   background-color: #00ffc2;
   border-radius: 50%;
-  top: 15px;
-  left: 103%;
+  top: 16px;
+  left: 88%;
 }
 .first-panel nav .access {
   display: flex;

@@ -20,6 +20,7 @@
   box-sizing: border-box;
    scroll-behavior: smooth;
    overflow-x: hidden ;
+ 
 }
 /* #nav {
   padding: 30px;
