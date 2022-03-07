@@ -74,6 +74,7 @@ overflow-x: hidden;
 @media screen and (max-height: 600px) {
         .container form{
         margin-top: 5px;
+          height: 350px;
  
     }
     .container form input{
@@ -86,14 +87,15 @@ overflow-x: hidden;
         border: 1px solid rgb(68, 68, 68)
     }
         .container .submit-btn{
+            margin-top: 20px;
          padding: 0px;
         width: 130px;
         height: 60px;
 
     }
         .container .signup{
-        margin-top: 40px;
-        height: 60px;
+        margin-top: 10px;
+        height: 100px;
     }
 
 }

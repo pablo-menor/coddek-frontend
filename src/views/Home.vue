@@ -370,7 +370,7 @@
             <i class="fas fa-check-circle"></i>Ponte a prueba con enunciados
             reales
           </p>
-          <button>¡COMIENZA!</button>
+          <router-link to="/registro/dev" class="button">¡COMIENZA!</router-link>
         </section>
       </div>
       <div class="company-card">
@@ -386,7 +386,7 @@
           <p>
             <i class="fas fa-check-circle"></i>Aumenta la visibilidad de tu empresa
           </p>
-          <button>¡ÚNETE!</button>
+          <router-link to="/registro/empresa" class="button">ÚNETE!</router-link>
         </section>
       </div>
     </section>
@@ -407,10 +407,10 @@ export default {
 
 <style scoped>
 .home {
-
    scroll-behavior: smooth;
 }
 .first-panel {
+  
   height: 500px;
   background: rgb(0, 38, 171);
   background: linear-gradient(
@@ -472,7 +472,7 @@ export default {
 }
 .first-panel nav .access .links::after {
   content: "";
-  background-color: #93ffd0;
+  background-color: #00ff0d;
   width: 100%;
   height: 2px;
   position: absolute;
@@ -581,7 +581,7 @@ export default {
   font-size: 1.5em;
   color: rgb(0, 196, 33);
 }
-.cards-panel .card-content button {
+.cards-panel .card-content .button {
   width: 170px;
   margin: auto;
   margin-top: 35px;
@@ -592,5 +592,8 @@ export default {
   color: #fff;
   font-size: 0.9em;
   cursor: pointer;
+  text-align: center;
+  text-decoration: none;
 }
+
 </style>

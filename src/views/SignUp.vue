@@ -645,8 +645,11 @@ export default {
 
 /*HEIGHT */
 @media screen and (max-height: 600px) {
+    .container .content{
+        height: 80vh;
+    }
   .container .content .form-container {
-    height: 400px;
+    height: 350px;
     padding-bottom: 10px;
   }
   .container .content .signup-svg {
