@@ -173,12 +173,14 @@ export default {
 .container .content {
   width: 100vw;
   display: flex;
-  height: 80vh;
-  padding: 60px;
+/* margin-top: 30px ; */
   align-items: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 .container .content .login-svg {
   width: 50%;
+  display: none;
 }
 #line-svg {
   color: red;
@@ -186,8 +188,9 @@ export default {
 }
 
 .container .content .form-container {
-  width: 35%;
-  max-width: 550px;
+  width: 80vw;
+  max-width: 400px;
+  
   height: 370px;
   box-shadow: 0 0 10px rgb(136, 136, 136);
   border-radius: 8px;
@@ -196,6 +199,7 @@ export default {
   /* justify-content: center; */
   align-items: center;
   flex-direction: column;
+  margin: auto;
  
 }
 
@@ -239,5 +243,23 @@ export default {
 .container .content .form-container .go-to-signup{
   color: #00B7AC;
   text-decoration: none;
+}
+/****************RESPONSIVE*****************/
+
+/*WIDTH */
+@media screen and (min-width: 1000px) {
+  .container .content .login-svg{
+    display: block;
+    width: 500px;
+  }
+    .container .content {
+    padding-left: 60px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .container .content {
+    gap: 10vw;
+  }
 }
 </style>

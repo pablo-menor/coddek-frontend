@@ -605,12 +605,14 @@ export default {
   width: 100vw;
   /* height: 80vh; */
   padding-top: 6px;
+  
   /* padding: 60px; */
   /* background-color: red; */
   display: flex;
   justify-content: center;
   /* align-items: center; */
   gap: 3vw;
+ 
 }
 
 .container .content .signup-svg {
@@ -625,6 +627,7 @@ export default {
   box-shadow: 0 0 10px rgb(136, 136, 136);
   border-radius: 10px;
   background-color: #ffffff;
+  
 }
 
 /****************RESPONSIVE*****************/
