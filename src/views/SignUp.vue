@@ -603,8 +603,8 @@ export default {
 }
 .container .content {
   width: 100vw;
-  height: 80vh;
-  padding-top: 30px;
+  /* height: 80vh; */
+  padding-top: 6px;
   /* padding: 60px; */
   /* background-color: red; */
   display: flex;
@@ -621,7 +621,7 @@ export default {
 .container .content .form-container {
   width: 80vw;
   max-width: 400px;
-  height: 530px;
+  height: 480px;
   box-shadow: 0 0 10px rgb(136, 136, 136);
   border-radius: 10px;
   background-color: #ffffff;

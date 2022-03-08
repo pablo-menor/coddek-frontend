@@ -27,8 +27,8 @@ overflow-x: hidden;
     .container form{
         overflow-x: hidden;
         width: 100vw;
-        height: 350px;
-        margin-top: 20px;
+        margin-bottom: 25px;
+        margin-top: 15px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -59,7 +59,7 @@ overflow-x: hidden;
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 40px;
+        margin-top: 20px;
     }
     .container .go-to-login{
         color: #00B7AC;
