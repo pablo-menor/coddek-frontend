@@ -534,7 +534,7 @@
 
       <div class="form-container">
         <DevSignUp v-show="$route.params.type == 'dev'" />
-        <!-- <CompanySignUp v-show="$route.params.type == 'empresa'"/> -->
+        <CompanySignUp v-show="$route.params.type == 'empresa'"/>
       </div>
     </div>
   </div>

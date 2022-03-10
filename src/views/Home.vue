@@ -386,7 +386,7 @@
           <p>
             <i class="fas fa-check-circle"></i>Aumenta la visibilidad de tu empresa
           </p>
-          <router-link to="/registro/empresa" class="button">ÚNETE!</router-link>
+          <router-link to="/registro/empresa" class="button">¡ÚNETE!</router-link>
         </section>
       </div>
     </section>
