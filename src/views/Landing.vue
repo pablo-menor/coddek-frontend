@@ -3,8 +3,8 @@
     <div class="first-panel">
       <div class="top-layer">
         <div class="access">
-          <a>LOGIN</a>
-          <a>REGISTRO</a>
+           <router-link to="/login" class="links">LOGIN</router-link>
+          <router-link to="/registro" class="links">REGISTRO</router-link>
         </div>
         <h1 class="logo">CODDEK</h1>
         <p>Descubre lo que piden las empresas en la <span>actualidad</span></p>
@@ -630,8 +630,13 @@ background: linear-gradient(100deg, rgba(2,246,233,1) 2%, rgba(0,173,237,1) 26%,
   margin-top: 20px;
   margin-right: 15px;
 }
+.links{
+    position: relative;
+  color: #ffff;
+  text-decoration: none;
+}
 .first-panel .logo {
-  font-size: 2em;
+  font-size: 2.1em;
   color: #fff;
   letter-spacing: 1.5px;
   font-weight: 200;
@@ -639,16 +644,17 @@ background: linear-gradient(100deg, rgba(2,246,233,1) 2%, rgba(0,173,237,1) 26%,
   width: 200px;
   text-align: center;
   margin-top: 30px;
+  height: 50px;
 }
 .first-panel .logo::after {
   content: "";
   position: absolute;
-  width: 15px;
-  height: 15px;
+  width: 17px;
+  height: 17px;
   background-color: #00ffc2;
   border-radius: 50%;
   top: 26px;
-  left: 85%;
+  left: 88%;
 }
 
 .top-layer p {
