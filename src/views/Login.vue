@@ -1,6 +1,30 @@
 <template>
   <div class="container">
-    <h1>Inicia sesión en <router-link to="/" class="logo">CODDEK</router-link></h1>
+    <h1>
+      Inicia sesión en <br /><router-link to="/" class="logo"
+        >CODDEK</router-link
+      >
+    </h1>
+    <div class="wave">
+      <svg
+        id="visual"
+        viewBox="0 0 675 900"
+        preserveAspectRatio="none"
+        style="height: 100%; width: 100%"
+        class="background"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        version="1.1"
+      >
+        <rect x="0" y="0" width="675" height="900" fill="#ffffff"></rect>
+        <path
+          d="M0 584L675 338L675 901L0 901Z"
+          fill="#0066FF"
+          stroke-linecap="round"
+          stroke-linejoin="miter"
+        ></path>
+      </svg>
+    </div>
     <div class="content">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -120,13 +144,15 @@
 
       <div class="form-container">
         <form action="">
-          <input class="email" type="text" placeholder="Correo electrónico">
-          <input class="password" type="text" placeholder="Contraseña">
+          <input class="email" type="text" placeholder="Correo electrónico" />
+          <input class="password" type="text" placeholder="Contraseña" />
         </form>
-        <input class="submit-btn" type="submit" value="Acceder">
+        <input class="submit-btn" type="submit" value="Acceder" />
         <div class="signup">
           <p>¿No tienes una cuenta?</p>
-          <router-link to="/registro" class="go-to-signup">Regístrate</router-link>
+          <router-link to="/registro" class="go-to-signup"
+            >Regístrate</router-link
+          >
         </div>
       </div>
     </div>
@@ -147,21 +173,23 @@ export default {
 .container h1 {
   margin: auto;
   text-align: center;
-  height: 20vh;
-  line-height: 20vh;
+  /* height: 20vh; */
+  margin-top: 50px;
+  /* line-height: 20vh; */
+  margin-bottom: 50px;
 }
 
-.container .logo{
+.container .logo {
   position: relative;
   text-decoration: none;
   color: #000;
 }
-.container .logo:hover{
+.container .logo:hover {
   cursor: pointer;
 }
 
-.container .logo::after{
-    content: "";
+.container .logo::after {
+  content: "";
   position: absolute;
   width: 15px;
   height: 15px;
@@ -173,10 +201,11 @@ export default {
 .container .content {
   width: 100vw;
   display: flex;
-/* margin-top: 30px ; */
+  /* margin-top: 30px ; */
   align-items: center;
   padding-top: 5px;
   padding-bottom: 5px;
+  margin: auto;
 }
 .container .content .login-svg {
   width: 50%;
@@ -190,7 +219,7 @@ export default {
 .container .content .form-container {
   width: 80vw;
   max-width: 400px;
-  
+background-color: #fff;
   height: 370px;
   box-shadow: 0 0 10px rgb(136, 136, 136);
   border-radius: 8px;
@@ -200,10 +229,9 @@ export default {
   align-items: center;
   flex-direction: column;
   margin: auto;
- 
 }
 
-.container .content .form-container form{
+.container .content .form-container form {
   /* background-color: black; */
   width: 85%;
   height: 190px;
@@ -212,54 +240,73 @@ export default {
   flex-direction: column;
   align-items: center;
 }
-.container .content .form-container form input{
+.container .content .form-container form input {
   width: 200px;
   padding: 15px;
   text-align: center;
   margin-top: 30px;
   outline: none;
   border-radius: 30px;
-  border: 1px solid rgb(68, 68, 68)
+  border: 1px solid rgb(68, 68, 68);
 }
-.container .content .form-container .submit-btn{
+.container .content .form-container .submit-btn {
   width: 130px;
-   padding: 15px;
+  padding: 15px;
   text-align: center;
-  background-color: #00B7AC;
+  background: rgb(255, 92, 0);
+  background: linear-gradient(
+    100deg,
+    rgba(255, 92, 0, 1) 20%,
+    rgba(255, 150, 0, 1) 92%
+  );
   color: rgb(255, 255, 255);
-   outline: none;
+  outline: none;
   border-radius: 30px;
   border: 1px solid rgb(68, 68, 68);
 }
-.container .content .form-container .submit-btn:hover{
+.container .content .form-container .submit-btn:hover {
   cursor: pointer;
 }
-.container .content .form-container .signup{
+.container .content .form-container .signup {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 40px;
 }
-.container .content .form-container .go-to-signup{
-  color: #00B7AC;
+.container .content .form-container .go-to-signup {
+  color: #00b7ac;
   text-decoration: none;
+}
+.container .wave {
+  overflow-x: hidden;
+  position: absolute;
+  bottom: -5px;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
 }
 /****************RESPONSIVE*****************/
 
 /*WIDTH */
 @media screen and (min-width: 1000px) {
-  .container .content .login-svg{
+  .container .content .login-svg {
     display: block;
     width: 500px;
   }
-    .container .content {
+  .container .content {
     padding-left: 60px;
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1300px) {
   .container .content {
-    gap: 10vw;
+    width: 80vw;
   }
+  
+}
+@media screen and (min-width: 1800px) {
+  .container .content {
+    width: 60vw;
+  } 
 }
 </style>
