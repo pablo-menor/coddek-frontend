@@ -589,7 +589,7 @@ export default {
   background-size: 145%;
   position: relative;
   display: flex;
-  /* overflow-y: hidden; */
+  overflow-y: hidden;
 }
 
 .top-layer {
