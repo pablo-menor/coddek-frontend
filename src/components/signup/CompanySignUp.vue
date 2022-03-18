@@ -44,11 +44,16 @@
   width: 130px;
   padding: 15px;
   text-align: center;
-  background-color: #00b7ac;
+  background: rgb(255, 92, 0);
+  background: linear-gradient(
+    100deg,
+    rgba(255, 92, 0, 1) 20%,
+    rgba(255, 150, 0, 1) 92%
+  );
   color: rgb(255, 255, 255);
   outline: none;
   border-radius: 30px;
-  border: 1px solid rgb(68, 68, 68);
+  border: none;
 }
 .container .submit-btn:hover {
   cursor: pointer;

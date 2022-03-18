@@ -1,6 +1,8 @@
 <template>
     <div class="container">
-
+        <!-- Menú móvil -->
+        <!-- buscador -->
+        <!--Componente OffersPanel -->
     </div>
 </template>
 

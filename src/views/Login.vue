@@ -262,7 +262,7 @@ background-color: #fff;
   color: rgb(255, 255, 255);
   outline: none;
   border-radius: 30px;
-  border: 1px solid rgb(68, 68, 68);
+  border: none;
 }
 .container .content .form-container .submit-btn:hover {
   cursor: pointer;
