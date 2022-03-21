@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1>
-      Inicia sesión en <br /><router-link to="/" class="logo"
+      Inicia sesión en <br class="br" /><router-link to="/" class="logo"
         >CODDEK</router-link
       >
     </h1>
@@ -292,6 +292,10 @@ background-color: #fff;
   .container .content .login-svg {
     display: block;
     width: 500px;
+  }
+
+  .br{
+    display: none;
   }
   .container .content {
     padding-left: 60px;

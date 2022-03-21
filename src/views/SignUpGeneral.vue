@@ -491,4 +491,21 @@ export default {
   text-decoration: none;
   color: #000;
 }
+/****RESPONSIVE****/
+
+@media screen and (min-width: 1000px) {
+  .container h1 {
+    font-size: 2.1rem;
+  }
+
+  .dev-card,
+.company-container {
+   height: 220px;
+}
+
+  .card{
+    height: 220px;
+  }
+  
+}
 </style>
