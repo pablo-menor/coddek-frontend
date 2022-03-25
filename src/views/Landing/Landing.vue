@@ -705,6 +705,7 @@ background: linear-gradient(100deg, rgba(2,246,233,1) 2%, rgba(0,173,237,1) 26%,
   height: 850px;
   /* background-color: rgb(114, 25, 25); */
   width: 100%;
+  max-width: 800px;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -718,8 +719,9 @@ background: linear-gradient(100deg, rgba(2,246,233,1) 2%, rgba(0,173,237,1) 26%,
   height: 390px;
   width: 350px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgb(92, 92, 92);
+  box-shadow: 0 3.5px 7px rgb(114, 114, 114);
   font-family: "Nunito", sans-serif;
+  position: relative;
 }
 .cards-panel .dev-card header,
 .company-card header {
@@ -756,24 +758,9 @@ background: linear-gradient(100deg, rgba(2,246,233,1) 2%, rgba(0,173,237,1) 26%,
 .cards-panel .card-content .button {
   width: 170px;
   margin: auto;
-  margin-top: 35px;
   padding: 12px 10px 12px 10px;
   border-radius: 20px;
   border: none;
-  /* background: rgb(4, 225, 185);
-  background: linear-gradient(
-    100deg,
-    rgba(4, 225, 185, 1) 20%,
-    rgba(4, 153, 228, 1) 92%
-  ); */
-  /* background: rgb(1, 221, 184);
-  background: linear-gradient(
-    100deg,
-    rgba(1, 221, 184, 1) 0%,
-    rgba(3, 181, 203, 1) 20%,
-    rgba(4, 140, 212, 1) 43%,
-    rgba(4, 107, 219, 1) 77%
-  ); */
   background: rgb(1, 221, 184);
   background: linear-gradient(
     100deg,
@@ -787,5 +774,21 @@ background: linear-gradient(100deg, rgba(2,246,233,1) 2%, rgba(0,173,237,1) 26%,
   cursor: pointer;
   text-align: center;
   text-decoration: none;
+  position: absolute;
+  bottom: 35px;
+  left: calc(50% - 85px);
 }
+
+/* ---------- RESPONSIVE --------- */
+
+@media screen and (min-width: 749px) {
+.cards-panel {
+  height: 500px;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 25px;
+} 
+}
+
 </style>

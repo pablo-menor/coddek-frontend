@@ -487,7 +487,7 @@ export default {
   height: 180px;
   background-color: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgb(92, 92, 92);
+ box-shadow: 0 3.5px 7px rgb(114, 114, 114);
   text-decoration: none;
   color: #000;
 }
