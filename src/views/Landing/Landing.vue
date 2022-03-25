@@ -584,7 +584,7 @@ export default {
 }
 .first-panel {
   height: 440px;
-  background-image: url("../assets/home.png");
+  background-image: url("../../assets/home.png");
   background-position: center;
   background-size: 145%;
   position: relative;
