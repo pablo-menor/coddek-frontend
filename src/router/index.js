@@ -3,6 +3,8 @@ import Login from '../views/Login.vue'
 import SignUp from '../views/SignUp/SignUp.vue'
 import SignUpGeneral from '../views/SignUp/SignUpGeneral.vue'
 import Landing from '../views/Landing/Landing.vue'
+import Dashboard from '../views/Dashboard/Dashboard.vue'
+
 
 const routes = [
   {
@@ -24,6 +26,11 @@ const routes = [
     path: "/registro",
     name: "SignUpGeneral",
     component: SignUpGeneral, 
+  },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    component: Dashboard, 
   },
 ]
 
