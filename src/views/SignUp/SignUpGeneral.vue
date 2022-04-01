@@ -24,7 +24,7 @@
     <div class="card-container">
       <router-link to="/registro/dev" class="card">
         <div class="dev-card">
-          <h2>DESARROLLADOR</h2>
+          <h2>DESARROLLADOR/A</h2>
           <svg
             width="68"
             height="66"
