@@ -4,6 +4,7 @@
     <sidebar-mobile class="menu-mobile"></sidebar-mobile>
     <side-arrow @open-menu="openMenu()" class="side-arrow"></side-arrow>
     <close-menu @close-menu="closeMenu()" class="close-menu"></close-menu>
+    <single-offer></single-offer>
 
     <!-- buscador -->
     <!--Componente OffersPanel -->
@@ -14,12 +15,15 @@
 import SidebarMobile from "../../components/sidebar/SidebarMobile.vue";
 import SideArrow from "../../components/sidebar/OpenMenu.vue";
 import CloseMenu from "../../components/sidebar/CloseMenu.vue";
+import SingleOffer from "../../components/offers/SingleOffer.vue"; /*PROVISIONAL, esto hay que importarlo en offerspanel*/ 
+
 export default {
   name: "Dashboard",
   components: {
     SidebarMobile,
     SideArrow,
     CloseMenu,
+    SingleOffer,
   },
   mounted() {
     this.closeMenu();
