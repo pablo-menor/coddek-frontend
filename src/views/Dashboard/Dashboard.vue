@@ -12,10 +12,15 @@
 </template>
 
 <script>
+// Components
 import SidebarMobile from "../../components/sidebar/SidebarMobile.vue";
 import SideArrow from "../../components/sidebar/OpenMenu.vue";
 import CloseMenu from "../../components/sidebar/CloseMenu.vue";
-import SingleOffer from "../../components/offers/SingleOffer.vue"; /*PROVISIONAL, esto hay que importarlo en offerspanel*/ 
+import SingleOffer from "../../components/offers/SingleOffer.vue"; /*PROVISIONAL, esto hay que importarlo en offerspanel*/
+
+// Services
+import AuthService from "../../service/auth.service";
+const authService = new AuthService();
 
 export default {
   name: "Dashboard",
@@ -24,6 +29,18 @@ export default {
     SideArrow,
     CloseMenu,
     SingleOffer,
+  },
+  data() {
+    return {
+      role: "",
+    };
+  },
+  created() {
+    authService.getRoleOrSendToLogin(this.$router)
+    .then(role => {
+      this.role = role;
+    });
+  
   },
   mounted() {
     this.closeMenu();
@@ -50,8 +67,8 @@ export default {
 </script>
 
 <style scoped>
-.container{
-    overflow-x: hidden;
+.container {
+  overflow-x: hidden;
 }
 .menu-mobile {
   margin-left: -98vw;

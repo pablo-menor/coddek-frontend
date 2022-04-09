@@ -1,8 +1,24 @@
 export default class BaseService {
-    async get(url) {
-        const res = await fetch(url);
-        const data = await res.json();
-        return data;
+    async get(url, headers) {
+
+        if (headers) {
+            try {
+                const res = await fetch(url, {
+                    method: 'GET',
+                    headers: headers
+                });
+                const dataRes = await res.json();
+                return dataRes;
+            } catch (error) {
+                return
+            }
+        } else {
+            const res = await fetch(url, {
+                method: 'GET'
+            });
+            const dataRes = await res.json();
+            return dataRes;
+        }
     }
     async post(url, data) {
         const res = await fetch(url, {
