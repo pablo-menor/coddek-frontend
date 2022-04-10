@@ -1,19 +1,20 @@
 <template>
   <div class="container">
-    <div class="navigation">
-      <router-link to="/login" class="link">Ofertas</router-link>
-      <router-link to="/login" class="link">Perfil</router-link>
-      <router-link to="/login" class="link">Training</router-link>
-      <router-link to="/login" class="link">Explorer</router-link>
-    </div>
-
+    <navigation-links :role="role"></navigation-links>
     <button class="logout-btn">Cerrar sesión</button>
   </div>
 </template>
 
 <script>
+import NavigationLinks from "./NavigationLinks.vue";
 export default {
   name: "SidebarMobile",
+  components: {
+    NavigationLinks,
+  },
+  props: {
+    role: String,
+  },
 };
 </script>
 
@@ -38,20 +39,11 @@ export default {
   width: 100vw;
   align-items: center;
   justify-content: space-around;
+  margin-left: -98vw;
+  transition: 0.3s ease-in-out;
+  position: fixed;
+  z-index: 2;
 }
-.navigation {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 35px;
-}
-.link {
-  color: white;
-  font-size: 2.5rem;
-
-  text-decoration: none;
-}
-
 .logout-btn {
   width: 150px;
   padding: 18px;

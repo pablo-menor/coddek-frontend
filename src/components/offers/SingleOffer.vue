@@ -1,19 +1,17 @@
 <template>
   <div class="container">
-      <div class="offer-layout">
-          <div class="img-empresa"></div>
-          <div class="data-offer">
-              <h3>Desarrollador Senior Java</h3>
-              <h5>Deloitte</h5>
-              <div class="tags-offer">
-                  <p>Tag1</p>
-                  <p>Tag2</p>
-                  <p>Tag3</p>
-                  <p>Tag4</p>
-              </div>
-          </div>
-          <div class="save-offer"></div>
+    <div class="img-company"></div>
+    <div class="data-offer">
+      <h3>Desarrollador Senior Java</h3>
+      <h5>Deloitte</h5>
+      <div class="tags-offer">
+        <p>Tag1</p>
+        <p>Tag2</p>
+        <p>Tag3</p>
+        <p>Tag4</p>
       </div>
+    </div>
+    <div class="save-offer"><i class="far fa-bookmark"></i></div>
   </div>
 </template>
 
@@ -24,47 +22,47 @@ export default {
 </script>
 
 <style scoped>
-
-    .offer-layout {
-        border: 2px solid black;
-        border-radius: 10px;
-        width: 70%;
-        height: 15%;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 5px;
-    }
-    .img-empresa {
-        border-radius: 50%;
-        background-color: grey;
-        width: 50px;
-        height: 50px;
-    }
-    .data-offer {
-        display: flex;
-        flex-direction: column;
-        gap: 2px
-        ;
-    }
-    .tags-offer {
-        display: flex;
-        gap: 5px;
-    }
-    .save-offer {
-        background-color: red;
-        width: 20px;
-        height: 20px;
-        margin-bottom: 50px;
-        margin-right: 2px;
-    }
-    .tags-offer p {
-        border: 2px solid grey;
-        border-radius: 20%;
-        background-color: grey;
-        color: white;
-    }
-    p {
-        font-size: 10px;
-    }
+.container {
+  box-shadow:1px 1px  5px  #919191;
+  border-radius: 5px;
+  width: 85%;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px;
+  position: relative;
+  z-index: 1;
+  max-width: 550px;
+}
+.img-company {
+  border-radius: 50%;
+  border: 1px solid #333;
+  width: 50px;
+  height: 50px;
+}
+.data-offer {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.tags-offer {
+  display: flex;
+  gap: 5px;
+}
+.save-offer {
+  position: absolute;
+  right:10px;
+  top: 10px;
+  font-size: 1.2rem;
+}
+.tags-offer p {
+  border: 2px solid grey;
+  border-radius: 20%;
+  background-color: grey;
+  color: white;
+}
+p {
+  font-size: 10px;
+}
 </style>

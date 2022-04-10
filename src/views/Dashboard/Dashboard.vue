@@ -1,13 +1,15 @@
 <template>
   <div class="container">
     <!-- Menu mobile-->
-    <sidebar-mobile class="menu-mobile"></sidebar-mobile>
+    <sidebar-mobile class="menu-mobile" :role="role"></sidebar-mobile>
     <side-arrow @open-menu="openMenu()" class="side-arrow"></side-arrow>
     <close-menu @close-menu="closeMenu()" class="close-menu"></close-menu>
-    <single-offer></single-offer>
 
     <!-- buscador -->
+    <search-input class="search-input"></search-input>
+
     <!--Componente OffersPanel -->
+    <offers-panel class="offers-panel"></offers-panel>
   </div>
 </template>
 
@@ -16,7 +18,8 @@
 import SidebarMobile from "../../components/sidebar/SidebarMobile.vue";
 import SideArrow from "../../components/sidebar/OpenMenu.vue";
 import CloseMenu from "../../components/sidebar/CloseMenu.vue";
-import SingleOffer from "../../components/offers/SingleOffer.vue"; /*PROVISIONAL, esto hay que importarlo en offerspanel*/
+import OffersPanel from "../../components/offers/OffersPanel.vue";
+import SearchInput from "../../components/search-jobs/SearchInput.vue";
 
 // Services
 import AuthService from "../../service/auth.service";
@@ -28,7 +31,8 @@ export default {
     SidebarMobile,
     SideArrow,
     CloseMenu,
-    SingleOffer,
+    OffersPanel,
+    SearchInput,
   },
   data() {
     return {
@@ -36,11 +40,9 @@ export default {
     };
   },
   created() {
-    authService.getRoleOrSendToLogin(this.$router)
-    .then(role => {
+    authService.getRoleOrSendToLogin(this.$router).then((role) => {
       this.role = role;
     });
-  
   },
   mounted() {
     this.closeMenu();
@@ -70,8 +72,12 @@ export default {
 .container {
   overflow-x: hidden;
 }
-.menu-mobile {
-  margin-left: -98vw;
-  transition: 0.3s ease-in-out;
+.offers-panel,
+.search-input {
+  margin-left: 2vw;
+}
+
+.search-input{
+  margin-top: 20px;
 }
 </style>

@@ -1,0 +1,49 @@
+<template>
+  <div class="container-search-input">
+      <div class="input-container">
+           <input class="input-field" type="text">
+           <i class="fas fa-search"></i>
+      </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "SearchInput",
+  components: {},
+  data() {
+    return {};
+  },
+  created() {},
+  mounted() {},
+  methods: {},
+};
+</script>
+
+<style scoped>
+.container-search-input {
+  display: flex;
+  justify-content: center;
+}
+
+.input-container{
+    height: 35px;
+    border: 2px solid #0075f3;
+    display: flex;
+    align-items: center;
+    width: 70%;
+    min-width: 230px;
+    max-width: 400px;
+    justify-content: space-around;
+    border-radius: 13px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.input-field{
+    border: none;
+    outline: none;  
+    width: 85%;
+    height: 25px;
+    font-size: 1rem;
+}
+</style>
