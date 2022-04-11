@@ -9,7 +9,7 @@
     <search-input class="search-input"></search-input>
 
     <!--Componente OffersPanel -->
-    <offers-panel class="offers-panel"></offers-panel>
+    <offers-panel class="offers-panel" v-show="role==='developer'" ></offers-panel>
   </div>
 </template>
 

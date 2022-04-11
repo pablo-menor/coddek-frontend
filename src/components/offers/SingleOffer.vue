@@ -2,8 +2,8 @@
   <div class="container">
     <div class="img-company"></div>
     <div class="data-offer">
-      <h3>Desarrollador Senior Java</h3>
-      <h5>Deloitte</h5>
+      <h3>{{ offer.title }}</h3>
+      <h5>{{ offer.company.name }}</h5>
       <div class="tags-offer">
         <p>Tag1</p>
         <p>Tag2</p>
@@ -18,6 +18,15 @@
 <script>
 export default {
   name: "SingleOffer",
+  data() {
+    return {};
+  },
+  props: {
+    offer: Object, 
+  },
+  created() {},
+  mounted() {},
+  methods: {},
 };
 </script>
 
