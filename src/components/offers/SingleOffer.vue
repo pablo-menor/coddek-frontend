@@ -5,10 +5,7 @@
       <h3>{{ offer.title }}</h3>
       <h5>{{ offer.company.name }}</h5>
       <div class="tags-offer">
-        <p>Tag1</p>
-        <p>Tag2</p>
-        <p>Tag3</p>
-        <p>Tag4</p>
+        <p v-for="(tag, i) in offer.tags" :key="i">{{ tag.name }}</p>
       </div>
     </div>
     <div class="save-offer"><i class="far fa-bookmark"></i></div>
@@ -22,7 +19,7 @@ export default {
     return {};
   },
   props: {
-    offer: Object, 
+    offer: Object,
   },
   created() {},
   mounted() {},
@@ -32,7 +29,7 @@ export default {
 
 <style scoped>
 .container {
-  box-shadow:1px 1px  5px  #919191;
+  box-shadow: 1px 1px 5px #919191;
   border-radius: 5px;
   width: 85%;
   height: 130px;
@@ -61,7 +58,7 @@ export default {
 }
 .save-offer {
   position: absolute;
-  right:10px;
+  right: 10px;
   top: 10px;
   font-size: 1.2rem;
 }
