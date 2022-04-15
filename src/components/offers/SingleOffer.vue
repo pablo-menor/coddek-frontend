@@ -1,14 +1,17 @@
 <template>
-  <div class="container">
+  <div class="container-single-offer" @click="selected()">
     <div class="img-company"></div>
     <div class="data-offer">
-      <h3>{{ offer.title }}</h3>
+      <h3 class="title">{{ offer.title }}</h3>
       <h5>{{ offer.company.name }}</h5>
       <div class="tags-offer">
-        <p v-for="(tag, i) in offer.tags" :key="i">{{ tag.name }}</p>
+        <span v-for="(tag, i) in offer.tags" :key="i">{{ tag.name }}</span>
       </div>
     </div>
     <div class="save-offer"><i class="far fa-bookmark"></i></div>
+    <div v-show="offer.salary" class="salary-container">
+      <span>{{ offer.salary }}€ bruto/año</span>
+    </div>
   </div>
 </template>
 
@@ -23,16 +26,20 @@ export default {
   },
   created() {},
   mounted() {},
-  methods: {},
+  methods: {
+    selected() {
+      this.$emit("selected", this.offer);
+    },
+  },
 };
 </script>
 
 <style scoped>
-.container {
+.container-single-offer {
   box-shadow: 1px 1px 5px #919191;
   border-radius: 5px;
   width: 85%;
-  height: 130px;
+  height: 150px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -50,11 +57,34 @@ export default {
 .data-offer {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  max-width: 220px;
+  margin-top: 4px;
+}
+.title{
+  font-size: 1rem;
 }
 .tags-offer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3px;
+  padding: 5px;
+  margin-top: 5px;
+  align-items: center;
+  height: 65px;
+  width: 130px;
+}
+.tags-offer span {
   display: flex;
-  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(250, 249, 249);
+  box-shadow: 1px 1px 3px #a8a8a8;
+  color: rgb(0, 0, 0);
+  font-size: 0.7rem;
+  height: 25px;
+  /* padding: 0 10px; */
+  border-radius: 3px;
+  text-align: center;
 }
 .save-offer {
   position: absolute;
@@ -62,13 +92,11 @@ export default {
   top: 10px;
   font-size: 1.2rem;
 }
-.tags-offer p {
-  border: 2px solid grey;
-  border-radius: 20%;
-  background-color: grey;
-  color: white;
-}
-p {
-  font-size: 10px;
+
+.salary-container {
+  position: absolute;
+  right: 13px;
+  top: 120px;
+  font-size: 0.8rem;
 }
 </style>

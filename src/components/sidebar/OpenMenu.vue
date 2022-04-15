@@ -32,6 +32,6 @@ export default {
   align-items: center;
   justify-content: right;
   position: fixed;
-  z-index: 2;
+  z-index: 6;
 }
 </style>

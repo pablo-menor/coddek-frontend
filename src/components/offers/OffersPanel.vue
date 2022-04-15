@@ -1,32 +1,48 @@
 <template>
   <div class="container-offers-panel">
-    <single-offer v-for="(offer, i) in offers" :key="i" :offer="offer"></single-offer>
+    <single-offer
+      v-for="(offer, i) in offers"
+      :key="i"
+      :offer="offer"
+      @selected="showDetails(offer)"
+    ></single-offer>
+    <offer-detail v-if="selectedOffer" :offer="selectedOffer"></offer-detail>
   </div>
 </template>
 
 <script>
+// Components
 import SingleOffer from "./SingleOffer.vue";
+import OfferDetail from "./OfferDetail.vue";
+
+// Services
 import OfferService from "../../service/offer.service";
 const offerService = new OfferService();
+
 export default {
   name: "SidebarMobile",
   components: {
     SingleOffer,
+    OfferDetail,
   },
   data() {
     return {
       offers: [],
+      selectedOffer: null,
     };
   },
   props: {},
   created() {
     offerService.getAllActiveOffers().then((offers) => {
       this.offers = offers;
-      console.log(offers);
     });
   },
   mounted() {},
-  methods: {},
+  methods: {
+    showDetails(offer) {
+      this.selectedOffer = offer;
+    },
+  },
 };
 </script>
 
