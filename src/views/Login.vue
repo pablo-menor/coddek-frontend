@@ -173,10 +173,6 @@ export default {
   methods: {
     login(){
       console.log(this.email +" "+ this.password);
-      if (!this.checkFields()) {
-        alert("Email o contraseña incorrecto");
-        return;
-      }
       const user = {
         email: this.email,
         password: this.password,
@@ -185,24 +181,13 @@ export default {
         if(res){
           console.log(res.token);
           localStorage.setItem("token",res.token);
+          this.$router.push("/dashboard");
         }else{
           alert("Error al iniciar sesión")
         }
       })
 
-    },
-    checkFields() {
-      if (
-        this.email.match(
-          /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
-        ) &&
-        this.password.length > 7
-      ) {
-        return true;
-      } else {
-        return false;
-      }
-    },
+    }
   }
 };
 </script>
