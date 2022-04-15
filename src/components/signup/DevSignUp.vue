@@ -33,6 +33,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import DeveloperService from "../../service/developer.service";
 const devService = new DeveloperService();

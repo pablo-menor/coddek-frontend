@@ -21,15 +21,25 @@ export default class AuthService {
         };
         try {
             const res = await this.baseService.get(url, headers);
-                if (res) {
-                   return res.role
-                }
-                else {
-                    router.push("/login");
-                }
+            if (res) {
+                return res.role
+            }
+            else {
+                router.push("/login");
+            }
 
         } catch (error) {
             router.push("/login");
+        }
+    }
+
+    async doLogin(user) {
+        const url = `http://localhost:3008/api/auth/login`;
+        try {
+            const res = await this.baseService.post(url, user);
+            return res;
+        } catch (error) {
+            return null;
         }
     }
 }
