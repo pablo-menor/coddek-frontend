@@ -1,18 +1,73 @@
 <template>
   <div class="container">
     <form action="">
-      <input class="username" type="text" placeholder="Empresa" />
-      <input class="email" type="text" placeholder="Correo electrónico" />
-      <input class="password" type="text" placeholder="Contraseña" />
-      <input class="password" type="text" placeholder="Repetir contraseña" />
+      <input class="username" v-model="name" type="text" placeholder="Empresa" />
+      <input class="email" v-model="email" type="text" placeholder="Correo electrónico" />
+      <input class="password" v-model="password" type="password" placeholder="Contraseña" />
+      <input class="password" v-model="password2" type="password" placeholder="Repetir contraseña" />
     </form>
-    <input class="submit-btn" type="submit" value="Acceder" />
+    <input class="submit-btn" @click="signUp()" type="submit" value="Acceder" />
     <div class="signup">
       <p>¿Ya estás registrado?</p>
       <router-link to="/login" class="go-to-login">Inicia sesión</router-link>
     </div>
   </div>
 </template>
+
+<script>
+import CompanyService from "../../service/company.service";
+const companyService = new CompanyService();
+export default {
+  name: "DevSignUp",
+  data() {
+    return {
+      name: "",
+      email: "",
+      password: "",
+      password2: "",
+    };
+  },
+  methods: {
+    signUp() {
+      if (!this.checkFields()) {
+        alert("Campos mal mal");
+        return;
+      }
+      let company = {
+        name: this.name,
+        email: this.email,
+        password: this.password,
+      };
+      companyService
+        .signUp(company)
+        .then((res) => {
+          if (res) {
+            this.$router.push("/login");
+          } else {
+            alert("Error al registrarse");
+          }
+        })
+        .catch((err) => {
+          alert("Error al registrarse");
+        });
+    },
+    checkFields() {
+      if (
+        this.name.length > 2 &&
+        this.email.match(
+          /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
+        ) &&
+        this.password.length > 7 &&
+        this.password === this.password2
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+};
+</script>
 
 <style scoped>
 .container {

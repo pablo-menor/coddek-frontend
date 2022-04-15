@@ -144,10 +144,10 @@
 
       <div class="form-container">
         <form action="">
-          <input class="email" type="text" placeholder="Correo electrónico" />
-          <input class="password" type="text" placeholder="Contraseña" />
+          <input class="email" v-model="email" type="text" placeholder="Correo electrónico" />
+          <input class="password" v-model="password" type="password" placeholder="Contraseña" />
         </form>
-        <input class="submit-btn" type="submit" value="Acceder" />
+        <input class="submit-btn" @click="login()" type="submit" value="Acceder" />
         <div class="signup">
           <p>¿No tienes una cuenta?</p>
           <router-link to="/registro" class="go-to-signup"
@@ -160,8 +160,35 @@
 </template>
 
 <script>
+import AuthService from "../service/auth.service";
+const authService = new AuthService();
 export default {
   name: "Login",
+  data(){
+    return{
+      email: "",
+      password: "",
+    }
+  },
+  methods: {
+    login(){
+      console.log(this.email +" "+ this.password);
+      const user = {
+        email: this.email,
+        password: this.password,
+      }
+      authService.doLogin(user).then(res => {
+        if(res){
+          console.log(res.token);
+          localStorage.setItem("token",res.token);
+          this.$router.push("/dashboard");
+        }else{
+          alert("Error al iniciar sesión")
+        }
+      })
+
+    }
+  }
 };
 </script>
 
