@@ -144,10 +144,25 @@
 
       <div class="form-container">
         <form action="">
-          <input class="email" v-model="email" type="text" placeholder="Correo electrónico" />
-          <input class="password" v-model="password" type="password" placeholder="Contraseña" />
+          <input
+            class="email"
+            v-model="email"
+            type="text"
+            placeholder="Correo electrónico"
+          />
+          <input
+            class="password"
+            v-model="password"
+            type="password"
+            placeholder="Contraseña"
+          />
         </form>
-        <input class="submit-btn" @click="login()" type="submit" value="Acceder" />
+        <input
+          class="submit-btn"
+          @click="login()"
+          type="submit"
+          value="Acceder"
+        />
         <div class="signup">
           <p>¿No tienes una cuenta?</p>
           <router-link to="/registro" class="go-to-signup"
@@ -164,31 +179,28 @@ import AuthService from "../service/auth.service";
 const authService = new AuthService();
 export default {
   name: "Login",
-  data(){
-    return{
+  data() {
+    return {
       email: "",
       password: "",
-    }
+    };
   },
   methods: {
-    login(){
-      console.log(this.email +" "+ this.password);
+    login() {
       const user = {
         email: this.email,
         password: this.password,
-      }
-      authService.doLogin(user).then(res => {
-        if(res){
-          console.log(res.token);
-          localStorage.setItem("token",res.token);
+      };
+      authService.doLogin(user).then((res) => {
+        if (res.token) {
+          localStorage.setItem("token", res.token);
           this.$router.push("/dashboard");
-        }else{
-          alert("Error al iniciar sesión")
+        } else {
+          alert("Error al iniciar sesión");
         }
-      })
-
-    }
-  }
+      });
+    },
+  },
 };
 </script>
 
@@ -246,7 +258,7 @@ export default {
 .container .content .form-container {
   width: 80vw;
   max-width: 400px;
-background-color: #fff;
+  background-color: #fff;
   height: 370px;
   box-shadow: 0 0 10px rgb(136, 136, 136);
   border-radius: 8px;
@@ -321,7 +333,7 @@ background-color: #fff;
     width: 500px;
   }
 
-  .br{
+  .br {
     display: none;
   }
   .container .content {
@@ -333,11 +345,10 @@ background-color: #fff;
   .container .content {
     width: 80vw;
   }
-  
 }
 @media screen and (min-width: 1800px) {
   .container .content {
     width: 60vw;
-  } 
+  }
 }
 </style>
