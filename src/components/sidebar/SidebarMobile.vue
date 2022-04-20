@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <navigation-links :role="role"></navigation-links>
-    <button class="logout-btn">Cerrar sesión</button>
+    <button class="logout-btn" @click="logout()">Cerrar sesión</button>
   </div>
 </template>
 
@@ -15,6 +15,12 @@ export default {
   props: {
     role: String,
   },
+  methods: {
+    logout(){
+      localStorage.removeItem('token');
+      this.$router.push('/login');
+    }
+  }
 };
 </script>
 

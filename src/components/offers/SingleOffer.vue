@@ -9,13 +9,20 @@
       </div>
     </div>
     <div class="save-offer"><i class="far fa-bookmark"></i></div>
-    <div v-show="offer.salary" class="salary-container">
-      <span>{{ offer.salary }}€ bruto/año</span>
+    <div v-if="offer.salary" class="salary-container">
+      <span
+        >{{ getSalary() }}€
+        bruto/año</span
+      >
     </div>
   </div>
 </template>
 
 <script>
+// Services
+import OfferService from "../../service/offer.service";
+const offerService = new OfferService();
+
 export default {
   name: "SingleOffer",
   data() {
@@ -29,6 +36,9 @@ export default {
   methods: {
     selected() {
       this.$emit("selected", this.offer);
+    },
+    getSalary() {
+      return offerService.convertSalary(this.offer.salary.amount);
     },
   },
 };
@@ -60,7 +70,7 @@ export default {
   max-width: 220px;
   margin-top: 4px;
 }
-.title{
+.title {
   font-size: 1rem;
 }
 .tags-offer {
