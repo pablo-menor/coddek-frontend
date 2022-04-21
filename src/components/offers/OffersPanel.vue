@@ -6,7 +6,11 @@
       :offer="offer"
       @selected="showDetails(offer)"
     ></single-offer>
-    <offer-detail v-if="selectedOffer" :offer="selectedOffer"></offer-detail>
+    <offer-detail
+      v-if="selectedOffer"
+      :offer="selectedOffer"
+      @cancel="selectedOffer = false"
+    ></offer-detail>
   </div>
 </template>
 

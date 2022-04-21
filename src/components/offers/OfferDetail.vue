@@ -73,6 +73,12 @@
       <p class="description-text-mobile">{{ offer.description }}</p>
       <button class="challange-details">Inscribirse</button>
     </section>
+    <div class="save-offer-mobile" @click="save()">
+      <i
+        v-bind:class="{ 'far fa-bookmark': !saved, 'fas fa-bookmark': saved }"
+      ></i>
+    </div>
+    <i class="fa-solid fa-x cancel-mobile" @click="cancel()"></i>
   </div>
   <!--------------------------DESKTOP VERSION--------------------------------------- -->
 </template>
@@ -80,12 +86,17 @@
 <script>
 // Services
 import OfferService from "../../service/offer.service";
+import DeveloperService from "../../service/developer.service";
+
 const offerService = new OfferService();
+const developerService = new DeveloperService();
 
 export default {
   name: "OfferDetail",
   data() {
-    return {};
+    return {
+      saved: false,
+    };
   },
   props: {
     offer: Object,
@@ -95,6 +106,21 @@ export default {
   methods: {
     getSalary() {
       return offerService.convertSalary(this.offer.salary.amount);
+    },
+    cancel() {
+      this.$emit("cancel");
+    },
+    save() {
+      if (!this.saved) {
+        developerService.saveOffer(this.offer._id).then((response) => {
+          if (response) {
+            this.saved = true;
+          }
+        });
+      } else {
+        developerService.deleteSavedOffer(this.offer._id);
+        this.saved = false;
+      }
     },
   },
 };
@@ -183,13 +209,13 @@ export default {
   padding: 3px;
 }
 .description-text-mobile::-webkit-scrollbar {
-    width: 8px; 
+  width: 8px;
 }
 .description-text-mobile::-webkit-scrollbar-thumb {
-    background: rgb(138, 138, 138);
-    border-radius: 4px;
+  background: rgb(138, 138, 138);
+  border-radius: 4px;
 }
-.challange-details{
+.challange-details {
   width: 80%;
   padding: 10px;
   border-radius: 3px;
@@ -203,6 +229,20 @@ export default {
   color: #fff;
   font-size: 1.2rem;
   margin-top: 15px;
+}
+.cancel-mobile {
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  font-size: 1.5rem;
+  color: rgb(247, 78, 0);
+}
+.save-offer-mobile {
+  position: absolute;
+  left: 30px;
+  top: 20px;
+  font-size: 1.5rem;
+  color: rgb(117, 117, 117);
 }
 /* ------------------------DESKTOP VERSION--------------------------------------- */
 </style>

@@ -20,36 +20,50 @@ export default class BaseService {
             return dataRes;
         }
     }
-    async post(url, data) {
-        const res = await fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
+    async post(url, data, headers) {
+        if (headers) {
+            try {
+                const res = await fetch(url, {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify(data)
+                });
+                const dataRes = await res.json();
+                return dataRes;
+            } catch (error) {
+                return
             }
-        });
-        const dataRes = await res.json();
-        return dataRes;
+        } else {
+            const res = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const dataRes = await res.json();
+            return dataRes;
+        }
     }
     async put(url, data) {
-        const res = await fetch(url, {
-            method: 'PUT',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        const dataRes = await res.json();
-        return dataRes;
+            const res = await fetch(url, {
+                method: 'PUT',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const dataRes = await res.json();
+            return dataRes;
+        }
+    async delete (url) {
+            const res = await fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const dataRes = await res.json();
+            return dataRes;
+        }
     }
-    async delete(url) {
-        const res = await fetch(url, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        const dataRes = await res.json();
-        return dataRes;
-    }
-}

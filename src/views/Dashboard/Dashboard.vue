@@ -8,8 +8,13 @@
     <!-- buscador -->
     <search-input class="search-input"></search-input>
 
-    <!--Componente OffersPanel -->
-    <offers-panel class="offers-panel" v-show="role==='developer'" ></offers-panel>
+    <!--  Desktop navigation component (header)-->
+
+    <!--OffersPanel Component -->
+    <offers-panel
+      class="offers-panel"
+      v-show="role === 'developer'"
+    ></offers-panel>
   </div>
 </template>
 
@@ -77,7 +82,7 @@ export default {
   margin-left: 2vw;
 }
 
-.search-input{
+.search-input {
   margin-top: 20px;
 }
 </style>
