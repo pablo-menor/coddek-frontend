@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       offers: [],
-      selectedOffer: null,
+      selectedOffer: null, 
     };
   },
   props: {},

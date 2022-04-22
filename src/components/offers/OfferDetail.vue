@@ -101,7 +101,9 @@ export default {
   props: {
     offer: Object,
   },
-  created() {},
+  created() {
+    this.getSavedOffers();
+  },
   mounted() {},
   methods: {
     getSalary() {
@@ -115,12 +117,21 @@ export default {
         developerService.saveOffer(this.offer._id).then((response) => {
           if (response) {
             this.saved = true;
+            this.$store.commit("addSavedOffer", this.offer);
+            console.log(this.$store.state.savedOffers);
           }
         });
       } else {
         developerService.deleteSavedOffer(this.offer._id);
         this.saved = false;
+        this.$store.commit("deleteSavedOffer", this.offer);
+        console.log(this.$store.state.savedOffers);
       }
+    },
+    getSavedOffers() {
+      developerService.getSavedOffers().then((response) => {
+        this.saved = response.some((offer) => offer.offerId === this.offer._id);
+      });
     },
   },
 };
@@ -235,14 +246,14 @@ export default {
   right: 30px;
   top: 20px;
   font-size: 1.5rem;
-  color: rgb(247, 78, 0);
+  color: rgb(255, 17, 0);
 }
 .save-offer-mobile {
   position: absolute;
   left: 30px;
   top: 20px;
   font-size: 1.5rem;
-  color: rgb(117, 117, 117);
+  color: rgb(255, 123, 0);
 }
 /* ------------------------DESKTOP VERSION--------------------------------------- */
 </style>

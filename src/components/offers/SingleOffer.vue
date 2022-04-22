@@ -8,12 +8,13 @@
         <span v-for="(tag, i) in offer.tags" :key="i">{{ tag.name }}</span>
       </div>
     </div>
-    <div class="save-offer"><i class="far fa-bookmark"></i></div>
+    <!-- <div class="save-offer">
+      <i
+        v-bind:class="{ 'far fa-bookmark': !saved, 'fas fa-bookmark': saved }"
+      ></i>
+    </div> -->
     <div v-if="offer.salary" class="salary-container">
-      <span
-        >{{ getSalary() }}€
-        bruto/año</span
-      >
+      <span>{{ getSalary() }}€ bruto/año</span>
     </div>
   </div>
 </template>
@@ -21,17 +22,24 @@
 <script>
 // Services
 import OfferService from "../../service/offer.service";
+import DeveloperService from "../../service/developer.service";
+
 const offerService = new OfferService();
+const developerService = new DeveloperService();
 
 export default {
   name: "SingleOffer",
   data() {
-    return {};
+    return {
+      saved: false,
+    };
   },
   props: {
     offer: Object,
   },
-  created() {},
+  created() {
+    this.getSavedOffers();
+  },
   mounted() {},
   methods: {
     selected() {
@@ -39,6 +47,11 @@ export default {
     },
     getSalary() {
       return offerService.convertSalary(this.offer.salary.amount);
+    },
+    getSavedOffers() {
+      developerService.getSavedOffers().then((response) => {
+        this.saved = response.some((offer) => offer.offerId === this.offer._id);
+      });
     },
   },
 };
