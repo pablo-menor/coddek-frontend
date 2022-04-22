@@ -1,10 +1,10 @@
 <template>
   <div class="container">
     <form action="">
-      <input class="username" v-model="name" type="text" placeholder="Empresa" />
-      <input class="email" v-model="email" type="text" placeholder="Correo electrónico" />
-      <input class="password" v-model="password" type="password" placeholder="Contraseña" />
-      <input class="password" v-model="password2" type="password" placeholder="Repetir contraseña" />
+      <input class="username" v-model="name" type="text" placeholder="Empresa" @keyup.enter="signUp()"/>
+      <input class="email" v-model="email" type="text" placeholder="Correo electrónico" @keyup.enter="signUp()"/>
+      <input class="password" v-model="password" type="password" placeholder="Contraseña" @keyup.enter="signUp()"/>
+      <input class="password" v-model="password2" type="password" placeholder="Repetir contraseña" @keyup.enter="signUp()"/>
     </form>
     <input class="submit-btn" @click="signUp()" type="submit" value="Acceder" />
     <div class="signup">

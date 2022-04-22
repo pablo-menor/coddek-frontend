@@ -149,12 +149,14 @@
             v-model="email"
             type="text"
             placeholder="Correo electrónico"
+            @keyup.enter="login()"
           />
           <input
             class="password"
             v-model="password"
             type="password"
             placeholder="Contraseña"
+            @keyup.enter="login()"
           />
         </form>
         <input

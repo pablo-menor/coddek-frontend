@@ -6,24 +6,28 @@
         v-model="username"
         type="text"
         placeholder="Usuario"
+        @keyup.enter="signUp()"
       />
       <input
         class="email"
         v-model="email"
         type="text"
         placeholder="Correo electrónico"
+        @keyup.enter="signUp()"
       />
       <input
         class="password"
         v-model="password"
         type="password"
         placeholder="Contraseña"
+        @keyup.enter="signUp()"
       />
       <input
         class="password"
         v-model="password2"
         type="password"
         placeholder="Repetir contraseña"
+        @keyup.enter="signUp()"
       />
     </form>
     <input class="submit-btn" @click="signUp()" type="submit" value="Acceder" />
