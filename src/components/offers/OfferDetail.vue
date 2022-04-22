@@ -4,6 +4,7 @@
     <section class="company-info-mobile">
       <div class="img-container"></div>
       <p class="company-name">{{ offer.company.name }}</p>
+      <div class="separator-mobile"></div>
     </section>
     <section class="main-details">
       <h2 class="title-mobile">{{ offer.title }}</h2>
@@ -143,22 +144,23 @@ export default {
   border-radius: 5px;
   width: 85%;
   max-width: 800px;
-  height: 96vh;
+  height: 97vh;
   position: fixed;
   z-index: 5;
-  top: calc(50vh - 48vh);
+  top: calc(50vh - 48.5vh);
   display: flex;
   flex-direction: column;
   border: 2px solid rgb(15, 136, 235);
   background-color: #fff;
 }
 .company-info-mobile {
+  padding-top: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   gap: 10px;
-  border-bottom: 1.5px solid rgb(15, 136, 235);
+  /* border-bottom: 1.5px solid rgb(15, 136, 235); */
   flex: 1.5;
 }
 .img-container {
@@ -172,10 +174,11 @@ export default {
   color: rgb(54, 41, 41);
 }
 .main-details {
-  border-bottom: 1.5px solid rgb(15, 136, 235);
+  /* border-bottom: 1.5px solid rgb(15, 136, 235); */
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-around;
   padding-top: 30px;
   flex: 2;
 }
@@ -190,7 +193,6 @@ export default {
 }
 .details-mobile {
   width: 80%;
-  margin-top: 30px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -254,6 +256,12 @@ export default {
   top: 20px;
   font-size: 1.5rem;
   color: rgb(255, 123, 0);
+}
+.separator-mobile {
+  width: 80%;
+  height: 1.5px;
+  background-color: rgb(15, 136, 235);
+  border-radius: 5px;
 }
 /* ------------------------DESKTOP VERSION--------------------------------------- */
 </style>
