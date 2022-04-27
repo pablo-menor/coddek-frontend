@@ -195,7 +195,8 @@ export default {
       };
       authService.doLogin(user).then((res) => {
         if (res.token) {
-          localStorage.setItem("token", res.token);
+          this.$store.dispatch("setLogin", res.user); 
+          this.$store.dispatch("setToken", res.token);
           this.$router.push("/dashboard");
         } else {
           alert("Error al iniciar sesión");

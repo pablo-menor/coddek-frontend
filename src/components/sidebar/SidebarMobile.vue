@@ -17,7 +17,8 @@ export default {
   },
   methods: {
     logout(){
-      localStorage.removeItem('token');
+      this.$store.dispatch('setLogout');
+      localStorage.removeItem('vuex');
       this.$router.push('/login');
     }
   }

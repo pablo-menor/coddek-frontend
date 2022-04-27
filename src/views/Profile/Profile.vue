@@ -1,53 +1,58 @@
 <template>
-  <div class="container">
+  <div class="container-profile">
     <!-- Menu mobile-->
-    <sidebar-mobile class="menu-mobile" :role="role"></sidebar-mobile>
+    <sidebar-mobile
+      class="menu-mobile"
+      :role="$store.state.role"
+    ></sidebar-mobile>
     <side-arrow @open-menu="openMenu()" class="side-arrow"></side-arrow>
     <close-menu @close-menu="closeMenu()" class="close-menu"></close-menu>
 
-    <!-- buscador -->
-    <search-input class="search-input"></search-input>
-
-    <!--  Desktop navigation component (banner)-->
-
-    <!--OffersPanel Component -->
-    <offers-panel
-      class="offers-panel"
-      v-show="role === 'developer'"
-    ></offers-panel>
+    <profile-company v-if="role === 'company'" :own="own" :user="user" class="profile-component" />
+    <profile-dev v-if="role === 'developer'" :own="own" :user="user" class="profile-component"/>
   </div>
 </template>
 
 <script>
 // Components
+import ProfileCompany from "../../components/Profile/ProfileCompany.vue";
+import ProfileDev from "../../components/Profile/ProfileDev.vue";
 import SidebarMobile from "../../components/sidebar/SidebarMobile.vue";
 import SideArrow from "../../components/sidebar/OpenMenu.vue";
 import CloseMenu from "../../components/sidebar/CloseMenu.vue";
-import OffersPanel from "../../components/offers/OffersPanel.vue";
-import SearchInput from "../../components/search-jobs/SearchInput.vue";
-
 // Services
 import AuthService from "../../service/auth.service";
 const authService = new AuthService();
-
 export default {
-  name: "Dashboard",
+  name: "Profile",
   components: {
+    ProfileCompany,
+    ProfileDev,
     SidebarMobile,
     SideArrow,
     CloseMenu,
-    OffersPanel,
-    SearchInput,
   },
   data() {
     return {
       role: "",
+      own: false,
+      user: {},
     };
   },
   created() {
-    authService.getRoleOrSendToLogin(this.$router).then((role) => {
-      this.role = role;
-    });
+    authService
+      .getRoleAndOwnership(this.$route.params.username)
+      .then((data) => {
+        console.log(data);
+        if (!data.message) {
+          this.role = data.role;
+          this.own = data.owned;
+          this.user = data.user;
+        } else {
+          // If user not found do something
+          this.$router.push("/404");
+        }
+      });
   },
   mounted() {
     this.closeMenu();
@@ -74,15 +79,8 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  overflow-x: hidden;
-}
-.offers-panel,
-.search-input {
+.profile-component {
   margin-left: 2vw;
-}
-
-.search-input {
-  margin-top: 20px;
+  width: 98vw;
 }
 </style>

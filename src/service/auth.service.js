@@ -1,18 +1,19 @@
 import BaseService from "./base.service";
-
+import store from "../store";
 export default class AuthService {
     constructor() {
         this.baseService = new BaseService();
+        this.store = store;
     }
     getToken() {
-        return localStorage.getItem('token');
+        return this.store.state.token;
     }
 
     // Returns the role or sends to the login page if the token is not valid
     async getRoleOrSendToLogin(router) {
         const url = `http://localhost:3008/api/auth`;
         const token = this.getToken();
-        if (!token) {
+        if (token === '') {
             router.push("/login");
         }
         const headers = {
@@ -40,6 +41,26 @@ export default class AuthService {
             return res;
         } catch (error) {
             return null;
+        }
+    }
+
+    async getRoleAndOwnership(username) {
+        const url = `http://localhost:3008/api/auth/${username}`
+        const token = this.getToken();
+        if (token === '') {
+            router.push("/login");
+        }
+        const headers = {
+            'Content-Type': 'application/json',
+            'auth-token': token
+        };
+        try {
+            return await this.baseService.get(url, headers);
+
+        } catch (error) {
+            if (error.status === 401) {
+                router.push("/login");
+            }
         }
     }
 }

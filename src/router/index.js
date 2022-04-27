@@ -4,6 +4,7 @@ import SignUp from '../views/SignUp/SignUp.vue'
 import SignUpGeneral from '../views/SignUp/SignUpGeneral.vue'
 import Landing from '../views/Landing/Landing.vue'
 import Dashboard from '../views/Dashboard/Dashboard.vue'
+import Profile from '../views/Profile/Profile.vue'
 
 
 const routes = [
@@ -32,6 +33,11 @@ const routes = [
     name: "Dashboard",
     component: Dashboard, 
   },
+  {
+    path: "/:username",
+    name: "Profile",
+    component: Profile,
+  }
 ]
 
 const router = createRouter({

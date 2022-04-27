@@ -10,7 +10,7 @@ export default class BaseService {
                 const dataRes = await res.json();
                 return dataRes;
             } catch (error) {
-                return
+                return error
             }
         } else {
             const res = await fetch(url, {

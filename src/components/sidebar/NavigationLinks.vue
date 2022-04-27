@@ -1,12 +1,12 @@
 <template>
     <div class="navigation" v-show="role=='developer'">
-      <router-link to="/login" class="link">Perfil</router-link>
+      <router-link :to="profileLink" class="link">Perfil</router-link>
       <router-link to="/dashboard" class="link">Dashboard</router-link>
       <router-link to="/login" class="link">Training</router-link>
     </div>
 
     <div class="navigation" v-show="role=='company'">
-      <router-link to="/login" class="link">Perfil</router-link>
+      <router-link :to="profileLink" class="link">Perfil</router-link>
       <router-link to="/login" class="link">Nueva oferta</router-link>
       <router-link to="/dashboard" class="link">Dashboard</router-link>
     </div>
@@ -17,6 +17,11 @@ export default {
     name: "NavigationLinks",
     props: {
         role: String,
+    },
+    data() {
+        return {
+          profileLink: `/${this.$store.state.username}`,
+        };
     },
 }
 </script>
