@@ -9,6 +9,7 @@
     <search-input class="search-input"></search-input>
 
     <!--  Desktop navigation component (banner)-->
+    <banner class="banner" :role="role"></banner>
 
     <!--OffersPanel Component -->
     <offers-panel
@@ -25,6 +26,7 @@ import SideArrow from "../../components/sidebar/OpenMenu.vue";
 import CloseMenu from "../../components/sidebar/CloseMenu.vue";
 import OffersPanel from "../../components/offers/OffersPanel.vue";
 import SearchInput from "../../components/search-jobs/SearchInput.vue";
+import Banner from "../../views/Dashboard/Banner.vue";
 
 // Services
 import AuthService from "../../service/auth.service";
@@ -38,6 +40,7 @@ export default {
     CloseMenu,
     OffersPanel,
     SearchInput,
+    Banner,
   },
   data() {
     return {
@@ -81,8 +84,29 @@ export default {
 .search-input {
   margin-left: 2vw;
 }
-
 .search-input {
-  margin-top: 20px;
+  margin-top: 2vw;
+}
+.offers-panel {
+  top: 60px;
+}
+
+/* ---------- RESPONSIVE --------- */
+@media screen and (min-width: 749px) {
+  .menu-mobile{
+    display: none;
+  }
+  .side-arrow{
+    display: none;
+  }
+  .close-menu{
+    display: none;
+  }
+  .banner{
+    display: flex;
+  }
+  .search-input{
+     display: none;
+  }
 }
 </style>

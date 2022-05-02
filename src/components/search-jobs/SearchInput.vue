@@ -38,6 +38,7 @@ export default {
     border-radius: 13px;
     padding-left: 10px;
     padding-right: 10px;
+    background-color: white;
 }
 .input-field{
     border: none;
