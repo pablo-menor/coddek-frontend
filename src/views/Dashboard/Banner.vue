@@ -48,14 +48,13 @@ export default {
     
   );
     top: 0;
-    position: fixed;
     display: none;
     align-items: center;
     justify-content: center;
 
 }
 .profile{
-    height: 100%;
+    height: 60px;
     position: absolute;
     right: 0;
     padding: 7px;

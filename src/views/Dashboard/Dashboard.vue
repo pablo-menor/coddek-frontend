@@ -106,7 +106,8 @@ export default {
     display: flex;
   }
   .search-input{
-     display: none;
+    display: none;
   }
+ 
 }
 </style>
