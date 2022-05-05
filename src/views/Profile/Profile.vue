@@ -5,11 +5,24 @@
       class="menu-mobile"
       :role="$store.state.role"
     ></sidebar-mobile>
+    <!-- Back to Dashboard -->
+    <router-link to="/dashboard">
+      <i class="fa-solid fa-arrow-left-long back-to-dashboard"></i
+    > </router-link>
     <side-arrow @open-menu="openMenu()" class="side-arrow"></side-arrow>
     <close-menu @close-menu="closeMenu()" class="close-menu"></close-menu>
-
-    <profile-company v-if="role === 'company'" :own="own" :user="user" class="profile-component" />
-    <profile-dev v-if="role === 'developer'" :own="own" :user="user" class="profile-component"/>
+    <profile-company
+      v-if="role === 'company'"
+      :own="own"
+      :user="user"
+      class="profile-component"
+    />
+    <profile-dev
+      v-if="role === 'developer'"
+      :own="own"
+      :user="user"
+      class="profile-component"
+    />
   </div>
 </template>
 
@@ -82,5 +95,31 @@ export default {
 .profile-component {
   margin-left: 2vw;
   width: 98vw;
+}
+.back-to-dashboard {
+  position: absolute;
+  top: 35px;
+  left: 35px;
+  cursor: pointer;
+  z-index: 6;
+  color: rgb(228, 228, 228);
+  font-size: 1.8rem;
+  display: none;
+}
+
+/* --------------RESPONSIVE------------------ */
+@media screen and (min-width: 700px) {
+  .menu-mobile,
+  .side-arrow,
+  .close-menu {
+    display: none;
+  }
+  .profile-component {
+    margin-left: 0;
+    width: 100vw;
+  }
+  .back-to-dashboard {
+    display: flex;
+  }
 }
 </style>

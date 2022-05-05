@@ -49,7 +49,7 @@ export default {
   margin-left: -98vw;
   transition: 0.3s ease-in-out;
   position: fixed;
-  z-index: 6;
+  z-index: 8;
 }
 .logout-btn {
   width: 150px;

@@ -45,7 +45,20 @@ export default class BaseService {
             return dataRes;
         }
     }
-    async put(url, data) {
+    async put(url, data, headers) {
+        if (headers) {
+            try {
+                const res = await fetch(url, {
+                    method: 'PUT',
+                    headers: headers,
+                    body: JSON.stringify(data)
+                });
+                const dataRes = await res.json();
+                return dataRes;
+            } catch (error) {
+                return
+            }
+        } else {
             const res = await fetch(url, {
                 method: 'PUT',
                 body: JSON.stringify(data),
@@ -55,6 +68,7 @@ export default class BaseService {
             });
             const dataRes = await res.json();
             return dataRes;
+        }
         }
     async delete (url) {
             const res = await fetch(url, {

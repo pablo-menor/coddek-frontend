@@ -56,4 +56,24 @@ export default class DeveloperService {
         return await this.baseService.get(url, headers);
     }
 
+    async getAppliedOffers(userId) {
+        const token = this.authService.getToken();
+        const headers = {
+            'Content-Type': 'application/json',
+            'auth-token': token
+        };
+        const url = `http://localhost:3008/api/developers/applied-offers/${userId}`;
+        return await this.baseService.get(url, headers);
+    }
+
+    async updateAbout(about) {
+        const token = this.authService.getToken();
+        const headers = {
+            'Content-Type': 'application/json',
+            'auth-token': token
+        };
+
+        const url = `http://localhost:3008/api/developers/update-dev`;
+        return await this.baseService.put(url, {about}, headers);
+    }
 }
