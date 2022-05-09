@@ -74,6 +74,15 @@ export default class DeveloperService {
         };
 
         const url = `http://localhost:3008/api/developers/update-dev`;
-        return await this.baseService.put(url, {about}, headers);
+        return await this.baseService.put(url, { about }, headers);
+    }
+    async updateLinks({ github, linkedin }) {
+        const token = this.authService.getToken();
+        const headers = {
+            'Content-Type': 'application/json',
+            'auth-token': token
+        };
+        const url = `http://localhost:3008/api/developers/update-dev`;
+        return await this.baseService.put(url, { github, linkedin }, headers);
     }
 }
