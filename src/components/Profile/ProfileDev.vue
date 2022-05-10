@@ -6,24 +6,69 @@
           <div class="picture"></div>
           <span class="username">{{ user.username }}</span>
         </div>
-        <span class="edit-links" v-if="own"
+        <span class="edit-links" v-if="own" @click="editLinks()"
           ><i class="fa-regular fa-pen-to-square"></i
         ></span>
-        <div class="social">
-          <div class="github">My Github</div>
-          <div class="github">My LinkedIn</div>
+        <div class="social" v-show="own || user.github || user.linkedin">
+          <div class="github">
+            <span v-show="user.github">
+              <a class="links-url" ref="githubURL">Mi Github</a></span
+            >
+            <span v-show="!user.github && own"> Github</span>
+          </div>
+
+          <div class="github">
+            <span v-show="user.linkedin">
+              <a class="links-url" ref="linkedinURL" > Mi Linkedin</a></span
+            >
+            <span v-show="!user.linkedin && own"> Linkedin</span>
+          </div>
         </div>
       </section>
+      <div class="editingLinks" v-show="editingLinks">
+        <div class="link-input">
+          <span>Github:</span>
+          <input type="text" ref="github" />
+        </div>
+        <div class="link-input">
+          <span>Linkedin: </span>
+          <input type="text" ref="linkedin" />
+        </div>
+        <i
+          class="fa-solid fa-circle-check confirm-changes-about"
+          v-show="editingLinks"
+          @click="updateLinks()"
+          ref="confirmLinks"
+        ></i>
+        <i
+          class="fa-solid fa-xmark cancel-changes-about"
+          v-show="editingLinks"
+          @click="editingLinks = false"
+        ></i>
+      </div>
       <section class="section about">
         {{ user.about || "Bienvenido a mi perfil" }}
         <span class="edit-about" v-if="own"
           ><i class="fa-regular fa-pen-to-square" @click="editAbout()"></i
         ></span>
-       <textarea class="editing-about" ref="editAbout" v-show="editingAbout" maxlength="280"/>
-       <i class="fa-solid fa-circle-check confirm-changes-about" v-show="editingAbout" @click="updateAbout()"></i>
-       <i class="fa-solid fa-xmark cancel-changes-about" v-show="editingAbout" @click="editingAbout = false"></i>
+        <textarea
+          class="editing-about"
+          ref="editAbout"
+          v-show="editingAbout"
+          maxlength="280"
+        />
+        <i
+          class="fa-solid fa-circle-check confirm-changes-about"
+          v-show="editingAbout"
+          @click="updateAbout()"
+        ></i>
+        <i
+          class="fa-solid fa-xmark cancel-changes-about"
+          v-show="editingAbout"
+          @click="editingAbout = false"
+        ></i>
       </section>
-      <desktop-options class="desktop-options" />
+      <desktop-options  @changeContent="changeContent($event)" class="desktop-options" />
       <section class="section content" ref="content">
         <div class="track-record">
           <span>Historial</span>
@@ -74,6 +119,7 @@ export default {
     return {
       appliedOffers: [],
       editingAbout: false,
+      editingLinks: false,
     };
   },
   components: {
@@ -94,7 +140,11 @@ export default {
   created() {},
   mounted() {
     this.changeContent(0);
-    this.fetchAppliefOffers();
+    this.fetchAppliefOffers(); 
+    setTimeout(() => {
+       this.$refs.githubURL.href = this.user.github;
+      this.$refs.linkedinURL.href = this.user.linkedin;
+    }, 100); 
   },
   methods: {
     changeContent(index) {
@@ -112,13 +162,29 @@ export default {
     },
     editAbout() {
       this.editingAbout = true;
-      this.$refs.editAbout.value = this.user.about || "Bienvenido a mi perfil"; 
+      this.$refs.editAbout.value = this.user.about || "Bienvenido a mi perfil";
     },
     updateAbout() {
       this.editingAbout = false;
       this.user.about = this.$refs.editAbout.value;
       console.log(this.user.about);
-      devService.updateAbout(this.user.about)
+      devService.updateAbout(this.user.about);
+    },
+    editLinks() {
+      this.editingLinks = true;
+      this.$refs.github.value = this.user.github || "";
+      this.$refs.linkedin.value = this.user.linkedin || "";
+    },
+    updateLinks() {
+      console.log("IN");
+      this.editingLinks = false;
+      this.user.github = this.$refs.github.value;
+      this.user.linkedin = this.$refs.linkedin.value;
+      let newLinks = {
+        github: this.user.github,
+        linkedin: this.user.linkedin,
+      };
+      devService.updateLinks(newLinks);
     },
   },
 };
@@ -194,6 +260,46 @@ export default {
   top: 100px;
   z-index: 5;
 }
+.editingLinks {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+  align-items: center;
+  background-color: #0a71d8;
+  height: 200px;
+  width: 90%;
+  max-width: 400px;
+  top: 200px;
+  z-index: 9;
+  border-radius: 3px;
+}
+.editingLinks .link-input {
+  display: flex;
+  justify-content: space-between;
+  width: 87%;
+  height: 30px;
+  align-items: center;
+}
+.editingLinks span {
+  color: #ffffff;
+}
+.editingLinks input {
+  height: 30px;
+  width: 70%;
+  padding-left: 5px;
+  outline: none;
+}
+
+.links-url{
+  color: #000;
+  text-decoration: none;
+}
+.links-url:hover {
+color: rgb(78, 78, 78);
+}
+
 .section {
   padding: 15px;
   border-radius: 5px;

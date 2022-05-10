@@ -146,7 +146,7 @@ export default {
 .container-offer-detail-mobile {
   border-radius: 5px;
   width: 85%;
-  max-width: 800px;
+  max-width: 555px;
   height: 97vh;
   position: fixed;
   z-index: 5;
@@ -252,6 +252,7 @@ export default {
   top: 20px;
   font-size: 1.5rem;
   color: rgb(255, 17, 0);
+  cursor: pointer;
 }
 .save-offer-mobile {
   position: absolute;
@@ -259,6 +260,7 @@ export default {
   top: 20px;
   font-size: 1.5rem;
   color: rgb(255, 123, 0);
+  cursor: pointer;
 }
 .separator-mobile {
   width: 80%;
@@ -267,4 +269,16 @@ export default {
   border-radius: 5px;
 }
 /* ------------------------DESKTOP VERSION--------------------------------------- */
+@media screen and (min-width: 750px) {
+  .container-offer-detail-mobile {
+  height: 97vh;
+  position: fixed;
+  z-index: 5;
+  top: calc(50vh - 48.5vh);
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgb(15, 136, 235);
+  background-color: #fff;
+}
+}
 </style>
