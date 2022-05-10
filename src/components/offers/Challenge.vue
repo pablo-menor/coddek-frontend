@@ -11,11 +11,8 @@
         </p>
     </div>
     <button class="downloadBtn">Descargar archivos</button>
-    <div class="cv-choosing">
-        <div class="cv-preview"> <!-- Estas son las tarjetas en las que habría que hacer un for para cada uno de los cvs que tenga el usuario -->
-            <div class="cv"></div>
-            <input type="radio" id="" name="cvs">
-        </div>
+
+    <div class="dragdrop">
     </div>
 
     <form>
@@ -57,26 +54,13 @@ export default {
   border: 2px solid rgb(15, 136, 235);
   background-color: #fff;
 }
-.cv-choosing {
+.dragdrop {
     width: 75%;
     height: 40%;
-    background-color: #E0E0E0;
     display: flex;
     align-items: flex-start;
     padding: 10px 10px 0 10px;
-}
-.cv-preview {
-    width: 25%;
-    height: 80%;
-    background-color: #C0C0C0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.cv-preview input {
-    position: absolute;
-    bottom: 27%;
-    color: black;
+    border: 2px dotted rgba(180, 180, 180, 0.867);
 }
 .text {
     display: flex;
