@@ -68,7 +68,7 @@
           @click="editingAbout = false"
         ></i>
       </section>
-      <desktop-options class="desktop-options" />
+      <desktop-options  @changeContent="changeContent($event)" class="desktop-options" />
       <section class="section content" ref="content">
         <div class="track-record">
           <span>Historial</span>
