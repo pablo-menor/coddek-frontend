@@ -42,7 +42,7 @@ export default {
 .challenge-offer {
   border-radius: 5px;
   width: 85%;
-  max-width: 800px;
+  max-width: 555px;
   height: 97vh;
   position: fixed;
   z-index: 5;
@@ -81,6 +81,7 @@ text-align: justify;
   top: 20px;
   font-size: 1.5rem;
   color: rgb(255, 17, 0);
+  cursor: pointer;
 }
 .sendButton {
   width: 80%;
