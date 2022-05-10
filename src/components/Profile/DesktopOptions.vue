@@ -1,39 +1,48 @@
 <template>
   <div class="container-desktop-options">
-    <div class="options-developer-desktop" v-if="role===developer">
-        <span>Historial</span>
-        <span>Ofertas guardadas</span>
-        <span>Mis currículums</span>
+    <div ref="devOptionsDesktop" class="options-developer-desktop" v-if="role === developer">
+      <span @click="select(0)" class="selected">Historial</span>
+      <span @click="select(1)">Ofertas guardadas</span>
+      <span @click="select(2)">Mis currículums</span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-    name: "DesktopOptions",
-    data() {
-        return {};
+  name: "DesktopOptions",
+  data() {
+    return {};
+  },
+  components: {},
+  props: {
+    role: {
+      type: String,
+      required: true,
     },
-    components: {},
-    props: {
-        role: {
-            type: String,
-            required: true,
-        },
+  },
+  created() {},
+  mounted() {},
+  methods: {
+    select(index) {
+      let options = this.$refs.devOptionsDesktop.children;
+      for (const option of options) {
+        option.classList.remove("selected");
+      }
+      options[index].classList.add("selected");
+      this.$emit("changeContent", index);
     },
-    created() {},
-    mounted() {},
-    methods: {},
-}
+  },
+};
 </script>
     
 <style scoped>
 .options-developer-desktop {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 20px;
-    height: 60px;
-    gap: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  height: 60px;
+  gap: 50px;
 }
 </style>

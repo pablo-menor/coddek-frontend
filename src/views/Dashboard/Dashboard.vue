@@ -8,9 +8,7 @@
     <!-- buscador -->
     <search-input class="search-input"></search-input>
 
-    
-
-    <!--  Desktop navigation component (banner)-->
+    <!--  Desktop Banner-->
     <banner class="banner" :role="role"></banner>
 
     <!--OffersPanel Component -->

@@ -72,7 +72,7 @@
     </section>
     <section class="description">
       <p class="description-text-mobile">{{ offer.description }}</p>
-      <button class="challange-details">Inscribirse</button>
+      <button class="challange-details" @click="showChallenge()">Inscribirse</button>
     </section>
     <div class="save-offer-mobile" @click="save()">
       <i
@@ -134,6 +134,9 @@ export default {
         this.saved = response.some((offer) => offer.offerId === this.offer._id);
       });
     },
+    showChallenge() {
+      this.$emit("showChallenge");
+    }
   },
 };
 </script>
