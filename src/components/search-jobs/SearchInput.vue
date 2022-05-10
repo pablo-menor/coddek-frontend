@@ -4,13 +4,20 @@
            <input class="input-field" type="text">
            <i class="fas fa-search"></i>
       </div>
+      <!-- Boton filtros -->
+    <button-filters class="button-filters"></button-filters>
   </div>
 </template>
 
 <script>
+//Components
+import ButtonFilters from "../../views/Dashboard/Filters-button.vue";
+
 export default {
   name: "SearchInput",
-  components: {},
+  components: {
+     ButtonFilters,
+  },
   data() {
     return {};
   },
@@ -24,6 +31,7 @@ export default {
 .container-search-input {
   display: flex;
   justify-content: center;
+  gap:5px;
 }
 
 .input-container{

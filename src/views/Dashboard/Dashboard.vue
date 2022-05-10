@@ -8,14 +8,20 @@
     <!-- buscador -->
     <search-input class="search-input"></search-input>
 
+    
+
     <!--  Desktop navigation component (banner)-->
     <banner class="banner" :role="role"></banner>
 
     <!--OffersPanel Component -->
     <offers-panel
       class="offers-panel"
-      v-show="role === 'developer'"
-    ></offers-panel>
+      v-show="role === 'developer'">
+    </offers-panel>
+
+    <!--Filters-->
+    <filters class="filters-component"></filters>
+
   </div>
 </template>
 
@@ -27,6 +33,8 @@ import CloseMenu from "../../components/sidebar/CloseMenu.vue";
 import OffersPanel from "../../components/offers/OffersPanel.vue";
 import SearchInput from "../../components/search-jobs/SearchInput.vue";
 import Banner from "../../views/Dashboard/Banner.vue";
+import Filters from "../../views/Dashboard/Filters.vue";
+import ButtonFilters from "../../views/Dashboard/Filters-button.vue";
 
 // Services
 import AuthService from "../../service/auth.service";
@@ -41,6 +49,8 @@ export default {
     OffersPanel,
     SearchInput,
     Banner,
+    Filters,
+    ButtonFilters,
   },
   data() {
     return {
@@ -81,7 +91,8 @@ export default {
   overflow-x: hidden;
 }
 .offers-panel,
-.search-input {
+.search-input,
+.filters-component{
   margin-left: 2vw;
 }
 .search-input {
@@ -90,6 +101,8 @@ export default {
 .offers-panel {
   top: 60px;
 }
+
+
 
 /* ---------- RESPONSIVE --------- */
 @media screen and (min-width: 749px) {
@@ -108,6 +121,5 @@ export default {
   .search-input{
     display: none;
   }
- 
 }
 </style>
