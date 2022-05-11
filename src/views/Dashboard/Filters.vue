@@ -21,7 +21,7 @@ export default {
 <style scoped>
 .container-filters{
   min-width: 320px; 
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   gap: 10px;
@@ -45,7 +45,7 @@ export default {
 
 
 /* ---------- RESPONSIVE --------- */
-@media screen and (min-width: 1170px) {
+@media screen and (min-width: 800px) {
 .container-filters{
   display: flex;
 
