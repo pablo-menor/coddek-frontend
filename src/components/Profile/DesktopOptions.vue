@@ -45,4 +45,8 @@ export default {
   height: 60px;
   gap: 50px;
 }
+
+.options-developer-desktop span {
+  cursor: pointer;
+}
 </style>

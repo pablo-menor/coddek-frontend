@@ -175,6 +175,7 @@ export default {
 .company-name {
   font-size: 1.2rem;
   color: rgb(54, 41, 41);
+  min-height: 26px;
 }
 .main-details {
   /* border-bottom: 1.5px solid rgb(15, 136, 235); */
@@ -233,6 +234,7 @@ export default {
 }
 .challange-details {
   width: 80%;
+  max-width: 250px;
   padding: 10px;
   border-radius: 3px;
   border: none;
@@ -245,6 +247,7 @@ export default {
   color: #fff;
   font-size: 1.2rem;
   margin-top: 15px;
+  min-height: 45px;
 }
 .cancel-mobile {
   position: absolute;
@@ -279,6 +282,7 @@ export default {
   flex-direction: column;
   border: 2px solid rgb(15, 136, 235);
   background-color: #fff;
+  width: 70%;
 }
 }
 </style>
