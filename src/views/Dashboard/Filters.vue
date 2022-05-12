@@ -41,11 +41,14 @@ export default {
   flex-direction: column;
   border: 2px solid rgb(15, 136, 235);
   background-color: #fff;
+  background-color: rgb(250, 249, 249);
+  box-shadow: 1px 1px 3px #a8a8a8;
+  color: rgb(0, 0, 0);
 }
 
 
 /* ---------- RESPONSIVE --------- */
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 1170px) {
 .container-filters{
   display: flex;
 
@@ -53,7 +56,7 @@ export default {
 .filters{
   display: flex;
   max-width: 300px;
-  top: 70px;
+  top: 75px;
   left: 10px;
   position: fixed;
 }

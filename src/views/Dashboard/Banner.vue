@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="banner-container">
     <!-- search input -->
     <search-input
       class="search-input"
@@ -75,7 +75,7 @@ export default {
 </script>
 
 <style scoped>
-.container {
+.banner-container {
   width: 100%;
   height: 60px;
   background: linear-gradient(
@@ -86,6 +86,8 @@ export default {
   );
   top: 0;
   display: none;
+  position: fixed;
+  z-index: 6; 
   align-items: center;
   justify-content: center;
 }
@@ -115,7 +117,8 @@ export default {
   flex-direction: column;
   justify-content: center;
   gap: 10px;
-  z-index: 9;
+  z-index: 8;
+  position: fixed;
 }
 
 .options-menu div {

@@ -75,5 +75,13 @@ export default {
   gap: 10px;
   padding-top: 20px;
   padding-bottom: 20px;
+  margin-top: 10px;
+}
+
+/* ---------- RESPONSIVE --------- */
+@media screen and (min-width: 749px) {
+  .container-offers-panel {
+    margin-top: 60px;
+  }
 }
 </style>

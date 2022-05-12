@@ -55,4 +55,5 @@ export default {
     height: 25px;
     font-size: 1rem;
 }
+
 </style>
