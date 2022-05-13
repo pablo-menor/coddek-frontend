@@ -131,7 +131,7 @@ export default {
     },
     getSavedOffers() {
       developerService.getSavedOffers().then((response) => {
-        this.saved = response.some((offer) => offer.offerId === this.offer._id);
+        this.saved = response.some((offer) => offer._id === this.offer._id);
       });
     },
     showChallenge() {

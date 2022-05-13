@@ -19,7 +19,7 @@
 
           <div class="github">
             <span v-show="user.linkedin">
-              <a class="links-url" ref="linkedinURL" > Mi Linkedin</a></span
+              <a class="links-url" ref="linkedinURL"> Mi Linkedin</a></span
             >
             <span v-show="!user.linkedin && own"> Linkedin</span>
           </div>
@@ -68,7 +68,11 @@
           @click="editingAbout = false"
         ></i>
       </section>
-      <desktop-options  @changeContent="changeContent($event)" class="desktop-options" />
+      <desktop-options
+        @changeContent="changeContent($event)"
+        class="desktop-options"
+        v-if="own"
+      />
       <section class="section content" ref="content">
         <div class="track-record">
           <span>Historial</span>
@@ -83,11 +87,24 @@
             <span class="company-name"> {{ ele.company_name }}</span>
           </div>
           <div class="no-data" v-show="appliedOffers == 0">
-            No has aplicado a ninguna oferta
+            No se han encontrado ofertas
           </div>
         </div>
         <div class="track-record">
           <span>Guardados</span>
+          <div
+            v-show="savedOffers.length > 0"
+            class="offer-saved-profile applied-offer"
+            v-for="(ele, i) in savedOffers"
+            :key="i"
+            @click="showDetails(ele)"
+          >
+            <span class="title">{{ ele.title }}</span>
+            <span class="company-name"> {{ ele.company_name }}</span>
+          </div>
+          <div class="no-data" v-show="savedOffers.length == 0">
+            No hay ofertas guardadas
+          </div>
         </div>
         <div class="track-record">
           <span>CV's</span>
@@ -100,7 +117,19 @@
       :role="'developer'"
       @changeContent="changeContent($event)"
       class="mobile-options"
+      ref="mobileOptions"
     />
+
+    <offer-detail
+      v-if="selectedOffer != null"
+      :offer="selectedOffer"
+      @cancel="cancelDetail()"
+      @showChallenge="showChallenge = true"
+      class="saved-offer-detail-profile"
+    ></offer-detail>
+
+    <challenge v-show="showChallenge" @cancelChallenge="showChallenge = false"  class="apply-offer-profile">
+    </challenge>
   </div>
 </template>
 
@@ -109,6 +138,8 @@
 import MobileOptions from "./MobileOptions.vue";
 import Banner from "./Banner.vue";
 import DesktopOptions from "./DesktopOptions.vue";
+import OfferDetail from "../offers/OfferDetail.vue";
+import Challenge from "../offers/Challenge.vue";
 
 // Services
 import DeveloperService from "../../service/developer.service";
@@ -118,14 +149,19 @@ export default {
   data() {
     return {
       appliedOffers: [],
+      savedOffers: [],
       editingAbout: false,
       editingLinks: false,
+      selectedOffer: null,
+      showChallenge: false,
     };
   },
   components: {
     MobileOptions,
     Banner,
     DesktopOptions,
+    OfferDetail,
+    Challenge,
   },
   props: {
     own: {
@@ -140,11 +176,14 @@ export default {
   created() {},
   mounted() {
     this.changeContent(0);
-    this.fetchAppliefOffers(); 
+    this.fetchAppliefOffers();
+    this.fetchSavedfOffers();
     setTimeout(() => {
-       this.$refs.githubURL.href = this.user.github;
+      this.$refs.githubURL.href = this.user.github;
       this.$refs.linkedinURL.href = this.user.linkedin;
-    }, 100); 
+    }, 100);
+
+    console.log(this.user);
   },
   methods: {
     changeContent(index) {
@@ -157,7 +196,13 @@ export default {
     fetchAppliefOffers() {
       devService.getAppliedOffers(this.user._id).then((response) => {
         console.log(response);
+
         this.appliedOffers = response;
+      });
+    },
+    fetchSavedfOffers() {
+      devService.getSavedOffers().then((response) => {
+        this.savedOffers = response;
       });
     },
     editAbout() {
@@ -185,6 +230,14 @@ export default {
         linkedin: this.user.linkedin,
       };
       devService.updateLinks(newLinks);
+    },
+    showDetails(offer) {
+      let offerObject = JSON.parse(JSON.stringify(offer));
+      this.selectedOffer = offerObject;
+    },
+    cancelDetail() {
+      this.selectedOffer = null;
+      this.fetchSavedfOffers();
     },
   },
 };
@@ -292,12 +345,12 @@ export default {
   outline: none;
 }
 
-.links-url{
+.links-url {
   color: #000;
   text-decoration: none;
 }
 .links-url:hover {
-color: rgb(78, 78, 78);
+  color: rgb(78, 78, 78);
 }
 
 .section {
@@ -389,6 +442,10 @@ color: rgb(78, 78, 78);
 }
 .desktop-options {
   display: none;
+}
+
+.saved-offer-detail-profile, .apply-offer-profile {
+  z-index: 6;
 }
 
 /* --------------------------------Responsive---------------------------------- */
