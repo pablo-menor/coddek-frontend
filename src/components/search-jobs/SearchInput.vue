@@ -1,8 +1,8 @@
 <template>
   <div class="container-search-input">
       <div class="input-container">
-           <input class="input-field" type="text">
-           <i class="fas fa-search"></i>
+           <input class="input-field" type="text" v-model="inputSearch" @keyup="filterOffersByTitle()">
+           <i class="fas fa-search" @click="filterOffersByTitle()"></i>
       </div>
       <!-- Boton filtros -->
     <button-filters class="button-filters"></button-filters>
@@ -13,17 +13,24 @@
 //Components
 import ButtonFilters from "../../views/Dashboard/Filters-button.vue";
 
+
 export default {
   name: "SearchInput",
   components: {
      ButtonFilters,
   },
   data() {
-    return {};
+    return {
+      inputSearch: '',
+    };
   },
   created() {},
   mounted() {},
-  methods: {},
+  methods: {
+    filterOffersByTitle() {
+      this.$emit("search", this.inputSearch);
+    }
+  },
 };
 </script>
 

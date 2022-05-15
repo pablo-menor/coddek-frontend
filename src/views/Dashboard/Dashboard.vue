@@ -6,7 +6,7 @@
     <close-menu @close-menu="closeMenu()" class="close-menu"></close-menu>
 
     <!-- buscador -->
-    <search-input class="search-input"></search-input>
+    <search-input class="search-input" @search="searchByTitle($event)"></search-input>
 
     <!--  Desktop Banner-->
     <banner class="banner" :role="role"></banner>
@@ -14,7 +14,9 @@
     <!--OffersPanel Component -->
     <offers-panel
       class="offers-panel"
-      v-show="role === 'developer'">
+      v-show="role === 'developer'"
+      ref="panel"
+      >
     </offers-panel>
 
     <!--Filters-->
@@ -80,6 +82,9 @@ export default {
       let closeMenu = document.querySelector(".close-menu");
       closeMenu.style.display = "none";
     },
+    searchByTitle(input){
+      this.$refs.panel.getOffersByTitle(input);
+    }
   },
 };
 </script>

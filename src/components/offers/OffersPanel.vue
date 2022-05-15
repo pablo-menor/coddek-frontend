@@ -10,13 +10,10 @@
       v-if="selectedOffer"
       :offer="selectedOffer"
       @cancel="selectedOffer = false"
-      @showChallenge="showChallenge=true"
+      @showChallenge="showChallenge = true"
     ></offer-detail>
 
-    <challenge
-    v-show="showChallenge"
-    @cancelChallenge="showChallenge = false">
-
+    <challenge v-show="showChallenge" @cancelChallenge="showChallenge = false">
     </challenge>
   </div>
 </template>
@@ -25,7 +22,7 @@
 // Components
 import SingleOffer from "./SingleOffer.vue";
 import OfferDetail from "./OfferDetail.vue";
-import Challenge from "./Challenge.vue"; 
+import Challenge from "./Challenge.vue";
 
 // Services
 import OfferService from "../../service/offer.service";
@@ -36,12 +33,12 @@ export default {
   components: {
     SingleOffer,
     OfferDetail,
-    Challenge, 
+    Challenge,
   },
   data() {
     return {
       offers: [],
-      selectedOffer: null, 
+      selectedOffer: null,
       showChallenge: false,
     };
   },
@@ -55,6 +52,11 @@ export default {
   methods: {
     showDetails(offer) {
       this.selectedOffer = offer;
+    },
+    getOffersByTitle(input) {
+      offerService.findOfferByTitle(input).then((offers) => {
+        this.offers = offers;
+      });
     },
   },
 };

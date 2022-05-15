@@ -28,6 +28,10 @@ export default class OfferService {
         const url = `http://localhost:3008/api/offers/${id}`;
         return await this.baseService.delete(url);
     }
+    async findOfferByTitle(input) {
+        const url = `http://localhost:3008/api/offers/search/${input}`;
+        return await this.baseService.get(url);
+    }
 
     // Convert salary string to number
     convertSalary(salary) {
