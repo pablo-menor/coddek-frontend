@@ -87,7 +87,7 @@ export default {
   top: 0;
   display: none;
   position: fixed;
-  z-index: 6; 
+  z-index: 5; 
   align-items: center;
   justify-content: center;
 }

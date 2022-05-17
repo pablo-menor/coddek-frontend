@@ -17,8 +17,13 @@ export default class OfferService {
         return await this.baseService.get(url);
     }
     async createOffer(offer) {
-        const url = `http://localhost:3008/api/offers`;
-        return await this.baseService.post(url, offer);
+        const token = this.authService.getToken();
+        const headers = {
+            'Content-Type': 'application/json',
+            'auth-token': token
+        };
+        const url = `http://localhost:3008/api/offers/create`;
+        return await this.baseService.post(url, offer, headers);
     }
     async updateOffer(offer) {
         const url = `http://localhost:3008/api/offers/${offer.id}`;

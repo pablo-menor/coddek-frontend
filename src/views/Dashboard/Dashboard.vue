@@ -22,6 +22,12 @@
     <!--Filters-->
     <filters class="filters-component"></filters>
 
+    <!-- OfferCreator -->
+    <offer-creator 
+    class="offer-creator"
+    v-show="role === 'company'"
+    ></offer-creator>
+
   </div>
 </template>
 
@@ -35,6 +41,8 @@ import SearchInput from "../../components/search-jobs/SearchInput.vue";
 import Banner from "../../views/Dashboard/Banner.vue";
 import Filters from "../../views/Dashboard/Filters.vue";
 import ButtonFilters from "../../views/Dashboard/Filters-button.vue";
+//prueba offer creator
+import OfferCreator from "../../components/offers/OfferCreator.vue";
 
 // Services
 import AuthService from "../../service/auth.service";
@@ -51,6 +59,7 @@ export default {
     Banner,
     Filters,
     ButtonFilters,
+    OfferCreator,
   },
   data() {
     return {
@@ -95,7 +104,8 @@ export default {
 }
 .offers-panel,
 .search-input,
-.filters-component{
+.filters-component,
+.offer-creator{
   margin-left: 2vw;
 }
 .search-input {
@@ -104,7 +114,6 @@ export default {
 .offers-panel {
   top: 60px;
 }
-
 
 
 /* ---------- RESPONSIVE --------- */
