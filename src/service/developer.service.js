@@ -85,4 +85,35 @@ export default class DeveloperService {
         const url = `http://localhost:3008/api/developers/update-dev`;
         return await this.baseService.put(url, { github, linkedin }, headers);
     }
+
+    async updateAvatar(formData) {
+        const token = this.authService.getToken();
+        const headers = {
+            'auth-token': token
+        };
+        // const url = `http://localhost:3008/api/developers/update-dev`;
+        // return await this.baseService.put(url, { avatar }, headers);
+        fetch("http://localhost:3008/api/developers/update-avatar", {
+            method: "PUT",
+            body: formData,
+            headers: headers
+        }).then((response) => {
+            console.log(response);
+            return response
+        });
+    }
+    async getProfilePicture(fileName) {
+        const url = `http://localhost:3008/${fileName}`;
+        return await fetch(url);    
+    }
+
+    async getCVs(userId) {
+        const token = this.authService.getToken();
+        const headers = {
+            'Content-Type': 'application/json',
+            'auth-token': token
+        };
+        const url = `http://localhost:3008/api/developers/cvs/${userId}`;
+        return await this.baseService.get(url, headers);
+    }
 }
