@@ -3,7 +3,20 @@
     <div class="wrapper">
       <section class="user-info">
         <div class="picture-name">
-          <div class="picture"></div>
+          <div @click="selectProfilePic()" class="picture" ref="imgDevProfile">
+            <img
+              src="../../assets/default_avatar_dev.png"
+              class="no-pic"
+              alt="defaul profile picture"
+              v-if="user.avatar === 'default_avatar_dev.jpg'"
+            />
+            <input
+              @change="updateImg()"
+              type="file"
+              id="pictureFile"
+              ref="inputFile"
+            />
+          </div>
           <span class="username">{{ user.username }}</span>
         </div>
         <span class="edit-links" v-if="own" @click="editLinks()"
@@ -128,7 +141,11 @@
       class="saved-offer-detail-profile"
     ></offer-detail>
 
-    <challenge v-show="showChallenge" @cancelChallenge="showChallenge = false"  class="apply-offer-profile">
+    <challenge
+      v-show="showChallenge"
+      @cancelChallenge="showChallenge = false"
+      class="apply-offer-profile"
+    >
     </challenge>
   </div>
 </template>
@@ -178,6 +195,7 @@ export default {
     this.changeContent(0);
     this.fetchAppliefOffers();
     this.fetchSavedfOffers();
+    this.getProfilePicture();
     setTimeout(() => {
       this.$refs.githubURL.href = this.user.github;
       this.$refs.linkedinURL.href = this.user.linkedin;
@@ -203,6 +221,11 @@ export default {
     fetchSavedfOffers() {
       devService.getSavedOffers().then((response) => {
         this.savedOffers = response;
+      });
+    },
+    fetchCVs() {
+      devService.getCVs(this.user._id).then((response) => {
+        console.log(response);
       });
     },
     editAbout() {
@@ -238,6 +261,39 @@ export default {
     cancelDetail() {
       this.selectedOffer = null;
       this.fetchSavedfOffers();
+    },
+    selectProfilePic() {
+      this.$refs.inputFile.click();
+    },
+    updateImg() {
+      // GET IMG and render on page
+      let file = this.$refs.inputFile.files[0];
+      let reader = new FileReader(); // HTML5 FileReader API
+      reader.readAsDataURL(file);
+      reader.onload = (e) => {
+        this.user.avatar = e.target.result;
+        this.$refs.imgDevProfile.style.backgroundImage = `url(${this.user.avatar})`;
+        this.$refs.imgDevProfile.style.backgroundPosition = "center center";
+        this.$refs.imgDevProfile.style.backgroundSize = "cover";
+        this.$refs.imgDevProfile.style.backgroundRepeat = "no-repeat";
+      };
+      // Send img to server
+      let formData = new FormData();
+      formData.append("avatar", file);
+      devService.updateAvatar(formData);
+    },
+    getProfilePicture() {
+      if (this.user.avatar === "default_avatar_dev.jpg") {
+        return;
+      }
+      devService.getProfilePicture(this.user.avatar).then((response) => {
+        console.log(response.url);
+          this.user.avatar = response.url;
+          this.$refs.imgDevProfile.style.backgroundImage = `url(${response.url})`;
+          this.$refs.imgDevProfile.style.backgroundPosition = "center center";
+          this.$refs.imgDevProfile.style.backgroundSize = "cover";
+          this.$refs.imgDevProfile.style.backgroundRepeat = "no-repeat";
+      });
     },
   },
 };
@@ -285,7 +341,12 @@ export default {
   height: 120px;
   border-radius: 50%;
   margin-top: 5px;
-  background-color: rgb(177, 177, 177);
+  border: 1px solid #e6e6e6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(113, 113, 113);
+  cursor: pointer;
 }
 .username {
   font-size: 1.1rem;
@@ -444,10 +505,20 @@ export default {
   display: none;
 }
 
-.saved-offer-detail-profile, .apply-offer-profile {
+.saved-offer-detail-profile,
+.apply-offer-profile {
   z-index: 6;
 }
 
+.no-pic {
+  width: 105px;
+  height: 105px;
+  border-radius: 50%;
+}
+#pictureFile {
+  visibility: hidden;
+  position: absolute;
+}
 /* --------------------------------Responsive---------------------------------- */
 
 @media screen and (min-width: 700px) {

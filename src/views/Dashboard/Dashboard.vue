@@ -6,7 +6,8 @@
     <close-menu @close-menu="closeMenu()" class="close-menu"></close-menu>
 
     <!-- buscador -->
-    <search-input class="search-input" @search="searchByTitle($event)"></search-input>
+    <search-input class="search-input" @search="searchByTitle($event)"
+    v-show="role === 'developer'"></search-input>
 
     <!--  Desktop Banner-->
     <banner class="banner" :role="role"></banner>
@@ -19,8 +20,18 @@
       >
     </offers-panel>
 
+    <!-- Dashboard Company -->
+    <dashboard-company
+      class="company-options"
+      v-show="role === 'company'"
+      ref="dashcompany"
+    >
+    </dashboard-company>
+
     <!--Filters-->
-    <filters class="filters-component"></filters>
+    <filters class="filters-component"
+      v-show="role === 'developer'">
+    </filters>
 
     <!-- OfferCreator -->
     <offer-creator 
@@ -43,6 +54,7 @@ import Filters from "../../views/Dashboard/Filters.vue";
 import ButtonFilters from "../../views/Dashboard/Filters-button.vue";
 //prueba offer creator
 import OfferCreator from "../../components/offers/OfferCreator.vue";
+import DashboardCompany from "../../components/Dashboard-Company/DashboardCompany.vue"
 
 // Services
 import AuthService from "../../service/auth.service";
@@ -60,6 +72,8 @@ export default {
     Filters,
     ButtonFilters,
     OfferCreator,
+    DashboardCompany,
+
   },
   data() {
     return {
@@ -105,7 +119,8 @@ export default {
 .offers-panel,
 .search-input,
 .filters-component,
-.offer-creator{
+.offer-creator,
+.company-options{
   margin-left: 2vw;
 }
 .search-input {
@@ -132,6 +147,9 @@ export default {
   }
   .search-input{
     display: none;
+  }
+  .company-options{
+    margin-left: 0;
   }
 }
 </style>

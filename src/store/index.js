@@ -8,16 +8,18 @@ const store = createStore({
         userId: "",
         role: "",
         isLoggedIn: false,
+        avatar: "",
     },
     mutations: {
         setToken(state, token) {
             state.token = token;
         },
-        setLogin(state, { username, _id, role }) {
+        setLogin(state, { username, _id, role, avatar }) {
             state.username = username;
             state.userId = _id;
             state.role = role;
             state.isLoggedIn = true;
+            state.avatar = avatar;
         },
         setLogout(state) {
             state.username = "";
@@ -25,6 +27,7 @@ const store = createStore({
             state.userId = "";
             state.role = "";
             state.isLoggedIn = false;
+            state.avatar = "";
         },
         addSavedOffer(state, offer) {
             state.savedOffers.push(offer);
@@ -37,8 +40,8 @@ const store = createStore({
         setToken({ commit }, token) {
             commit("setToken", token);
         },
-        setLogin({ commit }, { username, _id, role }) {
-            commit("setLogin", { username, _id, role });
+        setLogin({ commit }, { username, _id, role, avatar }) {
+            commit("setLogin", { username, _id, role, avatar });
         },
         setLogout({ commit }) {
             commit("setLogout");
