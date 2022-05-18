@@ -119,8 +119,51 @@
             No hay ofertas guardadas
           </div>
         </div>
-        <div class="track-record">
+        <div class="track-record cv-section-container">
           <span>CV's</span>
+          <i
+            ref="createCv"
+            class="fa-solid fa-plus add-cv"
+            v-if="cvs.length < 3 && !creatingCv"
+            @click="creatingCv = true"
+          ></i>
+          <div class="cvs-container" v-show="cvs.length > 0 || creatingCv">
+            <div
+              v-show="cvs.length > 0"
+              class="cv-profile"
+              v-for="(ele, i) in cvs"
+              :key="i"
+            >
+              <span class="title">{{ ele.title }}</span>
+              <span @click="openCV(ele)" class="see-cv-btn">
+                Ver <span class="material-symbols-outlined"> visibility </span>
+              </span>
+              <span @click="deleteCV(ele)" class="delete-cv-btn">
+                Eliminar <i class="fa-solid fa-trash"></i>
+              </span>
+            </div>
+            <div class="cv-template" v-show="creatingCv">
+              <input
+                ref="newCVTitle"
+                type="text"
+                class="new-title-cv"
+                placeholder="Título"
+                maxlength="15"
+              />
+              <input
+                type="file"
+                id="cvFile"
+                ref="newCVFile"
+                @change="createCV()"
+                class="new-cv-input"
+              />
+              <span @click="$refs.newCVFile.click()" class="add-pdf-btn">Añadir PDF</span>
+              <i @click="creatingCv = false" class="fa-solid fa-xmark close-template-cv"></i>
+            </div>
+          </div>
+          <div class="no-data" v-show="cvs.length == 0 && !creatingCv">
+            No tienes CV's
+          </div>
         </div>
       </section>
     </div>
@@ -167,10 +210,12 @@ export default {
     return {
       appliedOffers: [],
       savedOffers: [],
+      cvs: [],
       editingAbout: false,
       editingLinks: false,
       selectedOffer: null,
       showChallenge: false,
+      creatingCv: false,
     };
   },
   components: {
@@ -196,6 +241,7 @@ export default {
     this.fetchAppliefOffers();
     this.fetchSavedfOffers();
     this.getProfilePicture();
+    this.fetchCVs();
     setTimeout(() => {
       this.$refs.githubURL.href = this.user.github;
       this.$refs.linkedinURL.href = this.user.linkedin;
@@ -224,8 +270,8 @@ export default {
       });
     },
     fetchCVs() {
-      devService.getCVs(this.user._id).then((response) => {
-        console.log(response);
+      devService.getCVs().then((response) => {
+        this.cvs = response;
       });
     },
     editAbout() {
@@ -280,7 +326,7 @@ export default {
       // Send img to server
       let formData = new FormData();
       formData.append("avatar", file);
-      devService.updateAvatar(formData);
+      devService.createCV(formData);
     },
     getProfilePicture() {
       if (this.user.avatar === "default_avatar_dev.jpg") {
@@ -288,12 +334,33 @@ export default {
       }
       devService.getProfilePicture(this.user.avatar).then((response) => {
         console.log(response.url);
-          this.user.avatar = response.url;
-          this.$refs.imgDevProfile.style.backgroundImage = `url(${response.url})`;
-          this.$refs.imgDevProfile.style.backgroundPosition = "center center";
-          this.$refs.imgDevProfile.style.backgroundSize = "cover";
-          this.$refs.imgDevProfile.style.backgroundRepeat = "no-repeat";
+        this.user.avatar = response.url;
+        this.$refs.imgDevProfile.style.backgroundImage = `url(${response.url})`;
+        this.$refs.imgDevProfile.style.backgroundPosition = "center center";
+        this.$refs.imgDevProfile.style.backgroundSize = "cover";
+        this.$refs.imgDevProfile.style.backgroundRepeat = "no-repeat";
       });
+    },
+    openCV(cv) {
+      window.open(`http://localhost:3008/${cv.fileName}`);
+    },
+    deleteCV(cv) {
+      devService.deleteCV(cv._id).then((response) => {
+        this.fetchCVs();
+      });
+    },
+
+    createCV() {
+      let file = this.$refs.newCVFile.files[0];
+      let formData = new FormData();
+      formData.append("cv", file);
+      formData.append("title", this.$refs.newCVTitle.value);
+      devService.createCV(formData);
+      setTimeout(() => {
+        this.creatingCv = false;
+        this.$refs.newCVTitle.value = "";
+        this.fetchCVs();
+      }, 500);
     },
   },
 };
@@ -519,6 +586,143 @@ export default {
   visibility: hidden;
   position: absolute;
 }
+
+.cv-section-container {
+  position: relative;
+}
+.add-cv {
+  position: absolute;
+  right: 0;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background-color: #0070f1;
+  color: #fff;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.cvs-container {
+  margin-top: 20px;
+  /* margin-right: 10%; */
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+}
+
+.cv-profile {
+  width: 30%;
+  height: 180px;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(247, 247, 247);
+  gap: 15px;
+  box-shadow: 0 0 5px rgb(156, 145, 145);
+}
+
+.see-cv-btn {
+  font-size: 1rem;
+  color: #000000;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid #01b890;
+  padding: 1px 8px;
+  border-radius: 20px;
+  transition: 0.2s ease-in-out;
+}
+
+.see-cv-btn:hover {
+  background-color: #01b890;
+  border: 1px solid #ffffff;
+  color: #fff;
+}
+
+.see-cv-btn span {
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-cv-btn {
+  font-size: 1rem;
+  color: #000000;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid #f15c00;
+  padding: 5px 8px;
+  border-radius: 20px;
+  transition: 0.2s ease-in-out;
+}
+.delete-cv-btn i {
+  font-size: 1.2rem;
+  color: #f15c00;
+}
+.delete-cv-btn:hover {
+  background-color: #f15c00;
+  border: 1px solid #ffffff;
+  color: #fff;
+}
+.delete-cv-btn:hover i {
+  color: #fff;
+}
+
+.cv-template {
+  width: 30%;
+  height: 180px;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(247, 247, 247);
+  gap: 15px;
+  /* box-shadow: 0 0 5px rgb(156, 145, 145); */
+  border: 1px dashed #01b890;
+  position: relative;
+}
+.new-title-cv {
+  width: 80%;
+  border: none;
+  outline: none;
+  text-align: center;
+  padding: 4px;
+}
+.new-cv-input {
+  display: none;
+}
+.close-template-cv {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: rgb(255, 102, 0);
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.add-pdf-btn{
+  border: 1px solid #0f9c79;
+  padding : 5px;
+  font-size: 0.9rem;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.add-pdf-btn:hover {
+  background-color: #0f9c79;
+  border: 1px solid #ffffff;
+  color: #fff;
+}
 /* --------------------------------Responsive---------------------------------- */
 
 @media screen and (min-width: 700px) {
@@ -531,6 +735,19 @@ export default {
   }
   .desktop-options {
     display: flex;
+  }
+    .cv-profile, .cv-template{
+      height: 270px;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .delete-cv-btn, .delete-cv-btn i {
+    font-size: 0.8rem;
+  }
+
+  .cv-profile, .cv-template{
+  width: 35%;
   }
 }
 </style>

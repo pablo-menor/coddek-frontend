@@ -107,13 +107,38 @@ export default class DeveloperService {
         return await fetch(url);    
     }
 
-    async getCVs(userId) {
+    async getCVs() {
         const token = this.authService.getToken();
         const headers = {
             'Content-Type': 'application/json',
             'auth-token': token
         };
-        const url = `http://localhost:3008/api/developers/cvs/${userId}`;
+        const url = `http://localhost:3008/api/developers/cvs`;
         return await this.baseService.get(url, headers);
+    }
+
+    async deleteCV(cvId){
+        const token = this.authService.getToken();
+        const headers = {
+            'Content-Type': 'application/json',
+            'auth-token': token
+        };
+        const url = `http://localhost:3008/api/developers/delete-cv/${cvId}`;
+        return await this.baseService.delete(url, headers);
+    }
+
+    async createCV(formData) {
+        const token = this.authService.getToken();
+        const headers = {
+            'auth-token': token
+        };
+        fetch("http://localhost:3008/api/developers/upload-cv", {
+            method: "PUT",
+            body: formData,
+            headers: headers
+        }).then((response) => {
+            console.log(response);
+            return response
+        });
     }
 }

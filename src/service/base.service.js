@@ -69,8 +69,20 @@ export default class BaseService {
             const dataRes = await res.json();
             return dataRes;
         }
-        }
-    async delete (url) {
+    }
+    async delete(url, headers) {
+        if (headers) {
+            try {
+                const res = await fetch(url, {
+                    method: 'DELETE',
+                    headers: headers
+                });
+                const dataRes = await res.json();
+                return dataRes;
+            } catch (error) {
+                return
+            }
+        } else {
             const res = await fetch(url, {
                 method: 'DELETE',
                 headers: {
@@ -81,3 +93,4 @@ export default class BaseService {
             return dataRes;
         }
     }
+}
