@@ -20,6 +20,11 @@
       >
     </offers-panel>
 
+    <!--Filters-->
+    <filters class="filters-component"
+      v-show="role === 'developer'">
+    </filters>
+
     <!-- Dashboard Company -->
     <dashboard-company
       class="company-options"
@@ -28,17 +33,13 @@
     >
     </dashboard-company>
 
-    <!--Filters-->
-    <filters class="filters-component"
-      v-show="role === 'developer'">
-    </filters>
-
     <!-- OfferCreator -->
     <offer-creator 
     class="offer-creator"
     v-show="role === 'company'"
     ></offer-creator>
 
+    
   </div>
 </template>
 
@@ -52,9 +53,9 @@ import SearchInput from "../../components/search-jobs/SearchInput.vue";
 import Banner from "../../views/Dashboard/Banner.vue";
 import Filters from "../../views/Dashboard/Filters.vue";
 import ButtonFilters from "../../views/Dashboard/Filters-button.vue";
-//prueba offer creator
 import OfferCreator from "../../components/offers/OfferCreator.vue";
-import DashboardCompany from "../../components/Dashboard-Company/DashboardCompany.vue"
+import DashboardCompany from "../../components/Dashboard-Company/DashboardCompany.vue";
+
 
 // Services
 import AuthService from "../../service/auth.service";
@@ -107,7 +108,7 @@ export default {
     },
     searchByTitle(input){
       this.$refs.panel.getOffersByTitle(input);
-    }
+    },
   },
 };
 </script>
@@ -120,7 +121,8 @@ export default {
 .search-input,
 .filters-component,
 .offer-creator,
-.company-options{
+.company-options,
+.filters-component{
   margin-left: 2vw;
 }
 .search-input {

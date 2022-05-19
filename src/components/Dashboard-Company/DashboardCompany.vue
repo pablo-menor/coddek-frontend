@@ -7,22 +7,35 @@
       </div>
       <div class="buttons">
         <router-link :to="profileLink" class="option-company">Mi Perfil</router-link>
-        <span class="option-company">Crear Oferta</span>
+        <span class="option-company" @click="showOfferCreator()">Crear Oferta</span>
         <span class="option-company">Mis Ofertas</span>
         <span class="option-company">Candidatos</span>
       </div>
     </div>
+
   </div>
 </template>
 
 <script>
+//prueba offer creator
+import OfferCreator from "../../components/offers/OfferCreator.vue";
+
 export default {
   name: "DashboardCompany",
+  components: {
+    OfferCreator,
+  },
   data() {
         return {
           profileLink: `/${this.$store.state.username}`,
         };
     },
+    methods: {
+    showOfferCreator(){
+      let createOfferCreator = document.querySelector(".container-offer-creator");
+      createOfferCreator.style.display = "flex";
+    }
+  },
 };
 </script>
 
