@@ -59,7 +59,7 @@ export default {
 
 <style scoped>
 .container-single-offer {
-  box-shadow: 1px 1px 5px #919191;
+  box-shadow: 1px 1px 5px #b1b1b1c5;
   border-radius: 5px;
   width: 85%;
   height: 150px;
@@ -70,6 +70,7 @@ export default {
   position: relative;
   z-index: 1;
   max-width: 550px;
+  background-color: #fff;
 }
 .img-company {
   border-radius: 50%;

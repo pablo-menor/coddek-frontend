@@ -240,7 +240,7 @@ export default {
   padding-top: 70px;
   padding-bottom: 20px;
   height: 700px;
-  overflow: scroll;
+
   font-family: "Nunito", sans-serif;
 }
 
@@ -364,7 +364,7 @@ export default {
   min-height: 35px;
 }
 .btn-offer-creator {
-  display: none;
+  display: auto;
   max-width: 250px;
   width: 80%;
   background: rgb(255, 92, 0);

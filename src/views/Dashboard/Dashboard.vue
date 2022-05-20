@@ -116,10 +116,10 @@ export default {
 <style scoped>
 .container {
   overflow-x: hidden;
+  background-color: #f7f7f7;
 }
 .offers-panel,
 .search-input,
-.filters-component,
 .offer-creator,
 .company-options,
 .filters-component{
