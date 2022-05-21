@@ -229,6 +229,7 @@ export default {
   height: 80%;
   border: 1px solid rgb(1, 122, 192);
   padding: 3px;
+  word-break: break-all;
 }
 .description-text-mobile::-webkit-scrollbar {
   width: 8px;
