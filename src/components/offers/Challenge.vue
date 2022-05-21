@@ -70,8 +70,9 @@ export default {
 .challenge-offer {
   border-radius: 5px;
   width: 85%;
-  max-width: 555px;
+  max-width: 490px;
   height: 97vh;
+  max-height: 850px;
   position: fixed;
   z-index: 5;
   top: calc(50vh - 48.5vh);
@@ -91,7 +92,7 @@ export default {
   border: 2px dotted rgba(180, 180, 180, 0.867);
 }
 .text {
-  height: 90px;
+  height: 70px;
   width: 85%;
   display: flex;
   align-items: center;
@@ -146,8 +147,8 @@ export default {
   left: calc(50% - 85px);
 }
 .upload-area {
-  width: 80%;
-  height: 200px;
+  width: 60%;
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;

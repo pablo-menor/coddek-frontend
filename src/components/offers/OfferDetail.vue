@@ -150,8 +150,9 @@ export default {
 .container-offer-detail-mobile {
   border-radius: 5px;
   width: 85%;
-  max-width: 555px;
+  max-width: 490px;
   height: 97vh;
+  max-height: 850px;
   position: fixed;
   z-index: 5;
   top: calc(50vh - 48.5vh);
