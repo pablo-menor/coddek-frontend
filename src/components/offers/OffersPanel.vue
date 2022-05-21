@@ -58,6 +58,9 @@ export default {
         this.offers = offers;
       });
     },
+    filterOffersByOrder(){
+      console.log("filtro por orden");
+    }
   },
 };
 </script>

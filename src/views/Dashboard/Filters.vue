@@ -9,8 +9,8 @@
         </select>
       </section>
       <section class="section-tags-filter section-filter">
-        <label for="tag-filter" class="label" >Tags</label>
-        <input type="search" name="tag-filter" class="tag-filter">
+        <label for="tag-filter" class="label">Tags</label>
+        <input type="search" name="tag-filter" class="tag-filter" v-model="tag">
       </section>
       <section class="section-salary-filter section-filter">
         <label for="" class="label" >Salario mínimo</label>
@@ -22,7 +22,7 @@
       </section>
       <section class="section-location-filter section-filter">
         <label for="" class="label">Localización</label>
-        <input type="search" name="tag-filter" class="location-filter">
+        <input type="search" name="tag-filter" class="location-filter" v-model="location">
       </section>
       <section class="section-complete-filter section-filter">
         <label for="" class="label">Ofertas completas</label>
@@ -32,7 +32,7 @@
         </span>
       </section>
       <section class="section-btn-filter section-filter">
-        <button class="btn-filter">
+        <button class="btn-filter" >
             Filtrar
           </button>
       </section>
@@ -53,12 +53,17 @@ export default {
       complete: false,
     }
   },
-  created() {},
+  created() {
+ 
+  },
   mounted() {},
   methods: {
     changeComplete(){
       this.complete = !this.complete;
     },
+    sendFilters(){
+      this.$emit("filters", this.data());
+    }
   },
 };
 </script>
