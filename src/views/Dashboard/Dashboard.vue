@@ -10,7 +10,7 @@
     v-show="role === 'developer'"></search-input>
 
     <!--  Desktop Banner-->
-    <banner class="banner" :role="role"></banner>
+    <banner class="banner" :role="role" @search="searchByTitle($event)"></banner>
 
     <!--OffersPanel Component -->
     <offers-panel
@@ -40,6 +40,13 @@
     @closeOfferCreator="showOfferCreator = false">
     </offer-creator>
 
+    <!--OffersPanelCompany Component -->
+    <offers-panel
+      class="offers-panel-company"
+      v-show="role === 'company'"
+      ref="panel"
+      >
+    </offers-panel>
     
   </div>
 </template>
@@ -118,10 +125,11 @@ export default {
 <style scoped>
 .container {
   overflow-x: hidden;
+  background-color: #f7f7f7;
+  height: 100vh;
 }
 .offers-panel,
 .search-input,
-.filters-component,
 .offer-creator,
 .company-options,
 .filters-component{

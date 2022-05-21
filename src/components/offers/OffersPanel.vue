@@ -63,6 +63,9 @@ export default {
       this.challengeId = this.selectedOffer.challengeId
       this.showChallenge = true;
     },
+    filterOffersByOrder(){
+      console.log("filtro por orden");
+    }
   },
 };
 </script>

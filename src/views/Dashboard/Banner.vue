@@ -6,6 +6,7 @@
       v-if="role === 'developer'"
       :own="own"
       :user="user"
+      @search="searchByTitle($event)"
     ></search-input>
 
     <!-- profile pic -->
@@ -70,6 +71,9 @@ export default {
       localStorage.removeItem("vuex");
       this.$router.push("/login");
     },
+    searchByTitle(event){
+      this.$emit("search", event);
+    }
   },
 };
 </script>
