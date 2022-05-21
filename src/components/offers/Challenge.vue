@@ -2,17 +2,23 @@
   <div class="challenge-offer">
     <i class="fa-solid fa-x cancel-mobile" @click="cancelChallenge()"></i>
     <div class="text">
-        <h2>Challenge Title</h2>
-        <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora cumque
-        eum incidunt neque adipisci ut cum voluptatum explicabo minima veritatis
-        alias, facere quae aut, atque maxime assumenda exercitationem molestias
-        at?
-        </p>
+      <h2>{{ challenge.title }}</h2>
     </div>
-    <button class="downloadBtn">Descargar archivos</button>
+    <p class="desc-challenge">
+      {{ challenge.description }}
+    </p>
+    <button @click="showArchives()" class="downloadBtn">Ver archivos</button>
 
-    <div class="dragdrop">
+    <div class="upload-area">
+      <div class="uploadBtn" @click="$refs.fileInputSolution.click()">
+        Subir archivo
+      </div>
+      <input
+        class="file-challenge"
+        type="file"
+        name="fileSolution"
+        ref="fileInputSolution"
+      />
     </div>
 
     <form>
@@ -28,11 +34,33 @@
 </template>
 
 <script>
+// Services
+import ChallengeService from "../../service/challenge.service";
+const challengeService = new ChallengeService();
 export default {
   name: "Challenge",
+  props: {
+    challengeId: String,
+  },
+  data() {
+    return {
+      challenge: {},
+    };
+  },
+  created() {
+    this.fetchChallenge();
+  },
   methods: {
     cancelChallenge() {
       this.$emit("cancelChallenge");
+    },
+    fetchChallenge() {
+      challengeService.getById(this.challengeId).then((challenge) => {
+        this.challenge = challenge;
+      });
+    },
+    showArchives() {
+      window.open(`http://localhost:3008/${this.challenge.archives}`);
     },
   },
 };
@@ -55,25 +83,23 @@ export default {
   background-color: #fff;
 }
 .dragdrop {
-    width: 75%;
-    height: 40%;
-    display: flex;
-    align-items: flex-start;
-    padding: 10px 10px 0 10px;
-    border: 2px dotted rgba(180, 180, 180, 0.867);
+  width: 75%;
+  height: 40%;
+  display: flex;
+  align-items: flex-start;
+  padding: 10px 10px 0 10px;
+  border: 2px dotted rgba(180, 180, 180, 0.867);
 }
 .text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin-top: 5%;
-    gap: 30px;
-    margin-left: 5%;
-    margin-right: 5%;
-}
-.text p {
-text-align: justify;
+  height: 90px;
+  width: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 5%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 .cancel-mobile {
   position: absolute;
@@ -118,5 +144,41 @@ text-align: justify;
   text-align: center;
   text-decoration: none;
   left: calc(50% - 85px);
+}
+.upload-area {
+  width: 80%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 10px 0 10px;
+  border: 2px dotted rgb(221, 144, 1);
+}
+.uploadBtn {
+  width: 170px;
+  margin: 0;
+  padding: 12px 10px 12px 10px;
+  border-radius: 20px;
+  border: none;
+  background: rgb(1, 221, 184);
+  color: #fff;
+  font-size: 0.9em;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  left: calc(50% - 85px);
+}
+
+.file-challenge {
+  display: none;
+}
+
+.desc-challenge {
+  width: 90%;
+  height: 120px;
+  font-size: 0.9rem;
+  border: 1px solid rgb(1, 122, 192);
+  padding: 3px;
+  word-break: break-all;
 }
 </style>

@@ -10,10 +10,10 @@
       v-if="selectedOffer"
       :offer="selectedOffer"
       @cancel="selectedOffer = false"
-      @showChallenge="showChallenge = true"
+      @showChallenge="showChallengeDetails($event)"
     ></offer-detail>
 
-    <challenge v-show="showChallenge" @cancelChallenge="showChallenge = false">
+    <challenge v-if="showChallenge" @cancelChallenge="showChallenge = false" :challengeId="challengeId">
     </challenge>
   </div>
 </template>
@@ -40,6 +40,7 @@ export default {
       offers: [],
       selectedOffer: null,
       showChallenge: false,
+      challengeId: null,
     };
   },
   props: {},
@@ -57,6 +58,10 @@ export default {
       offerService.findOfferByTitle(input).then((offers) => {
         this.offers = offers;
       });
+    },
+    showChallengeDetails(challengeId) {
+      this.challengeId = this.selectedOffer.challengeId
+      this.showChallenge = true;
     },
   },
 };

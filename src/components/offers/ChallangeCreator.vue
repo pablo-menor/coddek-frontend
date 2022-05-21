@@ -1,70 +1,91 @@
 <template>
-    <div class="container-challange-creator">
-        <div class="challenge-offer">
-            <i class="fa-solid fa-x cancel-mobile" @click="closeChallangeCreator()"></i>
-            <div class="text">
-                <input
-                    type="text"
-                    class="title-challange input"
-                    placeholder="Titulo de la oferta"
-                />
-                <textarea
-                    name="Descripcion deL challange"
-                    class="description-text-mobile input"
-                ></textarea>
-            </div>
-            <button class="downloadBtn">Descargar archivos</button>
-
-            <div class="dragdrop">
-            </div>
-
-            <form>
-            <label for="cv">Selecciona un currículum: </label>
-            <select name="cv" id="cv">
-                <option value="cv1">Currículum 1</option>
-                <option value="cv2">Currículum 2</option>
-                <option value="cv3">Currículum 3</option>
-            </select>
-            </form>
-            <button class="sendButton">Enviar</button>
+  <div class="container-challange-creator">
+    <div class="challenge-offer">
+      <i
+        class="fa-solid fa-x cancel-mobile"
+        @click="closeChallangeCreator()"
+      ></i>
+      <div class="text">
+        <input
+          type="text"
+          class="title-challange input"
+          placeholder="Título del challenge"
+          v-model="title"
+        />
+        <textarea
+          class="description-text-mobile input"
+          placeholder="Descripción corta..."
+          v-model="description"
+        ></textarea>
+      </div>
+      <div class="upload-area">
+        <div class="uploadBtn" @click="$refs.fileInputChallenge.click()">
+          Subir archivo
         </div>
+        <input
+          class="file-challenge"
+          type="file"
+          name="fileChallenge"
+          ref="fileInputChallenge"
+        />
+      </div>
+      <button @click="saveChallenge()" class="sendButton">Guardar</button>
+    </div>
   </div>
 </template>
 
 <script>
+import ChallengeService from "../../service/challenge.service.js";
+const challengeService = new ChallengeService();
 export default {
   name: "ChallengeCreator",
   components: {},
   data() {
     return {
-      
+      title: "",
+      description: "",
     };
   },
   created() {},
   mounted() {},
   methods: {
     closeChallangeCreator() {
-      document.querySelector(".container-challange-creator").style.display = "none";
+      this.title = "";
+      this.description = "";
+      this.$emit("closeChallangeCreator");
+    },
+
+    saveChallenge() {
+      const formData = new FormData();
+      formData.append("title", this.title);
+      formData.append("description", this.description);
+      formData.append("challenge", this.$refs.fileInputChallenge.files[0]);
+
+      challengeService.save(formData).then((response) => {
+        this.$emit("challengeCreated", response);
+        this.title = "";
+        this.description = "";
+      });
     },
   },
 };
 </script>
 
 <style scoped>
-.container-challange-creator{
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    font-family: "Nunito", sans-serif;
+.container-challange-creator {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  font-family: "Nunito", sans-serif;
 }
 .challenge-offer {
   border-radius: 5px;
   width: 85%;
   max-width: 555px;
-  height: 97vh;
+  height: 90vh;
   position: fixed;
   z-index: 5;
-  top: calc(50vh - 48.5vh);
+  top: calc(50vh - 45vh);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -73,26 +94,26 @@ export default {
   background-color: #fff;
 }
 .dragdrop {
-    width: 75%;
-    height: 40%;
-    display: flex;
-    align-items: flex-start;
-    padding: 10px 10px 0 10px;
-    border: 2px dotted rgba(180, 180, 180, 0.867);
+  width: 75%;
+  height: 40%;
+  display: flex;
+  align-items: flex-start;
+  padding: 10px 10px 0 10px;
+  border: 2px dotted rgba(180, 180, 180, 0.867);
 }
 .text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin-top: 5%;
-    gap: 30px;
-    margin-left: 5%;
-    margin-right: 5%;
-    width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 5%;
+  gap: 30px;
+  margin-left: 5%;
+  margin-right: 5%;
+  width: 80%;
 }
 .text p {
-text-align: justify;
+  text-align: justify;
 }
 .cancel-mobile {
   position: absolute;
@@ -117,7 +138,16 @@ text-align: justify;
   font-size: 1.2rem;
   margin-bottom: 5%;
 }
-.downloadBtn {
+.upload-area {
+  width: 80%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 10px 0 10px;
+  border: 2px dotted rgba(180, 180, 180, 0.867);
+}
+.uploadBtn {
   width: 170px;
   margin: 0;
   padding: 12px 10px 12px 10px;
@@ -138,12 +168,21 @@ text-align: justify;
   text-decoration: none;
   left: calc(50% - 85px);
 }
-.title-challange{
-    width: 60%;
+
+.file-challenge {
+  display: none;
 }
-.description-text-mobile{
+.title-challange {
+  width: 60%;
+  margin-top: 70px;
+  outline: none;
+  margin-top: 70px;
+}
+.description-text-mobile {
   width: 95%;
   height: 100px;
+  margin-top: 40px;
+  outline: none;
 }
 .input {
   border: none;
@@ -153,5 +192,4 @@ text-align: justify;
   border-radius: 5px;
   border: 0.1px solid rgba(15, 136, 235, 0.595);
 }
-
 </style>

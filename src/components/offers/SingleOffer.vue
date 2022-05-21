@@ -46,7 +46,8 @@ export default {
       this.$emit("selected", this.offer);
     },
     getSalary() {
-      return offerService.convertSalary(this.offer.salary.amount);
+     let range  = offerService.convertSalary(this.offer.salary.amount);
+      return `${range.min}- ${range.max}`;
     },
     getSavedOffers() {
       developerService.getSavedOffers().then((response) => {

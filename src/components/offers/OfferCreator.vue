@@ -3,7 +3,7 @@
     <div class="creator-panel">
       <section class="company-info-mobile">
         <div class="img-container"></div>
-        <p class="company-name">Empresa</p>
+        <p class="company-name">{{$store.state.username}}</p>
         <div class="separator-mobile"></div>
       </section>
       <section class="main-details">
@@ -63,7 +63,6 @@
             Experiencia:
             <input
               type="text"
-              placeholder="experiencia mínima"
               class="input"
               v-model="experience"
             />
@@ -92,7 +91,6 @@
             Localización:
             <input
               type="text"
-              placeholder="Ciudad"
               class="input"
               v-model="location"
             />
@@ -126,15 +124,29 @@
           rows="10"
           class="description-text-mobile input"
           v-model="description"
+          placeholder=" Descripción de la oferta..."
         ></textarea>
-        <span class="post-offer">Publicar oferta automaticamente
-          <i class="fa-solid fa-toggle-off" v-show="ongoin == false" @click="changeOngoin()"></i>
-          <i class="fa-solid fa-toggle-on"  v-show="ongoin == true" @click="changeOngoin()"></i>
+        <span class="post-offer"
+          >Publicar oferta automaticamente
+          <i
+            class="fa-solid fa-toggle-off"
+            v-show="ongoing == false"
+            @click="changeOngoing()"
+          ></i>
+          <i
+            class="fa-solid fa-toggle-on"
+            v-show="ongoing == true"
+            @click="changeOngoing()"
+          ></i>
         </span>
-        <button class="btn-go-to-challange-creator" @click="createChallange()">
-          Crear challange
+        <button
+          class="btn-go-to-challange-creator"
+          @click="challengeCreator = true"
+          v-show="challengeId.length == 0"
+        >
+          Crear challenge
         </button>
-        <button class="btn-offer-creator" @click="createOffer()">
+        <button class="btn-offer-creator" v-show="challengeId.length > 0" @click="createOffer()">
           Crear oferta
         </button>
       </section>
@@ -143,10 +155,11 @@
 
     <!-- ChallangeCreator -->
     <challange-creator
-    class="challange-creator"
-    v-show="role === 'company'"
+      class="challange-creator"
+      v-show="challengeCreator"
+      @challengeCreated="challengeCreated($event)"
+      @closeChallangeCreator="challengeCreator = false"
     ></challange-creator>
-
   </div>
 </template>
 <script>
@@ -161,7 +174,7 @@ const companyService = new CompanyService();
 export default {
   name: "OfferCreator",
   components: {
-        ChallangeCreator,
+    ChallangeCreator,
   },
   data() {
     return {
@@ -173,7 +186,9 @@ export default {
       maxSalary: "",
       tags: [],
       nameTag: "",
-      ongoin: false,
+      ongoing: false,
+      challengeCreator: false,
+      challengeId: "",
     };
   },
   created() {},
@@ -184,18 +199,31 @@ export default {
         title: this.title,
         description: this.description,
         location: this.location,
-        experience: this.experience,
+        experienceRequired: this.experience,
         salary: {
-          amount: this.minSalary + "-" + this.maxSalary,
+          amount: this.minSalary.replaceAll('.', '') + "-" + this.maxSalary.replaceAll('.', ''),
           currency: "EUR",
         },
         tags: this.tags,
+        ongoing: this.ongoing,
+        challengeId: this.challengeId,
+
       };
-      console.log(offer);
       offerService.createOffer(offer);
+      this.closeOfferCreator();
     },
     closeOfferCreator() {
-      document.querySelector(".container-offer-creator").style.display = "none";
+      this.title = "";
+      this.description = "";
+      this.location = "";
+      this.experience = "";
+      this.minSalary = "";
+      this.maxSalary = "";
+      this.tags = [];
+      this.challengeCreator = false;
+      this.challengeId = "";
+      this.ongoing = false;
+     this.$emit("closeOfferCreator");
     },
     addTag() {
       document.querySelector(".tags-offer-created").style.display = "flex";
@@ -214,39 +242,41 @@ export default {
         document.querySelector(".tags-offer-created").style.display = "none";
       }
     },
-    changeOngoin(){
-      if(this.ongoin == false){
-        this.ongoin = true;
-      } else if(this.ongoin == true){
-        this.ongoin = false;
-      }
-      console.log(this.ongoin);
+    changeOngoing() {
+      this.ongoing = !this.ongoing;
     },
-    createChallange(){
-
-      document.querySelector(".challange-creator").style.display = "flex";
-
-    }
+    challengeCreated(data) {
+      this.challengeCreator = false;
+      this.challengeId = data.id;
+    },
   },
 };
 </script>
 <style scoped>
 .container-offer-creator {
+  /* width: 98vw;
   min-width: 320px;
-  display: none;
   flex-direction: column;
   align-items: center;
   gap: 10px;
   padding-top: 70px;
   padding-bottom: 20px;
-  height: 700px;
-  overflow: scroll;
+  overflow: scroll; */
   font-family: "Nunito", sans-serif;
+    font-family: "Nunito", sans-serif;
+  min-width: 320px;
+  width: 98vw;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding-top: 70px;
 }
 
 .creator-panel {
-  border-radius: 5px;
-  width: 85%;
+  /* border-radius: 5px;
+  width: 100%;
   max-width: 555px;
   height: 97vh;
   position: fixed;
@@ -255,7 +285,23 @@ export default {
   display: flex;
   flex-direction: column;
   border: 2px solid rgb(15, 136, 235);
+  background-color: #fff; */
+
+    border-radius: 5px;
+  width: 85%;
+    height: 90vh;
+  /* height: 90vh; */
+  max-width: 555px;
+  position: fixed;
+  z-index: 5;
+  top: calc(50vh - 45vh);
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgb(15, 136, 235);
   background-color: #fff;
+  background-color: rgb(250, 249, 249);
+  box-shadow: 1px 1px 3px #a8a8a8;
+  color: rgb(0, 0, 0);
 }
 .company-info-mobile {
   padding-top: 5px;
@@ -364,7 +410,6 @@ export default {
   min-height: 35px;
 }
 .btn-offer-creator {
-  display: none;
   max-width: 250px;
   width: 80%;
   background: rgb(255, 92, 0);
@@ -391,6 +436,7 @@ export default {
   box-shadow: 2px 2px 2px #d9d9d999;
   border-radius: 5px;
   border: 0.1px solid rgba(15, 136, 235, 0.595);
+  outline: none;
 }
 
 .btnAdd {
@@ -429,15 +475,15 @@ export default {
   color: rgb(255, 128, 0);
 }
 
-.post-offer{
-  gap:15px;
+.post-offer {
+  gap: 15px;
   display: flex;
   align-items: center;
   height: 30px;
   width: 100%;
   justify-content: center;
 }
-.post-offer i{
+.post-offer i {
   font-size: 1.2rem;
   color: #f15c00;
 }

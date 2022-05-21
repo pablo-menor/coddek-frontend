@@ -326,7 +326,7 @@ export default {
       // Send img to server
       let formData = new FormData();
       formData.append("avatar", file);
-      devService.createCV(formData);
+      devService.updateAvatar(formData);
     },
     getProfilePicture() {
       if (this.user.avatar === "default_avatar_dev.jpg") {

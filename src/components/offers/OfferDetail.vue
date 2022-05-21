@@ -72,7 +72,9 @@
     </section>
     <section class="description">
       <p class="description-text-mobile">{{ offer.description }}</p>
-      <button class="challange-details" @click="showChallenge()">Inscribirse</button>
+      <button class="challange-details" @click="showChallenge()">
+        Inscribirse
+      </button>
     </section>
     <div class="save-offer-mobile" @click="save()">
       <i
@@ -108,7 +110,9 @@ export default {
   mounted() {},
   methods: {
     getSalary() {
-      return offerService.convertSalary(this.offer.salary.amount);
+      // return offerService.convertSalary(this.offer.salary.amount);
+      let range = offerService.convertSalary(this.offer.salary.amount);
+      return `${range.min} - ${range.max}`;
     },
     cancel() {
       this.$emit("cancel");
@@ -135,8 +139,8 @@ export default {
       });
     },
     showChallenge() {
-      this.$emit("showChallenge");
-    }
+      this.$emit("showChallenge", this.offer.challengeId);
+    },
   },
 };
 </script>
@@ -220,6 +224,7 @@ export default {
   align-items: center;
 }
 .description-text-mobile {
+  width: 100%;
   font-size: 0.9rem;
   height: 80%;
   border: 1px solid rgb(1, 122, 192);
@@ -274,15 +279,15 @@ export default {
 /* ------------------------DESKTOP VERSION--------------------------------------- */
 @media screen and (min-width: 750px) {
   .container-offer-detail-mobile {
-  height: 97vh;
-  position: fixed;
-  z-index: 5;
-  top: calc(50vh - 48.5vh);
-  display: flex;
-  flex-direction: column;
-  border: 2px solid rgb(15, 136, 235);
-  background-color: #fff;
-  width: 70%;
-}
+    height: 97vh;
+    position: fixed;
+    z-index: 5;
+    top: calc(50vh - 48.5vh);
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rgb(15, 136, 235);
+    background-color: #fff;
+    width: 70%;
+  }
 }
 </style>

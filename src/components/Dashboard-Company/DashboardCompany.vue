@@ -2,8 +2,8 @@
   <div class="dashboard-company-panel">
     <div class="wrap-companypanel">
       <div class="logo-name">
-        <i class="fa-solid fa-jedi"></i>
-        <h1>Gugel</h1>
+        <div class="company-pic-dash"></div>
+        <h1>{{$store.state.username}}</h1>
       </div>
       <div class="buttons">
         <router-link :to="profileLink" class="option-company">Mi Perfil</router-link>
@@ -32,8 +32,7 @@ export default {
     },
     methods: {
     showOfferCreator(){
-      let createOfferCreator = document.querySelector(".container-offer-creator");
-      createOfferCreator.style.display = "flex";
+     this.$emit("showOfferCreator");
     }
   },
 };
@@ -51,6 +50,10 @@ export default {
   gap: 10px;
   padding-top: 70px;
 }
+/* h1{
+  font-size: 1.2rem;
+
+} */
 .wrap-companypanel {
   border-radius: 5px;
   width: 85%;
@@ -67,6 +70,13 @@ export default {
   box-shadow: 1px 1px 3px #a8a8a8;
   color: rgb(0, 0, 0);
 }
+.company-pic-dash{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 1px solid  rgb(15, 136, 235);
+  margin-bottom: 10px;
+}
 .logo-name {
   display: flex;
   flex: 1;
@@ -77,8 +87,9 @@ export default {
   margin-bottom: 60px;
 }
 .logo-name h1 {
-  font-size: 40px;
+  font-size: 1.7rem;
   margin-top: 30px;
+  height: 60px;
 }
 .buttons {
   display: flex;

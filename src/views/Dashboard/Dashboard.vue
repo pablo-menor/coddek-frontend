@@ -30,14 +30,15 @@
       class="company-options"
       v-show="role === 'company'"
       ref="dashcompany"
-    >
+      @showOfferCreator="showOfferCreator  = true">
     </dashboard-company>
 
     <!-- OfferCreator -->
     <offer-creator 
     class="offer-creator"
-    v-show="role === 'company'"
-    ></offer-creator>
+    v-show="role === 'company' && showOfferCreator"
+    @closeOfferCreator="showOfferCreator = false">
+    </offer-creator>
 
     
   </div>
@@ -79,6 +80,7 @@ export default {
   data() {
     return {
       role: "",
+      showOfferCreator: false,
     };
   },
   created() {
