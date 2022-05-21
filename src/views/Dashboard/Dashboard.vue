@@ -39,14 +39,6 @@
     v-show="role === 'company' && showOfferCreator"
     @closeOfferCreator="showOfferCreator = false">
     </offer-creator>
-
-    <!--OffersPanelCompany Component -->
-    <offers-panel
-      class="offers-panel-company"
-      v-show="role === 'company'"
-      ref="panel"
-      >
-    </offers-panel>
     
   </div>
 </template>
