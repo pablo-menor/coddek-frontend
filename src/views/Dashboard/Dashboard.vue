@@ -125,8 +125,6 @@ export default {
 <style scoped>
 .container {
   overflow-x: hidden;
-  background-color: #f7f7f7;
-  height: 100vh;
 }
 .offers-panel,
 .search-input,
