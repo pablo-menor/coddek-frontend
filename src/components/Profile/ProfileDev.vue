@@ -157,8 +157,13 @@
                 @change="createCV()"
                 class="new-cv-input"
               />
-              <span @click="$refs.newCVFile.click()" class="add-pdf-btn">Añadir PDF</span>
-              <i @click="creatingCv = false" class="fa-solid fa-xmark close-template-cv"></i>
+              <span @click="$refs.newCVFile.click()" class="add-pdf-btn"
+                >Añadir PDF</span
+              >
+              <i
+                @click="creatingCv = false"
+                class="fa-solid fa-xmark close-template-cv"
+              ></i>
             </div>
           </div>
           <div class="no-data" v-show="cvs.length == 0 && !creatingCv">
@@ -180,7 +185,7 @@
       v-if="selectedOffer != null"
       :offer="selectedOffer"
       @cancel="cancelDetail()"
-      @showChallenge="showChallenge = true"
+      @showChallenge="showChallengeDetails($event)"
       class="saved-offer-detail-profile"
     ></offer-detail>
 
@@ -188,6 +193,8 @@
       v-show="showChallenge"
       @cancelChallenge="showChallenge = false"
       class="apply-offer-profile"
+      :challengeId="challengeId"
+      :offerId="offerId"
     >
     </challenge>
   </div>
@@ -216,6 +223,8 @@ export default {
       selectedOffer: null,
       showChallenge: false,
       creatingCv: false,
+      challengeId: null,
+      offerId: null,
     };
   },
   components: {
@@ -361,6 +370,11 @@ export default {
         this.$refs.newCVTitle.value = "";
         this.fetchCVs();
       }, 500);
+    },
+    showChallengeDetails(challengeId) {
+      this.challengeId = this.selectedOffer.challengeId;
+      this.offerId = this.selectedOffer._id;
+      this.showChallenge = true;
     },
   },
 };
@@ -714,9 +728,9 @@ export default {
   border-radius: 3px;
 }
 
-.add-pdf-btn{
+.add-pdf-btn {
   border: 1px solid #0f9c79;
-  padding : 5px;
+  padding: 5px;
   font-size: 0.9rem;
   border-radius: 20px;
   cursor: pointer;
@@ -741,18 +755,21 @@ export default {
     display: flex;
     min-height: 60px;
   }
-    .cv-profile, .cv-template{
-      height: 270px;
+  .cv-profile,
+  .cv-template {
+    height: 270px;
   }
 }
 
 @media screen and (max-width: 440px) {
-  .delete-cv-btn, .delete-cv-btn i {
+  .delete-cv-btn,
+  .delete-cv-btn i {
     font-size: 0.8rem;
   }
 
-  .cv-profile, .cv-template{
-  width: 35%;
+  .cv-profile,
+  .cv-template {
+    width: 35%;
   }
 }
 </style>

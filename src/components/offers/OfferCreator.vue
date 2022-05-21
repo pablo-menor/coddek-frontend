@@ -3,7 +3,7 @@
     <div class="creator-panel">
       <section class="company-info-mobile">
         <div class="img-container"></div>
-        <p class="company-name">{{$store.state.username}}</p>
+        <p class="company-name">{{ $store.state.username }}</p>
         <div class="separator-mobile"></div>
       </section>
       <section class="main-details">
@@ -61,11 +61,7 @@
             </svg>
 
             Experiencia:
-            <input
-              type="text"
-              class="input"
-              v-model="experience"
-            />
+            <input type="text" class="input" v-model="experience" />
           </span>
           <span class="detail-mobile">
             <svg
@@ -89,11 +85,7 @@
               />
             </svg>
             Localización:
-            <input
-              type="text"
-              class="input"
-              v-model="location"
-            />
+            <input type="text" class="input" v-model="location" />
           </span>
           <span class="detail-mobile">
             Tags:
@@ -146,7 +138,11 @@
         >
           Crear challenge
         </button>
-        <button class="btn-offer-creator" v-show="challengeId.length > 0" @click="createOffer()">
+        <button
+          class="btn-offer-creator"
+          v-show="challengeId.length > 0"
+          @click="createOffer()"
+        >
           Crear oferta
         </button>
       </section>
@@ -201,13 +197,15 @@ export default {
         location: this.location,
         experienceRequired: this.experience,
         salary: {
-          amount: this.minSalary.replaceAll('.', '') + "-" + this.maxSalary.replaceAll('.', ''),
+          amount:
+            this.minSalary.replaceAll(".", "") +
+            "-" +
+            this.maxSalary.replaceAll(".", ""),
           currency: "EUR",
         },
         tags: this.tags,
         ongoing: this.ongoing,
         challengeId: this.challengeId,
-
       };
       offerService.createOffer(offer);
       this.closeOfferCreator();
@@ -223,7 +221,7 @@ export default {
       this.challengeCreator = false;
       this.challengeId = "";
       this.ongoing = false;
-     this.$emit("closeOfferCreator");
+      this.$emit("closeOfferCreator");
     },
     addTag() {
       document.querySelector(".tags-offer-created").style.display = "flex";
@@ -263,7 +261,7 @@ export default {
   padding-bottom: 20px;
   overflow: scroll; */
   font-family: "Nunito", sans-serif;
-    font-family: "Nunito", sans-serif;
+  font-family: "Nunito", sans-serif;
   min-width: 320px;
   width: 98vw;
   height: 90vh;
@@ -275,22 +273,9 @@ export default {
 }
 
 .creator-panel {
-  /* border-radius: 5px;
-  width: 100%;
-  max-width: 555px;
-  height: 97vh;
-  position: fixed;
-  z-index: 5;
-  top: calc(50vh - 48.5vh);
-  display: flex;
-  flex-direction: column;
-  border: 2px solid rgb(15, 136, 235);
-  background-color: #fff; */
-
-    border-radius: 5px;
-  width: 85%;
-    height: 90vh;
-  /* height: 90vh; */
+  border-radius: 5px;
+  height: 90vh;
+  min-height: 800px;
   max-width: 555px;
   position: fixed;
   z-index: 5;

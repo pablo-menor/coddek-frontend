@@ -23,13 +23,13 @@
 
     <form>
       <label for="cv">Selecciona un currículum: </label>
-      <select name="cv" id="cv">
-        <option value="cv1">Currículum 1</option>
-        <option value="cv2">Currículum 2</option>
-        <option value="cv3">Currículum 3</option>
+      <select name="cv" id="cv" ref="cvSelector">
+        <option v-for="(cv, index) in cvs" :key="index" :value="cv.title">
+          {{ cv.title }}
+        </option>
       </select>
     </form>
-    <button class="sendButton">Enviar</button>
+    <button class="sendButton" @click="uploadSolution()">Enviar</button>
   </div>
 </template>
 
@@ -37,18 +37,23 @@
 // Services
 import ChallengeService from "../../service/challenge.service";
 const challengeService = new ChallengeService();
+import DeveloperService from "../../service/developer.service";
+const developerService = new DeveloperService();
 export default {
   name: "Challenge",
   props: {
     challengeId: String,
+    offerId: String,
   },
   data() {
     return {
       challenge: {},
+      cvs: [],
     };
   },
   created() {
     this.fetchChallenge();
+    this.fetchCVs();
   },
   methods: {
     cancelChallenge() {
@@ -61,6 +66,22 @@ export default {
     },
     showArchives() {
       window.open(`http://localhost:3008/${this.challenge.archives}`);
+    },
+    uploadSolution() {
+      const file = this.$refs.fileInputSolution.files[0];
+      const selectedCV = this.$refs.cvSelector.value;
+      const formData = new FormData();
+      formData.append("solution", file);
+      formData.append("cv", selectedCV);
+      challengeService.uploadSolution(formData, this.offerId).then(() => {
+        this.$emit("cancelChallenge");
+        this.$emit("solutionUploaded");
+      });
+    },
+    fetchCVs() {
+      developerService.getCVs().then((cvs) => {
+        this.cvs = cvs;
+      });
     },
   },
 };

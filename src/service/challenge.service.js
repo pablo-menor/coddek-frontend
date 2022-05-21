@@ -22,4 +22,17 @@ export default class ChallengeService {
         const res = this.baseService.get(url);
         return res;
     }
+
+    async uploadSolution(formData, offerId) {
+        const url = `http://localhost:3008/api/offers/upload-solution/${offerId}`;
+        const res = await fetch(url, {
+            method: "POST",
+            body: formData,
+            headers: {
+                "auth-token": this.authService.getToken(),
+            }
+        })
+        const data = await res.json();
+        return data;
+    }
 }

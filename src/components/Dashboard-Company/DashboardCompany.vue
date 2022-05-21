@@ -3,16 +3,19 @@
     <div class="wrap-companypanel">
       <div class="logo-name">
         <div class="company-pic-dash"></div>
-        <h1>{{$store.state.username}}</h1>
+        <h1>{{ $store.state.username }}</h1>
       </div>
       <div class="buttons">
-        <router-link :to="profileLink" class="option-company">Mi Perfil</router-link>
-        <span class="option-company" @click="showOfferCreator()">Crear Oferta</span>
+        <router-link :to="profileLink" class="option-company"
+          >Mi Perfil</router-link
+        >
+        <span class="option-company" @click="showOfferCreator()"
+          >Crear Oferta</span
+        >
         <span class="option-company">Mis Ofertas</span>
         <span class="option-company">Candidatos</span>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -26,14 +29,14 @@ export default {
     OfferCreator,
   },
   data() {
-        return {
-          profileLink: `/${this.$store.state.username}`,
-        };
+    return {
+      profileLink: `/${this.$store.state.username}`,
+    };
+  },
+  methods: {
+    showOfferCreator() {
+      this.$emit("showOfferCreator");
     },
-    methods: {
-    showOfferCreator(){
-     this.$emit("showOfferCreator");
-    }
   },
 };
 </script>
@@ -70,11 +73,11 @@ export default {
   box-shadow: 1px 1px 3px #a8a8a8;
   color: rgb(0, 0, 0);
 }
-.company-pic-dash{
+.company-pic-dash {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: 1px solid  rgb(15, 136, 235);
+  border: 1px solid rgb(15, 136, 235);
   margin-bottom: 10px;
 }
 .logo-name {
@@ -97,7 +100,7 @@ export default {
   align-items: center;
   flex-direction: column;
 }
-.option-company{
+.option-company {
   font-size: 1.8rem;
   cursor: pointer;
   text-decoration: none;
@@ -110,25 +113,34 @@ export default {
   width: 100%;
 }
 .option-company:last-child {
-    border-bottom: 0px;
+  border-bottom: 0px;
 }
 
-.option-company:hover{
-
+.option-company:hover {
 }
 
 /* ---------- RESPONSIVE --------- */
 @media screen and (min-width: 749px) {
-    .dashboard-company-panel {
-        position:fixed;
-        max-width: 300px;
-        top: 75px;
-        left: 10px;
-    }
-    .wrap-companypanel {
-        top: 75px;
-        max-width: 300px;
-        max-height: 700px;
-    }
+  .dashboard-company-panel {
+    position: fixed;
+    max-width: 300px;
+    top: 75px;
+    left: 10px;
+  }
+  .wrap-companypanel {
+    top: 75px;
+    max-width: 300px;
+    max-height: 700px;
+  }
+}
+@media screen and (max-height: 800px) {
+  .logo-name {
+    margin-bottom: 0px;
+  }
+  .wrap-companypanel {
+    top: 75px;
+    max-width: 300px;
+    max-height: 520px;
+  }
 }
 </style>

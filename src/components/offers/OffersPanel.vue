@@ -13,7 +13,13 @@
       @showChallenge="showChallengeDetails($event)"
     ></offer-detail>
 
-    <challenge v-if="showChallenge" @cancelChallenge="showChallenge = false" :challengeId="challengeId">
+    <challenge
+      v-if="showChallenge"
+      @cancelChallenge="showChallenge = false"
+      @solutionUploaded="selectedOffer = null"
+      :challengeId="challengeId"
+      :offerId="offerId"
+    >
     </challenge>
   </div>
 </template>
@@ -41,6 +47,7 @@ export default {
       selectedOffer: null,
       showChallenge: false,
       challengeId: null,
+      offerId: null,
     };
   },
   props: {},
@@ -60,12 +67,13 @@ export default {
       });
     },
     showChallengeDetails(challengeId) {
-      this.challengeId = this.selectedOffer.challengeId
+      this.challengeId = this.selectedOffer.challengeId;
+      this.offerId = this.selectedOffer._id;
       this.showChallenge = true;
     },
-    filterOffersByOrder(){
+    filterOffersByOrder() {
       console.log("filtro por orden");
-    }
+    },
   },
 };
 </script>
