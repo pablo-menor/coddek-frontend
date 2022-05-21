@@ -387,12 +387,14 @@ export default {
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  min-height: 800px;
 }
 
 .user-info {
   margin-top: 15px;
   width: 100%;
   height: 200px;
+  min-height: 200px;
   position: relative;
 }
 .picture-name {
@@ -486,6 +488,7 @@ export default {
   border-radius: 5px;
   border: 2px solid #6eb1e9;
   width: 93%;
+  /* min-height: 400px; */
 }
 .about {
   display: flex;
@@ -495,6 +498,7 @@ export default {
   padding-right: 35px;
   position: relative;
   height: auto;
+  min-height: 85px;
 }
 .edit-about {
   width: 35px;
@@ -735,6 +739,7 @@ export default {
   }
   .desktop-options {
     display: flex;
+    min-height: 60px;
   }
     .cv-profile, .cv-template{
       height: 270px;

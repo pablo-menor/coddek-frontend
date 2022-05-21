@@ -1,13 +1,6 @@
 <template>
   <div class="container-filters">
     <div class="filters">
-      <section class="section-order-filter section-filter">
-        <label for="" class="label" >Orden</label>
-        <select class="order-filter">
-          <option>Últimas ofertas</option>
-          <option>Ofertas anteriores</option>
-        </select>
-      </section>
       <section class="section-tags-filter section-filter">
         <label for="tag-filter" class="label">Tags</label>
         <input type="search" name="tag-filter" class="tag-filter" v-model="tag">
