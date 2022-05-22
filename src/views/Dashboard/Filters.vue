@@ -7,7 +7,9 @@
       </section>
       <section class="section-salary-filter section-filter">
         <label for="" class="label" >Salario mínimo</label>
-        <input type="range" name="salary-filter" class="salary-filter" min="10.000" max="60.000">
+        <span v-if="salary != ''">{{ salary }}.000€</span>
+        <span v-if="salary == ''">Rango</span>
+        <input type="range" name="salary-filter" class="salary-filter" min="10.000" max="60.000" v-model="salary">
         <div class="min-max-salary">
           <span>10.000 €</span>
           <span>60.000 €</span>
@@ -18,8 +20,8 @@
         <input type="search" name="tag-filter" class="location-filter" v-model="location">
       </section>
       <section class="section-complete-filter section-filter">
-        <label for="" class="label">Ofertas completas</label>
-        <span class="complete-filter">Filtar por ofertas completas
+        <label for="" class="label">Ofertas destacadas</label>
+        <span class="complete-filter">Filtar por ofertas destacadas
           <i class="fa-solid fa-toggle-off pointer" v-show="complete == false" @click="changeComplete()"></i>
           <i class="fa-solid fa-toggle-on pointer" v-show="complete == true"  @click="changeComplete()"></i>
         </span>

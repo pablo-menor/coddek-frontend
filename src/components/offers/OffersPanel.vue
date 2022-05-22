@@ -45,11 +45,13 @@ export default {
   data() {
     return {
       offers: [],
+      allOffers: [],
       selectedOffer: null,
       showChallenge: false,
       challengeId: null,
       offerId: null,
       filters: {},
+      input: "",
     };
   },
   props: {},
@@ -60,12 +62,15 @@ export default {
   methods: {
     getAllOffers() {
       offerService.getAllActiveOffers().then((offers) => {
-      this.offers = offers;
-    })},
+        this.offers = offers;
+        this.allOffers = offers;
+      });
+    },
     showDetails(offer) {
       this.selectedOffer = offer;
     },
     getOffersByTitle(input) {
+      this.input = input;
       offerService.findOfferByTitle(input).then((offers) => {
         this.offers = offers;
       });
@@ -77,9 +82,9 @@ export default {
     },
     getOffersByFilters(filters) {
       this.filters = filters;
-      offerService.getOffersByFilters(this.offers, filters).then((offers) => {
-        this.offers = offers;
-      });
+      let offers = offerService.filterOffers(this.allOffers, filters);
+      this.offers = offers;
+    
     },
   },
 };

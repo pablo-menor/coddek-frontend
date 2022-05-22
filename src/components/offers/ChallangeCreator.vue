@@ -27,7 +27,7 @@
           type="file"
           name="fileChallenge"
           ref="fileInputChallenge"
-          @change="changeText()"
+
         />
       </div>
       <button @click="saveChallenge()" class="sendButton pointer">Guardar</button>
