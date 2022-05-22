@@ -98,7 +98,7 @@ export default {
     return {
       role: "",
       showOfferCreator: false,
-      showMyOffers: false,
+      showMyOffers: true,
       companyOptions: true,
     };
   },

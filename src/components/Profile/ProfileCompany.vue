@@ -84,16 +84,16 @@
         <div class="track-record">
           <span>Ofertas</span>
           <div
-            v-show="true"
+             v-show="myOffers.length > 0"
             class="applied-offer"
-            v-for="(ele, i) in appliedOffers"
+            v-for="(ele, i) in myOffers"
             :key="i"
             @selected="showDetails(offer)"
           >
             <span class="title">{{ ele.title }}</span>
             <span class="company-name"> {{ ele.company_name }}</span>
           </div>
-          <div class="no-data" v-show="appliedOffers == 0">
+          <div class="no-data" v-show="myOffers.length == 0">
             No se han encontrado ofertas
           </div>
         </div>
@@ -135,6 +135,8 @@ import DesktopOptions from "./DesktopOptions.vue";
 // Services
 import CompanyService from "../../service/company.service";
 const companyService = new CompanyService();
+import OfferService from "../../service/offer.service";
+const offerService = new OfferService();
 
 export default {
   name: "ProfileCompany",
@@ -142,6 +144,7 @@ export default {
     return {
       editingLinks: false,
       editingAbout: false,
+      myOffers: [],
     };
   },
   props: {
@@ -163,6 +166,7 @@ export default {
   mounted() {
     this.changeContent(0);
     this.getProfilePicture();
+    this.getCompanyOffers()
 
   },
   methods: {
@@ -222,6 +226,12 @@ export default {
         this.$refs.imgCompanyProfile.style.backgroundPosition = "center center";
         this.$refs.imgCompanyProfile.style.backgroundSize = "cover";
         this.$refs.imgCompanyProfile.style.backgroundRepeat = "no-repeat";
+      });
+    },
+    getCompanyOffers() {
+      offerService.getAllCompanyOffers().then((response) => {
+        console.log(response);
+        this.myOffers = response;
       });
     },
   },
