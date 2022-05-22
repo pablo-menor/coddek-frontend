@@ -25,7 +25,7 @@
         </span>
       </section>
       <section class="section-btn-filter section-filter">
-        <button class="btn-filter" >
+        <button class="btn-filter" @click="sendFilters()" >
             Filtrar
           </button>
       </section>
@@ -39,7 +39,6 @@ export default {
   components: {},
   data() {
     return{
-      order: "",
       tag: "",
       salary: "",
       location: "",
@@ -55,7 +54,12 @@ export default {
       this.complete = !this.complete;
     },
     sendFilters(){
-      this.$emit("filters", this.data());
+      this.$emit("filters", {
+        tag: this.tag,
+        salary: this.salary,
+        location: this.location,
+        complete: this.complete,
+      });
     }
   },
 };

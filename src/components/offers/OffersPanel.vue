@@ -48,6 +48,7 @@ export default {
       showChallenge: false,
       challengeId: null,
       offerId: null,
+      filters: {},
     };
   },
   props: {},
@@ -71,8 +72,11 @@ export default {
       this.offerId = this.selectedOffer._id;
       this.showChallenge = true;
     },
-    filterOffersByOrder() {
-      console.log("filtro por orden");
+    getOffersByFilters(filters) {
+      this.filters = filters;
+      offerService.getOffersByFilters(this.offers, filters).then((offers) => {
+        this.offers = offers;
+      });
     },
   },
 };

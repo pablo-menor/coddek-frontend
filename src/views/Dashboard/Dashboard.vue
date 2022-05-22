@@ -22,7 +22,7 @@
 
     <!--Filters-->
     <filters class="filters-component"
-      v-show="role === 'developer'">
+      v-show="role === 'developer'" @filters="filter($event)">
     </filters>
 
     <!-- Dashboard Company -->
@@ -109,6 +109,9 @@ export default {
     },
     searchByTitle(input){
       this.$refs.panel.getOffersByTitle(input);
+    },
+    filter(filters){
+      this.$refs.panel.getOffersByFilters(filters);
     },
   },
 };
