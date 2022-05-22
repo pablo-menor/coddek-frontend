@@ -2,7 +2,6 @@
   <div class="container">
     <form action="">
       <input
-        class="username"
         v-model="username"
         type="text"
         placeholder="Usuario"

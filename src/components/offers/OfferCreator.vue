@@ -252,18 +252,10 @@ export default {
 </script>
 <style scoped>
 .container-offer-creator {
-  /* width: 98vw;
-  min-width: 320px;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  padding-top: 70px;
-  padding-bottom: 20px;
-  overflow: scroll; */
   font-family: "Nunito", sans-serif;
-  font-family: "Nunito", sans-serif;
-  min-width: 320px;
+
   width: 98vw;
+  min-width: 320px;
   height: 90vh;
   display: flex;
   flex-direction: column;

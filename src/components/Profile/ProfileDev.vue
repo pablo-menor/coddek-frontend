@@ -85,6 +85,7 @@
         @changeContent="changeContent($event)"
         class="desktop-options"
         v-if="own"
+        :role="'developer'"
       />
       <section class="section content" ref="content">
         <div class="track-record">
