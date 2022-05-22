@@ -61,5 +61,38 @@ export default class OfferService {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
+    // filter offers by filters
+    filterOffers(offers, filters) {
+        let filteredOffers = offers;
+        if(filters.salary != ""){
+            
+            filteredOffers = filteredOffers.filter(offer => {
+                const salary = this.convertSalary(offer.salary.amount);
+                let intSalary = parseInt(filters.salary);
+                if( salary.min>= intSalary){
+                    return offer;
+                }
+            })
+        }
+        if(filters.location != ""){
+            filteredOffers = filteredOffers.filter(offer => {
+                if(offer.location.toLowerCase().includes(filters.location.toLowerCase())){
+                    return offer;
+                }
+            })
+        }
+
+        if(filters.complete){
+            filteredOffers = filteredOffers.filter(offer => {
+                if(offer.featured){
+                    return offer;
+                }
+            })
+        }
+        
+        return filteredOffers;
+    }
+        
+
 
 }

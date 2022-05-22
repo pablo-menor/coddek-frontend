@@ -7,7 +7,9 @@
       </section>
       <section class="section-salary-filter section-filter">
         <label for="" class="label" >Salario mínimo</label>
-        <input type="range" name="salary-filter" class="salary-filter" min="10.000" max="60.000">
+        <span v-if="salary != ''">{{ salary }}.000€</span>
+        <span v-if="salary == ''">Rango</span>
+        <input type="range" name="salary-filter" class="salary-filter" min="10.000" max="60.000" v-model="salary">
         <div class="min-max-salary">
           <span>10.000 €</span>
           <span>60.000 €</span>
@@ -18,14 +20,14 @@
         <input type="search" name="tag-filter" class="location-filter" v-model="location">
       </section>
       <section class="section-complete-filter section-filter">
-        <label for="" class="label">Ofertas completas</label>
-        <span class="complete-filter">Filtar por ofertas completas
-          <i class="fa-solid fa-toggle-off" v-show="complete == false" @click="changeComplete()"></i>
-          <i class="fa-solid fa-toggle-on" v-show="complete == true"  @click="changeComplete()"></i>
+        <label for="" class="label">Ofertas destacadas</label>
+        <span class="complete-filter">Filtar por ofertas destacadas
+          <i class="fa-solid fa-toggle-off pointer" v-show="complete == false" @click="changeComplete()"></i>
+          <i class="fa-solid fa-toggle-on pointer" v-show="complete == true"  @click="changeComplete()"></i>
         </span>
       </section>
       <section class="section-btn-filter section-filter">
-        <button class="btn-filter" >
+        <button class="btn-filter" @click="sendFilters()" >
             Filtrar
           </button>
       </section>
@@ -39,7 +41,6 @@ export default {
   components: {},
   data() {
     return{
-      order: "",
       tag: "",
       salary: "",
       location: "",
@@ -55,12 +56,20 @@ export default {
       this.complete = !this.complete;
     },
     sendFilters(){
-      this.$emit("filters", this.data());
+      this.$emit("filters", {
+        tag: this.tag,
+        salary: this.salary,
+        location: this.location,
+        complete: this.complete,
+      });
     }
   },
 };
 </script>
 <style scoped>
+.pointer {
+  cursor: pointer;
+}
 .container-filters {
   min-width: 320px;
   display: none;
@@ -153,6 +162,7 @@ export default {
 
 .btn-filter{
   padding: 10px;
+  cursor: pointer;
   border-radius: 15px;
   border: none;
   color: #fff;

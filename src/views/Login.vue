@@ -174,18 +174,43 @@
       </div>
     </div>
   </div>
+  <error-pop-up :message = message :isOk = isOk v-show= "showPopup || registeredSuccesful">
+  </error-pop-up>
+
+  <!-- <error-pop-up :message = message :isOk = isOk v-show= registeredSuccesful>
+  </error-pop-up> -->
 </template>
 
 <script>
 import AuthService from "../service/auth.service";
+import ErrorPopUp from "../components/Popups/ErrorPopUp.vue";
+
 const authService = new AuthService();
 export default {
   name: "Login",
+  components: {
+    ErrorPopUp,
+  },
   data() {
     return {
       email: "",
       password: "",
+      isOk: false,
+      message: "",
+      showPopup: false,
+      registeredSuccesful: false,
     };
+  },
+  created(){
+    this.registeredSuccesful = localStorage.getItem("registeredSuccesful");
+    if(this.registeredSuccesful) {
+      this.message = "Usuario registrado correctamente";
+      this.isOk = true;
+      setTimeout(() => {
+        this.registeredSuccesful = false;
+        localStorage.removeItem("registeredSuccesful");
+      }, 5000)
+    }
   },
   methods: {
     login() {
@@ -199,7 +224,9 @@ export default {
           this.$store.dispatch("setToken", res.token);
           this.$router.push("/dashboard");
         } else {
-          alert("Error al iniciar sesión");
+          this.isOk = false;
+          this.message = "Email y/o contraseña incorrectos";
+          this.showPopup = true;
         }
       });
     },

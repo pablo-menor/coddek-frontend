@@ -5,6 +5,7 @@
       :key="i"
       :offer="offer"
       @selected="showDetails(offer)"
+      class="pointer"
     ></single-offer>
     <offer-detail
       v-if="selectedOffer"
@@ -44,24 +45,32 @@ export default {
   data() {
     return {
       offers: [],
+      allOffers: [],
       selectedOffer: null,
       showChallenge: false,
       challengeId: null,
       offerId: null,
+      filters: {},
+      input: "",
     };
   },
   props: {},
   created() {
-    offerService.getAllActiveOffers().then((offers) => {
-      this.offers = offers;
-    });
+    this.getAllOffers();
   },
   mounted() {},
   methods: {
+    getAllOffers() {
+      offerService.getAllActiveOffers().then((offers) => {
+        this.offers = offers;
+        this.allOffers = offers;
+      });
+    },
     showDetails(offer) {
       this.selectedOffer = offer;
     },
     getOffersByTitle(input) {
+      this.input = input;
       offerService.findOfferByTitle(input).then((offers) => {
         this.offers = offers;
       });
@@ -71,8 +80,11 @@ export default {
       this.offerId = this.selectedOffer._id;
       this.showChallenge = true;
     },
-    filterOffersByOrder() {
-      console.log("filtro por orden");
+    getOffersByFilters(filters) {
+      this.filters = filters;
+      let offers = offerService.filterOffers(this.allOffers, filters);
+      this.offers = offers;
+    
     },
   },
 };
@@ -85,6 +97,9 @@ export default {
   margin: 0;
 }
 
+.pointer {
+  cursor: pointer;
+}
 .container-offers-panel {
   min-width: 320px;
   display: flex;

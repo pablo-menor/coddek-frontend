@@ -12,8 +12,16 @@
       <i class="fa-regular fa-bookmark icon" @click="select(1)"></i>
       <i class="fa-regular fa-file-lines icon" @click="select(2)"></i>
     </div>
-    <div class="options options-company" v-if="role == 'company'">
-      OPTIONs Company
+    <div
+      class="options options-company"
+      v-if="role == 'company'"
+      ref="companyOptions"
+    >
+            <i
+        class="fa-solid fa-clock-rotate-left icon selected"
+        @click="selectCompany(0)"
+      ></i>
+      <i class="fa-solid fa-folder-open icon" @click="selectCompany(1)"></i>
     </div>
   </div>
 </template>
@@ -35,7 +43,15 @@ export default {
   methods: {
     select(index) {
       let icons = this.$refs.devOptions.children;
-      for(const icon of icons) {
+      for (const icon of icons) {
+        icon.classList.remove("selected");
+      }
+      icons[index].classList.add("selected");
+      this.$emit("changeContent", index);
+    },
+     selectCompany(index) {
+      let icons = this.$refs.companyOptions.children;
+      for (const icon of icons) {
         icon.classList.remove("selected");
       }
       icons[index].classList.add("selected");

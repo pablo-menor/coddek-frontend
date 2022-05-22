@@ -1,9 +1,21 @@
 <template>
   <div class="container-desktop-options">
-    <div ref="devOptionsDesktop" class="options-developer-desktop" v-if="role === developer">
+    <div
+      ref="devOptionsDesktop"
+      class="options-developer-desktop"
+      v-if="role === 'developer'"
+    >
       <span @click="select(0)" class="selected">Historial</span>
       <span @click="select(1)">Ofertas guardadas</span>
       <span @click="select(2)">Mis currículums</span>
+    </div>
+    <div
+      ref="devOptionsDesktop"
+      class="options-developer-desktop"
+      v-if="role === 'company'"
+    >
+      <span @click="select(0)" class="selected">Ofertas</span>
+      <span @click="select(1)">Challenges</span>
     </div>
   </div>
 </template>

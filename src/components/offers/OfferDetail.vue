@@ -2,7 +2,7 @@
   <!--------------------------MOBILE VERSION--------------------------------------- -->
   <div class="container-offer-detail-mobile">
     <section class="company-info-mobile">
-      <div class="img-container"></div>
+      <div class="img-container" ref="companyLogoDetails"></div>
       <p class="company-name">{{ offer.company.name }}</p>
       <div class="separator-mobile"></div>
     </section>
@@ -72,7 +72,7 @@
     </section>
     <section class="description">
       <p class="description-text-mobile">{{ offer.description }}</p>
-      <button class="challange-details" @click="showChallenge()">
+      <button class="challange-details pointer" @click="showChallenge()">
         Inscribirse
       </button>
     </section>
@@ -90,7 +90,8 @@
 // Services
 import OfferService from "../../service/offer.service";
 import DeveloperService from "../../service/developer.service";
-
+import CompanyService from "../../service/company.service";
+const companyService = new CompanyService();
 const offerService = new OfferService();
 const developerService = new DeveloperService();
 
@@ -106,6 +107,7 @@ export default {
   },
   created() {
     this.getSavedOffers();
+    this.getProfilePicture();
   },
   mounted() {},
   methods: {
@@ -141,11 +143,32 @@ export default {
     showChallenge() {
       this.$emit("showChallenge", this.offer.challengeId);
     },
+        async getProfilePicture() {
+       
+       await companyService.getCompany(this.offer.company.id).then((response) => {
+         this.companyAvatar = response.avatar;
+      });
+     
+      if (this.companyAvatar === "default_avatar_company.jpg") {
+        return;
+      }
+      companyService.getProfilePicture(this.companyAvatar).then((response) => {
+        // this.offer.company.avatarr = response.url;
+        console.log(response.url);
+        this.$refs.companyLogoDetails.style.backgroundImage = `url(${response.url})`;
+        this.$refs.companyLogoDetails.style.backgroundPosition = "center center";
+        this.$refs.companyLogoDetails.style.backgroundSize = "cover";
+        this.$refs.companyLogoDetails.style.backgroundRepeat = "no-repeat";
+      });
+    },
   },
 };
 </script>
 
 <style scoped>
+.pointer {
+  cursor: pointer;
+}
 /* ------------------------MOBILE VERSION--------------------------------------- */
 .container-offer-detail-mobile {
   border-radius: 5px;

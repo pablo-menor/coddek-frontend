@@ -28,7 +28,9 @@
     </offers-panel>
 
     <!--Filters-->
-    <filters class="filters-component" v-show="role === 'developer'"> </filters>
+    <filters class="filters-component"
+      v-show="role === 'developer'" @filters="filter($event)">
+    </filters>
 
     <!-- Dashboard Company -->
     <dashboard-company
@@ -125,8 +127,14 @@ export default {
       let closeMenu = document.querySelector(".close-menu");
       closeMenu.style.display = "none";
     },
-    searchByTitle(input) {
+    searchByTitle(input){
+      if(input == "") {
+        this.$refs.panel.getAllOffers();
+      }
       this.$refs.panel.getOffersByTitle(input);
+    },
+    filter(filters){
+      this.$refs.panel.getOffersByFilters(filters);
     },
   },
 };

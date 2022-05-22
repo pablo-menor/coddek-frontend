@@ -3,7 +3,7 @@
     <div class="creator-panel">
       <section class="company-info-mobile">
         <div class="img-container"></div>
-        <p class="company-name">{{ $store.state.username }}</p>
+        <p class="company-name default">{{ $store.state.username }}</p>
         <div class="separator-mobile"></div>
       </section>
       <section class="main-details">
@@ -95,7 +95,7 @@
               class="input"
               v-model="nameTag"
             />
-            <button class="btnAdd" @click="addTag()">+</button>
+            <button class="btnAdd pointer" @click="addTag()">+</button>
           </span>
           <div class="tags-offer-created">
             <span v-for="(tag, i) in tags" :key="i"
@@ -121,18 +121,18 @@
         <span class="post-offer"
           >Publicar oferta automaticamente
           <i
-            class="fa-solid fa-toggle-off"
+            class="fa-solid fa-toggle-off pointer"
             v-show="ongoing == false"
             @click="changeOngoing()"
           ></i>
           <i
-            class="fa-solid fa-toggle-on"
+            class="fa-solid fa-toggle-on pointer"
             v-show="ongoing == true"
             @click="changeOngoing()"
           ></i>
         </span>
         <button
-          class="btn-go-to-challange-creator"
+          class="btn-go-to-challange-creator pointer"
           @click="challengeCreator = true"
           v-show="challengeId.length == 0"
         >
@@ -251,19 +251,18 @@ export default {
 };
 </script>
 <style scoped>
+
+.default {
+  cursor: default;
+}
+.pointer {
+  cursor: pointer;
+}
 .container-offer-creator {
-  /* width: 98vw;
-  min-width: 320px;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  padding-top: 70px;
-  padding-bottom: 20px;
-  overflow: scroll; */
   font-family: "Nunito", sans-serif;
-  font-family: "Nunito", sans-serif;
-  min-width: 320px;
+
   width: 98vw;
+  min-width: 320px;
   height: 90vh;
   display: flex;
   flex-direction: column;

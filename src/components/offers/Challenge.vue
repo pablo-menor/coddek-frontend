@@ -10,7 +10,7 @@
     <button @click="showArchives()" class="downloadBtn">Ver archivos</button>
 
     <div class="upload-area">
-      <div class="uploadBtn" @click="$refs.fileInputSolution.click()">
+      <div class="uploadBtn btn-modify" @click="$refs.fileInputSolution.click()" ref= "uploadText">
         Subir archivo
       </div>
       <input
@@ -18,6 +18,7 @@
         type="file"
         name="fileSolution"
         ref="fileInputSolution"
+        @change ="changeText()"
       />
     </div>
 
@@ -29,7 +30,7 @@
         </option>
       </select>
     </form>
-    <button class="sendButton" @click="uploadSolution()">Enviar</button>
+    <button class="sendButton pointer" @click="uploadSolution()">Enviar</button>
   </div>
 </template>
 
@@ -56,6 +57,16 @@ export default {
     this.fetchCVs();
   },
   methods: {
+    changeText() {
+      this.$refs.uploadText.innerHTML = "Archivo subido!";
+      this.$refs.uploadText.classList.remove("btn-modify");
+      this.$refs.uploadText.classList.add("btn-green");
+      setTimeout(() => {
+        this.$refs.uploadText.innerHTML = "Subir archivo";
+        this.$refs.uploadText.classList.remove("btn-green");
+        this.$refs.uploadText.classList.add("btn-modify");
+      }, 3000)
+    },
     cancelChallenge() {
       this.$emit("cancelChallenge");
     },
@@ -88,6 +99,9 @@ export default {
 </script>
 
 <style scoped>
+.pointer {
+  cursor: pointer;
+}
 .challenge-offer {
   border-radius: 5px;
   width: 85%;
@@ -182,7 +196,6 @@ export default {
   padding: 12px 10px 12px 10px;
   border-radius: 20px;
   border: none;
-  background: rgb(1, 221, 184);
   color: #fff;
   font-size: 0.9em;
   cursor: pointer;
@@ -190,7 +203,18 @@ export default {
   text-decoration: none;
   left: calc(50% - 85px);
 }
-
+.btn-green {
+  background-color: green !important;
+}
+.btn-modify {
+  background: linear-gradient(
+    100deg,
+    rgba(1, 221, 184, 1) 0%,
+    rgba(3, 181, 203, 1) 36%,
+    rgba(4, 140, 212, 1) 52%,
+    rgba(4, 107, 219, 1) 77%
+  )
+}
 .file-challenge {
   display: none;
 }
