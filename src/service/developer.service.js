@@ -15,7 +15,11 @@ export default class DeveloperService {
         const url = `http://localhost:3008/api/developers/login`;
         return await this.baseService.post(url, developer);
     }
-
+    async getById(id) {
+        const url = `http://localhost:3008/api/developers/${id}`;
+        const res = this.baseService.get(url);
+        return res;
+    }
     async saveOffer(id) {
         const token = this.authService.getToken();
         const headers = {

@@ -6,13 +6,9 @@
         <h1>{{ $store.state.username }}</h1>
       </div>
       <div class="buttons">
-        <router-link :to="profileLink" class="option-company"
-          >Mi Perfil</router-link
-        >
-        <span class="option-company" @click="showOfferCreator()"
-          >Crear Oferta</span
-        >
-        <span class="option-company">Mis Ofertas</span>
+        <router-link :to="profileLink" class="option-company">Mi Perfil</router-link>
+        <span class="option-company" @click="showOfferCreator()">Crear Oferta</span>
+        <span class="option-company"  @click="showMyOffers()">Mis Ofertas</span>
         <span class="option-company">Candidatos</span>
       </div>
     </div>
@@ -36,6 +32,11 @@ export default {
   methods: {
     showOfferCreator() {
       this.$emit("showOfferCreator");
+      this.$emit("closeOptions");
+    },
+    showMyOffers() {
+      this.$emit("showMyOffers");
+      this.$emit("closeOptions")
     },
   },
 };
@@ -46,12 +47,10 @@ export default {
   font-family: "Nunito", sans-serif;
   min-width: 320px;
   width: 98vw;
-  height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  padding-top: 70px;
 }
 /* h1{
   font-size: 1.2rem;
@@ -63,7 +62,6 @@ export default {
   /* height: 90vh; */
   max-width: 555px;
   position: fixed;
-  z-index: 5;
   top: calc(50vh - 42.5vh);
   display: flex;
   flex-direction: column;
@@ -75,7 +73,6 @@ export default {
 }
 .company-pic-dash {
   width: 100px;
-  height: 100px;
   border-radius: 50%;
   border: 1px solid rgb(15, 136, 235);
   margin-bottom: 10px;

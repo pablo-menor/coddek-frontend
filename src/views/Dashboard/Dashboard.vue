@@ -6,40 +6,56 @@
     <close-menu @close-menu="closeMenu()" class="close-menu"></close-menu>
 
     <!-- buscador -->
-    <search-input class="search-input" @search="searchByTitle($event)"
-    v-show="role === 'developer'"></search-input>
+    <search-input
+      class="search-input"
+      @search="searchByTitle($event)"
+      v-show="role === 'developer'"
+    ></search-input>
 
     <!--  Desktop Banner-->
-    <banner class="banner" :role="role" @search="searchByTitle($event)"></banner>
+    <banner
+      class="banner"
+      :role="role"
+      @search="searchByTitle($event)"
+    ></banner>
 
     <!--OffersPanel Component -->
     <offers-panel
       class="offers-panel"
       v-show="role === 'developer'"
       ref="panel"
-      >
+    >
     </offers-panel>
 
     <!--Filters-->
-    <filters class="filters-component"
-      v-show="role === 'developer'">
-    </filters>
+    <filters class="filters-component" v-show="role === 'developer'"> </filters>
 
     <!-- Dashboard Company -->
     <dashboard-company
       class="company-options"
-      v-show="role === 'company'"
+      v-show="role === 'company' && companyOptions"
       ref="dashcompany"
-      @showOfferCreator="showOfferCreator  = true">
+      @showOfferCreator="showOfferCreator = true"
+      @showMyOffers="showMyOffers = true"
+    >
     </dashboard-company>
 
     <!-- OfferCreator -->
-    <offer-creator 
-    class="offer-creator"
-    v-show="role === 'company' && showOfferCreator"
-    @closeOfferCreator="showOfferCreator = false">
+    <offer-creator
+      class="offer-creator"
+      v-show="role === 'company' && showOfferCreator"
+      @closeOfferCreator="showOfferCreator = false"
+    >
     </offer-creator>
-    
+
+    <!--OffersPanelCompany Component -->
+    <company-offers-panel
+      class="offers-panel-company"
+      v-show="role === 'company' && showMyOffers"
+      @closeMyOffers="showMyOffers = false"
+    >
+      >
+    </company-offers-panel>
   </div>
 </template>
 
@@ -55,7 +71,7 @@ import Filters from "../../views/Dashboard/Filters.vue";
 import ButtonFilters from "../../views/Dashboard/Filters-button.vue";
 import OfferCreator from "../../components/offers/OfferCreator.vue";
 import DashboardCompany from "../../components/Dashboard-Company/DashboardCompany.vue";
-
+import CompanyOffersPanel from "../../components/offers/CompanyOffersPanel.vue";
 
 // Services
 import AuthService from "../../service/auth.service";
@@ -74,12 +90,14 @@ export default {
     ButtonFilters,
     OfferCreator,
     DashboardCompany,
-
+    CompanyOffersPanel,
   },
   data() {
     return {
       role: "",
       showOfferCreator: false,
+      showMyOffers: false,
+      companyOptions: true,
     };
   },
   created() {
@@ -107,7 +125,7 @@ export default {
       let closeMenu = document.querySelector(".close-menu");
       closeMenu.style.display = "none";
     },
-    searchByTitle(input){
+    searchByTitle(input) {
       this.$refs.panel.getOffersByTitle(input);
     },
   },
@@ -122,7 +140,7 @@ export default {
 .search-input,
 .offer-creator,
 .company-options,
-.filters-component{
+.filters-component {
   margin-left: 2vw;
 }
 .search-input {
@@ -132,25 +150,24 @@ export default {
   top: 60px;
 }
 
-
 /* ---------- RESPONSIVE --------- */
 @media screen and (min-width: 749px) {
-  .menu-mobile{
+  .menu-mobile {
     display: none;
   }
-  .side-arrow{
+  .side-arrow {
     display: none;
   }
-  .close-menu{
+  .close-menu {
     display: none;
   }
-  .banner{
+  .banner {
     display: flex;
   }
-  .search-input{
+  .search-input {
     display: none;
   }
-  .company-options{
+  .company-options {
     margin-left: 0;
   }
 }
