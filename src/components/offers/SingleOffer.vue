@@ -1,6 +1,7 @@
 <template>
   <div class="container-single-offer" @click="selected()">
-    <div class="img-company"></div>
+    <div class="img-company" ref="companyLogo">
+    </div>
     <div class="data-offer">
       <h3 class="title">{{ offer.title }}</h3>
       <h5>{{ offer.company.name }}</h5>
@@ -23,6 +24,8 @@
 // Services
 import OfferService from "../../service/offer.service";
 import DeveloperService from "../../service/developer.service";
+import CompanyService from "../../service/company.service";
+const companyService = new CompanyService();
 
 const offerService = new OfferService();
 const developerService = new DeveloperService();
@@ -32,6 +35,7 @@ export default {
   data() {
     return {
       saved: false,
+      companyAvatar: "gt",
     };
   },
   props: {
@@ -39,6 +43,7 @@ export default {
   },
   created() {
     this.getSavedOffers();
+    this.getProfilePicture();
   },
   mounted() {},
   methods: {
@@ -46,12 +51,30 @@ export default {
       this.$emit("selected", this.offer);
     },
     getSalary() {
-     let range  = offerService.convertSalary(this.offer.salary.amount);
+      let range = offerService.convertSalary(this.offer.salary.amount);
       return `${range.min}- ${range.max}`;
     },
     getSavedOffers() {
       developerService.getSavedOffers().then((response) => {
         this.saved = response.some((offer) => offer.offerId === this.offer._id);
+      });
+    },
+    async getProfilePicture() {
+       
+       await companyService.getCompany(this.offer.company.id).then((response) => {
+         this.companyAvatar = response.avatar;
+      });
+     
+      if (this.companyAvatar === "default_avatar_company.jpg") {
+        return;
+      }
+      companyService.getProfilePicture(this.companyAvatar).then((response) => {
+        // this.offer.company.avatarr = response.url;
+        console.log(response.url);
+        this.$refs.companyLogo.style.backgroundImage = `url(${response.url})`;
+        this.$refs.companyLogo.style.backgroundPosition = "center center";
+        this.$refs.companyLogo.style.backgroundSize = "cover";
+        this.$refs.companyLogo.style.backgroundRepeat = "no-repeat";
       });
     },
   },

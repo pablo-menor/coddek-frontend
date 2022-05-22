@@ -54,6 +54,17 @@ export default class CompanyService {
 
     async getProfilePicture(fileName) {
         const url = `http://localhost:3008/${fileName}`;
+        console.log(url);
         return await fetch(url);
+    }
+
+    async getCompany(id){
+        const token = this.authService.getToken();
+        const headers = {
+            'auth-token': token,
+            'Content-Type': 'application/json',
+        };
+        const url = `http://localhost:3008/api/companies/${id}`;
+        return await this.baseService.get(url, headers);
     }
 }
