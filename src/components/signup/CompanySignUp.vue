@@ -35,26 +35,40 @@
       <p>¿Ya estás registrado?</p>
       <router-link to="/login" class="go-to-login">Inicia sesión</router-link>
     </div>
+
+    <error-pop-up :message = message :isOk = isOk v-show= showPopup>
+    </error-pop-up>
+    
   </div>
 </template>
 
 <script>
 import CompanyService from "../../service/company.service";
+import ErrorPopUp from "../Popups/ErrorPopUp.vue";
+
 const companyService = new CompanyService();
 export default {
   name: "DevSignUp",
+  components: {
+    ErrorPopUp,
+  },
   data() {
     return {
       name: "",
       email: "",
       password: "",
       password2: "",
+      isOk: false,
+      message: "",
+      showPopup: false,
     };
   },
   methods: {
     signUp() {
       if (!this.checkFields()) {
-        alert("Campos mal mal");
+        this.isOk = false;
+        this.message = "Campos introducidos incorrectamente";
+        this.showPopup = true;
         return;
       }
       let company = {
@@ -66,13 +80,18 @@ export default {
         .signUp(company)
         .then((res) => {
           if (res) {
+            localStorage.setItem("registeredSuccesful", true);
             this.$router.push("/login");
           } else {
-            alert("Error al registrarse");
+            this.isOk = false;
+            this.message = "Usuario ya existe";
+            this.showPopup = true;
           }
         })
         .catch((err) => {
-          alert("Error al registrarse");
+          this.isOk = false;
+          this.message = "Usuario ya existe";
+          this.showPopup = true;
         });
     },
     checkFields() {
