@@ -108,6 +108,9 @@ export default {
       closeMenu.style.display = "none";
     },
     searchByTitle(input){
+      if(input == "") {
+        this.$refs.panel.getAllOffers();
+      }
       this.$refs.panel.getOffersByTitle(input);
     },
   },

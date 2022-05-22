@@ -19,7 +19,7 @@
         ></textarea>
       </div>
       <div class="upload-area">
-        <div class="uploadBtn" @click="$refs.fileInputChallenge.click()">
+        <div class="uploadBtn btn-modify" @click="$refs.fileInputChallenge.click()" ref="uploadText">
           Subir archivo
         </div>
         <input
@@ -27,9 +27,10 @@
           type="file"
           name="fileChallenge"
           ref="fileInputChallenge"
+          @change="changeText()"
         />
       </div>
-      <button @click="saveChallenge()" class="sendButton">Guardar</button>
+      <button @click="saveChallenge()" class="sendButton pointer">Guardar</button>
     </div>
   </div>
 </template>
@@ -49,6 +50,16 @@ export default {
   created() {},
   mounted() {},
   methods: {
+    changeText() {
+      this.$refs.uploadText.innerHTML = "Archivo subido!";
+      this.$refs.uploadText.classList.remove("btn-modify");
+      this.$refs.uploadText.classList.add("btn-green");
+      setTimeout(() => {
+        this.$refs.uploadText.innerHTML = "Subir archivo";
+        this.$refs.uploadText.classList.remove("btn-green");
+        this.$refs.uploadText.classList.add("btn-modify");
+      }, 3000)
+    },
     closeChallangeCreator() {
       this.title = "";
       this.description = "";
@@ -72,6 +83,22 @@ export default {
 </script>
 
 <style scoped>
+
+.pointer {
+  cursor: pointer;
+}
+.btn-green {
+  background-color: green !important;
+}
+.btn-modify {
+  background: linear-gradient(
+    100deg,
+    rgba(1, 221, 184, 1) 0%,
+    rgba(3, 181, 203, 1) 36%,
+    rgba(4, 140, 212, 1) 52%,
+    rgba(4, 107, 219, 1) 77%
+  )
+}
 .container-challange-creator {
   width: 100vw;
   display: flex;
@@ -153,14 +180,6 @@ export default {
   padding: 12px 10px 12px 10px;
   border-radius: 20px;
   border: none;
-  background: rgb(1, 221, 184);
-  background: linear-gradient(
-    100deg,
-    rgba(1, 221, 184, 1) 0%,
-    rgba(3, 181, 203, 1) 36%,
-    rgba(4, 140, 212, 1) 52%,
-    rgba(4, 107, 219, 1) 77%
-  );
   color: #fff;
   font-size: 0.9em;
   cursor: pointer;

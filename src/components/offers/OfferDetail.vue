@@ -72,7 +72,7 @@
     </section>
     <section class="description">
       <p class="description-text-mobile">{{ offer.description }}</p>
-      <button class="challange-details" @click="showChallenge()">
+      <button class="challange-details pointer" @click="showChallenge()">
         Inscribirse
       </button>
     </section>
@@ -166,6 +166,9 @@ export default {
 </script>
 
 <style scoped>
+.pointer {
+  cursor: pointer;
+}
 /* ------------------------MOBILE VERSION--------------------------------------- */
 .container-offer-detail-mobile {
   border-radius: 5px;
