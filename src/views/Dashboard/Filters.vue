@@ -20,8 +20,8 @@
       <section class="section-complete-filter section-filter">
         <label for="" class="label">Ofertas completas</label>
         <span class="complete-filter">Filtar por ofertas completas
-          <i class="fa-solid fa-toggle-off" v-show="complete == false" @click="changeComplete()"></i>
-          <i class="fa-solid fa-toggle-on" v-show="complete == true"  @click="changeComplete()"></i>
+          <i class="fa-solid fa-toggle-off pointer" v-show="complete == false" @click="changeComplete()"></i>
+          <i class="fa-solid fa-toggle-on pointer" v-show="complete == true"  @click="changeComplete()"></i>
         </span>
       </section>
       <section class="section-btn-filter section-filter">
@@ -65,6 +65,9 @@ export default {
 };
 </script>
 <style scoped>
+.pointer {
+  cursor: pointer;
+}
 .container-filters {
   min-width: 320px;
   display: none;
@@ -157,6 +160,7 @@ export default {
 
 .btn-filter{
   padding: 10px;
+  cursor: pointer;
   border-radius: 15px;
   border: none;
   color: #fff;

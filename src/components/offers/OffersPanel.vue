@@ -5,6 +5,7 @@
       :key="i"
       :offer="offer"
       @selected="showDetails(offer)"
+      class="pointer"
     ></single-offer>
     <offer-detail
       v-if="selectedOffer"
@@ -53,12 +54,14 @@ export default {
   },
   props: {},
   created() {
-    offerService.getAllActiveOffers().then((offers) => {
-      this.offers = offers;
-    });
+    this.getAllOffers();
   },
   mounted() {},
   methods: {
+    getAllOffers() {
+      offerService.getAllActiveOffers().then((offers) => {
+      this.offers = offers;
+    })},
     showDetails(offer) {
       this.selectedOffer = offer;
     },
@@ -89,6 +92,9 @@ export default {
   margin: 0;
 }
 
+.pointer {
+  cursor: pointer;
+}
 .container-offers-panel {
   min-width: 320px;
   display: flex;
